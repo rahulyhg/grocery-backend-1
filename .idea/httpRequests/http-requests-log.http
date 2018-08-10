@@ -1,0 +1,24 @@
+GET http://localhost:8080/patient
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-08-01T050426.200.json
+
+###
+
+GET http://localhost:8080/patient
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-08-01T050338.200.json
+
+###
+
+GET http://localhost:8080/patient
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-08-01T050328.200.json
+
+###
+
