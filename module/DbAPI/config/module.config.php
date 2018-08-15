@@ -29,6 +29,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.user' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/user[/:user_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\User\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -36,6 +45,7 @@ return [
             0 => 'db-api.rest.doctrine.patient',
             2 => 'db-api.rest.doctrine.procedure',
             3 => 'db-api.rest.doctrine.hospital',
+            4 => 'db-api.rest.doctrine.user',
         ],
     ],
     'zf-rest' => [
@@ -104,12 +114,36 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Hospital\HospitalCollection::class,
             'service_name' => 'Hospital',
         ],
+        'DbAPI\\V1\\Rest\\User\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\User\UserResource::class,
+            'route_name' => 'db-api.rest.doctrine.user',
+            'route_identifier_name' => 'user_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'user',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Application\Entity\User::class,
+            'collection_class' => \DbAPI\V1\Rest\User\UserCollection::class,
+            'service_name' => 'User',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
             'DbAPI\\V1\\Rest\\Patient\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Procedure\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Hospital\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\User\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Patient\\Controller' => [
@@ -127,6 +161,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\User\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Patient\\Controller' => [
@@ -138,6 +177,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Hospital\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\User\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -178,6 +221,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.hospital',
                 'is_collection' => true,
             ],
+            \Application\Entity\User::class => [
+                'route_identifier_name' => 'user_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.user',
+                'hydrator' => 'DbAPI\\V1\\Rest\\User\\UserHydrator',
+            ],
+            \DbAPI\V1\Rest\User\UserCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.user',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -193,6 +247,10 @@ return [
             \DbAPI\V1\Rest\Hospital\HospitalResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Hospital\\HospitalHydrator',
+            ],
+            \DbAPI\V1\Rest\User\UserResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\User\\UserHydrator',
             ],
         ],
     ],
@@ -218,6 +276,13 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\User\\UserHydrator' => [
+            'entity_class' => \Application\Entity\User::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Patient\\Controller' => [
@@ -228,6 +293,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Hospital\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Hospital\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\User\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\User\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -420,6 +488,117 @@ return [
             0 => [
                 'name' => 'procdate',
                 'required' => true,
+                'filters' => [],
+                'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\User\\Validator' => [
+            0 => [
+                'name' => 'username',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 255,
+                        ],
+                    ],
+                ],
+            ],
+            1 => [
+                'name' => 'email',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 255,
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name' => 'displayName',
+                'required' => false,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 50,
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name' => 'password',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name' => 'state',
+                'required' => true,
+                'filters' => [],
+                'validators' => [],
+            ],
+            5 => [
+                'name' => 'securityCounter',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            6 => [
+                'name' => 'lastLoginDateTime',
+                'required' => false,
                 'filters' => [],
                 'validators' => [],
             ],

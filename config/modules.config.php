@@ -33,6 +33,7 @@ return [
     'ZF\\OAuth2\\Doctrine\\Identity',
     'ZF\\OAuth2\\Doctrine\\Permissions\\Acl',
     'ZF\\Doctrine\\QueryBuilder',
+    'ZfrCors',
     'Application',
     'Db',
     'Status',
