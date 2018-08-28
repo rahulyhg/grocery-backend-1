@@ -30,6 +30,22 @@ class Page {
      */
     protected $subtitle;
 
+    /**
+     * @ORM\Column(name="locked", type="integer", length=4, nullable=false)
+     */
+    protected $locked;
+
+    /**
+     * Many Pages have Many Surveys.
+     * @ORM\ManyToMany(targetEntity="Survey", inversedBy="pages")
+     * @ORM\JoinTable(name="pages_surveys")
+     */
+    private $surveys;
+
+    public function __construct() {
+        $this->surveys = new ArrayCollection();
+    }
+
     function getId() {
         return $this->id;
     }
@@ -53,5 +69,23 @@ class Page {
     function setSubtitle($subtitle) {
         $this->subtitle = $subtitle;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLocked()
+    {
+        return $this->locked;
+    }
+
+    /**
+     * @param mixed $locked
+     */
+    public function setLocked($locked): void
+    {
+        $this->locked = $locked;
+    }
+
+
 
 }

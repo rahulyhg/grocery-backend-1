@@ -1,5 +1,5 @@
 <?php
-namespace Status\V2\Rest\Role;
+namespace DbAPI\V1\Rest\Role;
 
 use Zend\Paginator\Paginator;
 

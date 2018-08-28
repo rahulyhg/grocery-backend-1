@@ -36,8 +36,15 @@ class Survey {
      */
     private $tokens;
 
+    /**
+     * Many Surveys have Many Pages.
+     * @ORM\ManyToMany(targetEntity="Page", mappedBy="surveys")
+     */
+    private $pages;
+
     public function __construct() {
         $this->tokens = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     function getId() {
@@ -72,6 +79,20 @@ class Survey {
         $this->tokens = $tokens;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
 
+    /**
+     * @param mixed $pages
+     */
+    public function setPages($pages): void
+    {
+        $this->pages = $pages;
+    }
 
 }

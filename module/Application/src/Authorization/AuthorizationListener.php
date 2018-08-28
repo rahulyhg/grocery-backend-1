@@ -13,8 +13,12 @@ class AuthorizationListener
         // Deny from all
         $authorization->deny();
 
-        $authorization->addResource('DbAPI\\V1\\Rest\\User\\Controller::index');
-        $authorization->allow('guest','DbAPI\\V1\\Rest\\User\\Controller::index');
+        // Allow from all for oauth authentication
+        $authorization->addResource('ZF\OAuth2\Controller\Auth::token');
+        $authorization->allow(null, 'ZF\OAuth2\Controller\Auth::token');
 
+        // Add application specific resources
+        $authorization->allow('user', 'DbAPI\V1\Rest\Question\Controller::collection', 'GET');
+        $authorization->allow('admin', 'DbAPI\V1\Rest\Question\Controller::collection', array('GET','POST', 'PUT'));
     }
 }

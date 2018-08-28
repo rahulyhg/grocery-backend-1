@@ -1,5 +1,5 @@
 <?php
-namespace Status\V1\Rest\User;
+namespace DbAPI\V1\Rest\User;
 
 use ZF\Apigility\Doctrine\Server\Resource\DoctrineResource;
 

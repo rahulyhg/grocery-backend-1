@@ -19,7 +19,7 @@ class Module
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    /*public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
@@ -30,5 +30,5 @@ class Module
             new AuthorizationListener(),
             100 // Less than 1000 to allow roles to be added first && >= 100
         );
-    }*/
+    }
 }

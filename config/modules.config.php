@@ -36,6 +36,5 @@ return [
     'ZfrCors',
     'Application',
     'Db',
-    'Status',
     'DbAPI',
 ];
