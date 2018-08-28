@@ -14,12 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use ZF\OAuth2\Doctrine\Entity\UserInterface;
 use Zend\Stdlib\ArraySerializableInterface;
+use ZF\OAuth2\Doctrine\Permissions\Acl\Role\ProviderInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User implements UserInterface, ArraySerializableInterface
+class User implements UserInterface, ArraySerializableInterface, ProviderInterface
 {
     const STATUS_DISABLED = false;
     const STATUS_ENABLED  = true;
@@ -240,6 +241,16 @@ class User implements UserInterface, ArraySerializableInterface
     {
         return $this->roles->getValues();
     }
+    
+    /**
+     * Get role.
+     *
+     * @return array
+     */
+    public function getRole()
+    {
+        return $this->getRoles();
+    }
 
     /**
      * Add a role to the user.
@@ -351,18 +362,8 @@ class User implements UserInterface, ArraySerializableInterface
                 case 'password':
                     $this->setPassword($value);
                     break;
-                case 'profile':
-                    $this->setProfile($value);
-                    break;
                 case 'email':
                     $this->setEmail($value);
-                    break;
-                case 'country':
-                    $this->setAddress($value);
-                    break;
-                case 'phone_number':
-                case 'phoneNumber':
-                    $this->setPhone($value);
                     break;
                 default:
                     break;
@@ -376,11 +377,7 @@ class User implements UserInterface, ArraySerializableInterface
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'password' => $this->getPassword(),
-            // 'profile' => $this->getProfile(),
             'email' => $this->getEmail(),
-            // 'country' => $this->getCountry(),
-            // 'phone_number' => $this->getPhoneNumber(), // underscore formatting for openid
-            // 'phoneNumber' => $this->getPhoneNumber(),
         ];
     }
     
