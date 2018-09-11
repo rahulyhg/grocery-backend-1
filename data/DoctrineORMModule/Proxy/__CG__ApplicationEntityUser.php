@@ -323,6 +323,17 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setRoles($roles)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoles', [$roles]);
+
+        return parent::setRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getRole()
     {
 
@@ -334,7 +345,7 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function addRole($role)
+    public function addRole(\Application\Entity\Role $role)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'addRole', [$role]);
@@ -351,6 +362,17 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'addRoles', [$roles]);
 
         return parent::addRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeRole($role)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeRole', [$role]);
+
+        return parent::removeRole($role);
     }
 
     /**

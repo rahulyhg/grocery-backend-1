@@ -5,6 +5,7 @@ namespace Db\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
+use Db\Entity\PageElement;
 
 /**
  * This class represents a page item.
@@ -36,14 +37,25 @@ class Page {
     protected $locked;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|Survey[]
      * Many Pages have Many Surveys.
-     * @ORM\ManyToMany(targetEntity="Survey", inversedBy="pages")
-     * @ORM\JoinTable(name="pages_surveys")
+     * @ORM\ManyToMany(targetEntity="Survey", mappedBy="pages")
      */
     private $surveys;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|PageElement[]
+     * One Page has Many Page Elements.
+     * @ORM\OneToMany(targetEntity="PageElement", mappedBy="page", orphanRemoval=true )
+     * @ORM\OrderBy({"elementOrder"="ASC"})
+     */
+    private $pageElements;
+
+
+
     public function __construct() {
         $this->surveys = new ArrayCollection();
+        $this->pageElements = new ArrayCollection();
     }
 
     function getId() {
@@ -86,6 +98,109 @@ class Page {
         $this->locked = $locked;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSurveys()
+    {
+        return $this->surveys;
+    }
 
+    /**
+     * @param mixed $surveys
+     */
+    public function setSurveys($surveys): void
+    {
+        $this->surveys = $surveys;
+    }
+    
+    /**
+     * @param Survey $survey
+     */
+    public function addSurvey(Survey $survey) {
+        if ($this->pages->contains($survey)) {
+            return;
+        }
+        $this->surveys->add($survey);
+        $survey->addPage($this);
+    }
+    
+    /**
+     * @param Page $page
+     */
+    public function removeSurvey(Survey $survey) {
+        if (! $this->surveys->contains($survey)) {
+            return;
+        }
+        $this->surveys->removeElement($survey);
+        $survey->removePage($this);
+    }
+    
+    
+    public function addSurveys($surveys) {
+        foreach ($surveys as $survey) {
+            $this->addSurvey($survey);
+        }
+    }
+    public function removeSurveys($surveys) {
+        foreach ($surveys as $survey) {
+            $this->removeSurvey($survey);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPageElements()
+    {
+        return $this->pageElements;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|PageElement[]
+     */
+    public function setPageElements($pageElements): void
+    {
+        $this->pageElements = $pageElements;
+    }
+    
+    /**
+     * @param PageElement $pageElement
+     */
+    public function addPageElement(PageElement $pageElement) {
+        if ($this->pageElements->contains($pageElement)) {
+            return;
+        }
+        $this->pageElements->add($pageElement);
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|PageElement[]
+     */
+    public function addPageElements($pageElements) {
+        foreach ($pageElements as $pageElement) {
+            $this->addPageElement($pageElement);
+        }
+    }
+    
+    /**
+     * @param PageElement $pageElement
+     */
+    public function removePageElement($pageElement) {
+        if (! $this->pageElements->contains($pageElement)) {
+            return;
+        }
+        $this->pageElements->removeElement($pageElement);
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|PageElement[]
+     */
+    public function removePageElements($pageElements) {
+        foreach ($pageElements as $pageElement) {
+            $this->removePageElement($pageElement);
+        }
+    }
+    
 
 }

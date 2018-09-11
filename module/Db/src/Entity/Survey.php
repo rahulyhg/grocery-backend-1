@@ -31,20 +31,23 @@ class Survey {
     protected $description;
     
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|Token[]
      * One Survey has Many tokens.
      * @ORM\OneToMany(targetEntity="Token", mappedBy="survey")
      */
     private $tokens;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|Page[]
      * Many Surveys have Many Pages.
-     * @ORM\ManyToMany(targetEntity="Page", mappedBy="surveys")
+     * @ORM\ManyToMany(targetEntity="Page", inversedBy="surveys")
+     * @ORM\JoinTable(name="pages_surveys")
      */
     private $pages;
 
     public function __construct() {
         $this->tokens = new ArrayCollection();
-        $this->pages = new ArrayCollection();
+        $this->pages  = new ArrayCollection();
     }
 
     function getId() {
@@ -71,16 +74,22 @@ class Survey {
         $this->description = $description;
     }
     
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|Token[]
+     */
     function getTokens() {
         return $this->tokens;
     }
 
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|Token[] $tokens
+     */
     function setTokens($tokens) {
         $this->tokens = $tokens;
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\ArrayCollection|Page[]
      */
     public function getPages()
     {
@@ -88,11 +97,33 @@ class Survey {
     }
 
     /**
-     * @param mixed $pages
+     * @param \Doctrine\Common\Collections\ArrayCollection|Page[] $pages
      */
     public function setPages($pages): void
     {
         $this->pages = $pages;
+    }
+    
+    /**
+     * @param Page $page
+     */
+    public function addPage(Page $page) {
+        if ($this->pages->contains($page)) {
+            return;
+        }
+        $this->pages->add($page);
+        $page->addSurvey($this);
+    }
+    
+    /**
+     * @param Page $page
+     */
+    public function removePage(Page $page) {
+        if (! $this->pages->contains($page)) {
+            return;
+        }
+        $this->pages->removeElement($page);
+        $page->removeSurvey($this);
     }
 
 }

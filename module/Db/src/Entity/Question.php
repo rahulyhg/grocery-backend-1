@@ -5,9 +5,10 @@ namespace Db\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
+use Db\Entity\Answer;
 
 /**
- * This class represents a page item.
+ * This class represents a question.
  * @ORM\Entity()
  * @ORM\Table(name="questions")
  */
@@ -51,6 +52,7 @@ class Question {
     protected $allowExplanation;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection|Answer[]
      * Many Questions have Many answers.
      * @ORM\ManyToMany(targetEntity="Answer", inversedBy="questions")
      * @ORM\JoinTable(name="questions_answers")
@@ -59,6 +61,40 @@ class Question {
 
     public function __construct() {
         $this->answers = new ArrayCollection();
+    }
+    
+    /**
+     * @param Answer $answer
+     */
+    public function addAnswer(Answer $answer) {
+        if ($this->answers->contains($answer)) {
+            return;
+        }
+        $this->answers->add($answer);
+        $answer->addQuestion($this);
+    }
+    
+    /**
+     * @param Answer $answer
+     */
+    public function removeAnswer($answer) {
+        if (! $this->answers->contains($answer)) {
+            return;
+        }
+        $this->answers->removeElement($answer);
+        $answer->removeQuestion($this);
+    }
+
+    public function addAnswers($answers) {
+        foreach ($answers as $answer) {
+            $this->addAnswer($answer);
+        }
+    }
+    
+    public function removeAnswers($answers) {
+        foreach ($answers as $answer) {
+            $this->removeAnswer($answer);
+        }
     }
 
     function getId() {

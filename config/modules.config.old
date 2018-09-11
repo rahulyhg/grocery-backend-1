@@ -31,9 +31,11 @@ return [
     'ZF\\Versioning',
     'ZF\\OAuth2\\Doctrine',
     'ZF\\OAuth2\\Doctrine\\Identity',
-    //'ZF\\OAuth2\\Doctrine\\Permissions\\Acl',
+    'ZF\\OAuth2\\Doctrine\\Permissions\\Acl',
     'ZF\\Doctrine\\QueryBuilder',
     'ZfrCors',
     'Application',
     'Db',
+    'DbAPI',
+    'test',
 ];

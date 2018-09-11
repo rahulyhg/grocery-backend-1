@@ -29,15 +29,6 @@ return [
                     ],
                 ],
             ],
-            'db-api.rest.doctrine.page-element' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/page-element[/:page_element_id]',
-                    'defaults' => [
-                        'controller' => 'DbAPI\\V1\\Rest\\PageElement\\Controller',
-                    ],
-                ],
-            ],
             'db-api.rest.doctrine.element' => [
                 'type' => 'Segment',
                 'options' => [
@@ -83,6 +74,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.page-element' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/page-element[/:page_element_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\PageElement\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -90,12 +90,12 @@ return [
             0 => 'db-api.rest.doctrine.question',
             1 => 'db-api.rest.doctrine.token',
             2 => 'db-api.rest.doctrine.survey',
-            3 => 'db-api.rest.doctrine.page-element',
             4 => 'db-api.rest.doctrine.element',
             5 => 'db-api.rest.doctrine.answer',
             6 => 'db-api.rest.doctrine.page',
             7 => 'db-api.rest.doctrine.role',
             8 => 'db-api.rest.doctrine.user',
+            9 => 'db-api.rest.doctrine.page-element',
         ],
     ],
     'zf-rest' => [
@@ -169,29 +169,6 @@ return [
             'entity_class' => \Db\Entity\Survey::class,
             'collection_class' => \DbAPI\V1\Rest\Survey\SurveyCollection::class,
             'service_name' => 'Survey',
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
-            'listener' => \DbAPI\V1\Rest\PageElement\PageElementResource::class,
-            'route_name' => 'db-api.rest.doctrine.page-element',
-            'route_identifier_name' => 'page_element_id',
-            'entity_identifier_name' => 'id',
-            'collection_name' => 'page_element',
-            'entity_http_methods' => [
-                0 => 'GET',
-                1 => 'PATCH',
-                2 => 'PUT',
-                3 => 'DELETE',
-            ],
-            'collection_http_methods' => [
-                0 => 'GET',
-                1 => 'POST',
-            ],
-            'collection_query_whitelist' => [],
-            'page_size' => 25,
-            'page_size_param' => null,
-            'entity_class' => \Db\Entity\PageElement::class,
-            'collection_class' => \DbAPI\V1\Rest\PageElement\PageElementCollection::class,
-            'service_name' => 'PageElement',
         ],
         'DbAPI\\V1\\Rest\\Element\\Controller' => [
             'listener' => \DbAPI\V1\Rest\Element\ElementResource::class,
@@ -308,18 +285,43 @@ return [
             'collection_class' => \DbAPI\V1\Rest\User\UserCollection::class,
             'service_name' => 'User',
         ],
+        'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\PageElement\PageElementResource::class,
+            'route_name' => 'db-api.rest.doctrine.page-element',
+            'route_identifier_name' => 'page_element_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'page_element',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [
+                0 => 'sort',
+            ],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\PageElement::class,
+            'collection_class' => \DbAPI\V1\Rest\PageElement\PageElementCollection::class,
+            'service_name' => 'PageElement',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Token\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Survey\\Controller' => 'HalJson',
-            'DbAPI\\V1\\Rest\\PageElement\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Element\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Answer\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Page\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Role\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\User\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\PageElement\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -333,11 +335,6 @@ return [
                 2 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Survey\\Controller' => [
-                0 => 'application/vnd.db-api.v1+json',
-                1 => 'application/hal+json',
-                2 => 'application/json',
-            ],
-            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
@@ -363,6 +360,11 @@ return [
                 2 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\User\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
@@ -381,10 +383,6 @@ return [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
-            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
-                0 => 'application/vnd.db-api.v1+json',
-                1 => 'application/json',
-            ],
             'DbAPI\\V1\\Rest\\Element\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
@@ -402,6 +400,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\User\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -436,21 +438,11 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.survey',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Survey\\SurveyHydrator',
+                'max_depth' => 5,
             ],
             \DbAPI\V1\Rest\Survey\SurveyCollection::class => [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.survey',
-                'is_collection' => true,
-            ],
-            \Db\Entity\PageElement::class => [
-                'route_identifier_name' => 'page_element_id',
-                'entity_identifier_name' => 'id',
-                'route_name' => 'db-api.rest.doctrine.page-element',
-                'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
-            ],
-            \DbAPI\V1\Rest\PageElement\PageElementCollection::class => [
-                'entity_identifier_name' => 'id',
-                'route_name' => 'db-api.rest.doctrine.page-element',
                 'is_collection' => true,
             ],
             \Db\Entity\Element::class => [
@@ -480,6 +472,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.page',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Page\\PageHydrator',
+                'max_depth' => 4,
             ],
             \DbAPI\V1\Rest\Page\PageCollection::class => [
                 'entity_identifier_name' => 'id',
@@ -508,6 +501,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.user',
                 'is_collection' => true,
             ],
+            \Db\Entity\PageElement::class => [
+                'route_identifier_name' => 'page_element_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.page-element',
+                'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
+            ],
+            \DbAPI\V1\Rest\PageElement\PageElementCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.page-element',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -523,10 +527,6 @@ return [
             \DbAPI\V1\Rest\Survey\SurveyResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Survey\\SurveyHydrator',
-            ],
-            \DbAPI\V1\Rest\PageElement\PageElementResource::class => [
-                'object_manager' => 'doctrine.entitymanager.orm_default',
-                'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
             ],
             \DbAPI\V1\Rest\Element\ElementResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
@@ -548,6 +548,10 @@ return [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\User\\UserHydrator',
             ],
+            \DbAPI\V1\Rest\PageElement\PageElementResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
+            ],
         ],
     ],
     'doctrine-hydrator' => [
@@ -555,7 +559,9 @@ return [
             'entity_class' => \Db\Entity\Question::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'answers' => 'dbapi.v1.extract.answers',
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Token\\TokenHydrator' => [
@@ -569,35 +575,36 @@ return [
             'entity_class' => \Db\Entity\Survey::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
-            'use_generated_hydrator' => true,
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator' => [
-            'entity_class' => \Db\Entity\PageElement::class,
-            'object_manager' => 'doctrine.entitymanager.orm_default',
-            'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'pages' => 'dbapi.v1.extract.pages',
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Element\\ElementHydrator' => [
             'entity_class' => \Db\Entity\Element::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'pageElements' => \ZF\Doctrine\Hydrator\Strategy\CollectionLink::class,
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Answer\\AnswerHydrator' => [
             'entity_class' => \Db\Entity\Answer::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'questions' => \ZF\Doctrine\Hydrator\Strategy\CollectionLink::class,
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Page\\PageHydrator' => [
             'entity_class' => \Db\Entity\Page::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'pageElements' => 'dbapi.v1.extract.pageElements',
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Role\\RoleHydrator' => [
@@ -611,7 +618,18 @@ return [
             'entity_class' => \Application\Entity\User::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'roles' => 'dbapi.v1.extract.roles',
+            ],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator' => [
+            'entity_class' => \Db\Entity\PageElement::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [
+                'page' => \ZF\Doctrine\Hydrator\Strategy\EntityLink::class,
+            ],
             'use_generated_hydrator' => true,
         ],
     ],
@@ -624,9 +642,6 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Survey\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Survey\\Validator',
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
-            'input_filter' => 'DbAPI\\V1\\Rest\\PageElement\\Validator',
         ],
         'DbAPI\\V1\\Rest\\Element\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Element\\Validator',
@@ -642,6 +657,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\User\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\User\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\PageElement\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -744,7 +762,7 @@ return [
         'DbAPI\\V1\\Rest\\Token\\Validator' => [
             0 => [
                 'name' => 'token',
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     0 => [
                         'name' => \Zend\Filter\StringTrim::class,
@@ -768,25 +786,29 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Zend\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Zend\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Zend\I18n\Validator\IsInt::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Validator\Between::class,
                         'options' => [
-                            'min' => 1,
-                            'max' => 255,
+                            'min' => '1',
+                            'max' => '2',
                         ],
                     ],
                 ],
             ],
             2 => [
                 'name' => 'used',
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     0 => [
                         'name' => \Zend\Filter\StripTags::class,
@@ -842,34 +864,6 @@ return [
                 ],
             ],
         ],
-        'DbAPI\\V1\\Rest\\PageElement\\Validator' => [
-            0 => [
-                'name' => 'elementOrder',
-                'required' => true,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\Digits::class,
-                    ],
-                ],
-                'validators' => [],
-            ],
-            1 => [
-                'name' => 'locked',
-                'required' => true,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\Digits::class,
-                    ],
-                ],
-                'validators' => [],
-            ],
-        ],
         'DbAPI\\V1\\Rest\\Element\\Validator' => [
             0 => [
                 'name' => 'type',
@@ -908,7 +902,7 @@ return [
                         'name' => \Zend\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
-                            'max' => 50,
+                            'max' => 2048,
                         ],
                     ],
                 ],
@@ -1089,13 +1083,13 @@ return [
             ],
             4 => [
                 'name' => 'state',
-                'required' => true,
+                'required' => false,
                 'filters' => [],
                 'validators' => [],
             ],
             5 => [
                 'name' => 'securityCounter',
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     0 => [
                         'name' => \Zend\Filter\StripTags::class,
@@ -1110,6 +1104,34 @@ return [
                 'name' => 'lastLoginDateTime',
                 'required' => false,
                 'filters' => [],
+                'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\PageElement\\Validator' => [
+            0 => [
+                'name' => 'elementOrder',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            1 => [
+                'name' => 'locked',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
                 'validators' => [],
             ],
         ],
@@ -1128,10 +1150,150 @@ return [
                     'GET' => true,
                     'POST' => true,
                     'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Answer\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Page\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Element\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Token\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Survey\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Role\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\User\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
                 ],
             ],
         ],
     ],
+    'service_manager' => [
+        'invokables' => [
+            'dbapi.v1.extract.answers' => \DbAPI\V1\Rest\Question\QuestionStrategy::class,
+            'dbapi.v1.extract.roles' => \DbAPI\V1\Rest\User\UserStrategy::class,
+            'dbapi.v1.extract.pageElements' => \DbAPI\V1\Rest\Page\PageStrategy::class,
+            'dbapi.v1.extract.pages' => \DbAPI\V1\Rest\Survey\SurveyStrategy::class,
+        ],
+    ],
+    'controllers' => [
+        'factories' => [],
+    ],
+    'zf-rpc' => [],
 ];
