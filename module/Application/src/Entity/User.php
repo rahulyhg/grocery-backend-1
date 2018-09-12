@@ -15,6 +15,8 @@ use Zend\Form\Annotation;
 use ZF\OAuth2\Doctrine\Entity\UserInterface;
 use Zend\Stdlib\ArraySerializableInterface;
 use ZF\OAuth2\Doctrine\Permissions\Acl\Role\ProviderInterface;
+use Application\Entity\Role;
+use Db\Entity\Customer;
 
 /**
  * @ORM\Entity
@@ -69,6 +71,13 @@ class User implements UserInterface, ArraySerializableInterface, ProviderInterfa
      * @ORM\Column(type="integer")
      */
     protected $securityCounter = self::SEC_COUNTER;
+
+    /**
+     * Many Users have One Customer
+     * @ORM\ManyToOne(targetEntity="Db\Entity\Customer", inversedBy="users")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    protected $customer;
 
     /**
      * @ORM\Column(name="last_login_datetime", type="datetime", nullable=true)
@@ -233,13 +242,23 @@ class User implements UserInterface, ArraySerializableInterface, ProviderInterfa
     }
 
     /**
-     * Get role.
+     * Get roles.
      *
      * @return array
      */
     public function getRoles()
     {
-        return $this->roles->getValues();
+        return $this->roles;
+    }
+    
+    /**
+     * Set roles.
+     *
+     * @return void
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
     
     /**
@@ -256,25 +275,37 @@ class User implements UserInterface, ArraySerializableInterface, ProviderInterfa
      * Add a role to the user.
      *
      * @param Role $role
-     *
      * @return void
      */
-    public function addRole($role)
+    public function addRole(Role $role)
     {
-        $this->roles[] = $role;
+        if ($this->roles->contains($role)) {
+            return;
+        }
+        $this->roles->add($role);
     }
 
     public function addRoles(Collection $roles)
     {
         foreach($roles as $role){
-            $this->roles->add($role);
+            $this->addRole($role);
         }
 
     }
-
+    
+    /**
+     * @param Role $role
+     */
+    public function removeRole($role) {
+        if (! $this->roles->contains($role)) {
+            return;
+        }
+        $this->roles->removeElement($role);
+    }
+    
     public function removeRoles(Collection $roles) {
         foreach($roles as $role){
-            $this->roles->removeElement($role);
+            $this->removeRole($role);
         }
     }
 
@@ -379,6 +410,15 @@ class User implements UserInterface, ArraySerializableInterface, ProviderInterfa
             'password' => $this->getPassword(),
             'email' => $this->getEmail(),
         ];
+    }
+
+
+    function getCustomer() {
+        return $this->customer;
+    }
+
+    function setCustomer($customer) {
+        $this->customer = $customer;
     }
     
 }

@@ -64,10 +64,10 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', 'username', 'email', 'displayName', 'password', 'state', 'securityCounter', 'lastLoginDateTime', 'roles', 'client', 'accessToken', 'authorizationCode', 'refreshToken'];
+            return ['__isInitialized__', 'id', 'username', 'email', 'displayName', 'password', 'state', 'securityCounter', 'customer', 'lastLoginDateTime', 'roles', 'client', 'accessToken', 'authorizationCode', 'refreshToken'];
         }
 
-        return ['__isInitialized__', 'id', 'username', 'email', 'displayName', 'password', 'state', 'securityCounter', 'lastLoginDateTime', 'roles', 'client', 'accessToken', 'authorizationCode', 'refreshToken'];
+        return ['__isInitialized__', 'id', 'username', 'email', 'displayName', 'password', 'state', 'securityCounter', 'customer', 'lastLoginDateTime', 'roles', 'client', 'accessToken', 'authorizationCode', 'refreshToken'];
     }
 
     /**
@@ -323,7 +323,29 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function addRole($role)
+    public function setRoles($roles)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoles', [$roles]);
+
+        return parent::setRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRole()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRole', []);
+
+        return parent::getRole();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addRole(\Application\Entity\Role $role)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'addRole', [$role]);
@@ -340,6 +362,17 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'addRoles', [$roles]);
 
         return parent::addRoles($roles);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeRole($role)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeRole', [$role]);
+
+        return parent::removeRole($role);
     }
 
     /**
@@ -494,6 +527,28 @@ class User extends \Application\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrayCopy', []);
 
         return parent::getArrayCopy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCustomer()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCustomer', []);
+
+        return parent::getCustomer();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCustomer($customer)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCustomer', [$customer]);
+
+        return parent::setCustomer($customer);
     }
 
 }

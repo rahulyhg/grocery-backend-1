@@ -23,7 +23,8 @@ return [
     'zf-mvc-auth' => array(
         'authentication' => array(
             'map' => array(
-                'Status\\V1' => 'oauth2_doctrine'
+                'Status\\V1' => 'oauth2_doctrine',
+                'DbAPI\\V1' => 'oauth2_doctrine',
             )
         )
     )

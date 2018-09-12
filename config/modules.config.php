@@ -34,8 +34,9 @@ return [
     'ZF\\OAuth2\\Doctrine\\Permissions\\Acl',
     'ZF\\Doctrine\\QueryBuilder',
     'ZfrCors',
+    'ZF\Doctrine\Hydrator',
+    'ZF\Apigility\Documentation\Swagger',
     'Application',
     'Db',
-    'Status',
     'DbAPI',
 ];
