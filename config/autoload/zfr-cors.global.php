@@ -10,7 +10,7 @@ return [
          /**
           * Set the list of allowed origins domain with protocol.
           */
-         'allowed_origins' => ['http://localhost:4200', 'http://localhost', 'https://ppp-frontend'],
+         'allowed_origins' => ['http://localhost:4200', 'http://localhost', 'https://ppp-frontend', 'https://ppp-frontend.productie.reportsbv.nl'],
 
          /**
           * Set the list of HTTP verbs.

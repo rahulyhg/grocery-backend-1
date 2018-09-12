@@ -16,6 +16,7 @@ use ZF\OAuth2\Doctrine\Entity\UserInterface;
 use Zend\Stdlib\ArraySerializableInterface;
 use ZF\OAuth2\Doctrine\Permissions\Acl\Role\ProviderInterface;
 use Application\Entity\Role;
+use Db\Entity\Customer;
 
 /**
  * @ORM\Entity
@@ -70,6 +71,13 @@ class User implements UserInterface, ArraySerializableInterface, ProviderInterfa
      * @ORM\Column(type="integer")
      */
     protected $securityCounter = self::SEC_COUNTER;
+
+    /**
+     * Many Users have One Customer
+     * @ORM\ManyToOne(targetEntity="Db\Entity\Customer", inversedBy="users")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    protected $customer;
 
     /**
      * @ORM\Column(name="last_login_datetime", type="datetime", nullable=true)
@@ -402,6 +410,15 @@ class User implements UserInterface, ArraySerializableInterface, ProviderInterfa
             'password' => $this->getPassword(),
             'email' => $this->getEmail(),
         ];
+    }
+
+
+    function getCustomer() {
+        return $this->customer;
+    }
+
+    function setCustomer($customer) {
+        $this->customer = $customer;
     }
     
 }

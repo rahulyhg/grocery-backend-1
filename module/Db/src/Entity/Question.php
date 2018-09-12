@@ -22,7 +22,7 @@ class Question {
     protected $id;
 
     /**
-     * @ORM\Column(name="text", type="string", length=50, nullable=false)
+     * @ORM\Column(name="text", type="string", length=512, nullable=false)
      */
     protected $text;
 
@@ -50,6 +50,55 @@ class Question {
      * @ORM\Column(name="allow_explanation", type="integer", length=11, nullable=false)
      */
     protected $allowExplanation;
+
+
+    //////////////////
+    // Smiley texts //
+    // Please don't //
+    // judge me...  //
+    //////////////////
+    /**
+     * @ORM\Column(name="smileytext_fully_agree", type="text", length=256, nullable=true)
+     */
+    protected $smileytextFullyAgree;
+
+    /**
+     * @ORM\Column(name="smileytext_kinda_agree", type="text", length=256, nullable=true)
+     */
+    protected $smileytextKindaAgree;
+
+    /**
+     * @ORM\Column(name="smileytext_neutral", type="text", length=256, nullable=true)
+     */
+    protected $smileytextNeutral;
+
+    /**
+     * @ORM\Column(name="smileytext_kinda_disagree", type="text", length=256, nullable=true)
+     */
+    protected $smileytextKindaDisagree;
+
+    /**
+     * @ORM\Column(name="smileytext_fully_disagree", type="text", length=256, nullable=true)
+     */
+    protected $smileytextFullyDisagree;
+
+    /**
+     * @ORM\Column(name="smileytext_dont_know", type="text", length=256, nullable=true)
+     */
+    protected $smileytextDontKnow;
+
+    /**
+     * Many Questions have One Customer
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="questions")
+     */
+    protected $customer;
+
+    /**
+     * Many Questions have One Subtheme
+     * @ORM\ManyToOne(targetEntity="SubTheme", inversedBy="questions")
+     * @ORM\JoinColumn(name="subtheme_id", referencedColumnName="id", nullable=true)
+     */
+    private $subtheme;
 
     /**
      * @var \Doctrine\Common\Collections\Collection|Answer[]
@@ -125,6 +174,42 @@ class Question {
         return $this->allowExplanation;
     }
 
+    function getAnswers() {
+        return $this->answers;
+    }
+
+    function getSubtheme() {
+        return $this->subtheme;
+    }
+
+    function getSmileytextFullyAgree() {
+        return $this->smileytext_fully_agree;
+    }
+
+    function getSmileytextKindaAgree() {
+        return $this->smileytext_kinda_agree;
+    }
+
+    function getSmileytextNeutral() {
+        return $this->smileytext_neutral;
+    }
+
+    function getSmileytextKindaDisagree() {
+        return $this->smileytext_kinda_disagree;
+    }
+
+    function getSmileytextFullyDisagree() {
+        return $this->smileytext_fully_disagree;
+    }
+
+    function getSmileytextDontKnow() {
+        return $this->smileytext_dont_know;
+    }
+
+    function getCustomer() {
+        return $this->customer;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -153,12 +238,40 @@ class Question {
         $this->allowExplanation = $allowExplanation;
     }
 
-    function getAnswers() {
-        return $this->answers;
-    }
-
     function setAnswers($answers) {
         $this->answers = $answers;
+    }
+
+    function setSubtheme($subtheme) {
+        $this->subtheme = $subtheme;
+    }
+
+    function setSmileytextFullyAgree($text) {
+        $this->smileytext_fully_agree = $text;
+    }
+
+    function setSmileytextKindaAgree($text) {
+        $this->smileytext_kinda_agree = $text;
+    }
+
+    function setSmileytextNeutral($text) {
+        $this->smileytext_neutral = $text;
+    }
+
+    function setSmileytextKindaDisagree($text) {
+        $this->smileytext_kinda_disagree = $text;
+    }
+
+    function setSmileytextFullyDisagree($text) {
+        $this->smileytext_fully_disagree = $text;
+    }
+
+    function setSmileytextDontKnow($text) {
+        $this->smileytext_dont_know = $text;
+    }
+
+    function setCustomer($customer) {
+        $this->customer = $customer;
     }
 
 }

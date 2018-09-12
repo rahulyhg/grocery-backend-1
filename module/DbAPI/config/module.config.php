@@ -83,6 +83,42 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.sub-theme' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/sub-theme[/:sub_theme_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SubTheme\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.theme' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/theme[/:theme_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Theme\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.customer' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/customer[/:customer_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Customer\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.team' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/team[/:team_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Team\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -96,6 +132,11 @@ return [
             7 => 'db-api.rest.doctrine.role',
             8 => 'db-api.rest.doctrine.user',
             9 => 'db-api.rest.doctrine.page-element',
+            10 => 'db-api.rest.doctrine.sub-theme',
+            11 => 'db-api.rest.doctrine.theme',
+            12 => 'db-api.rest.doctrine.sub-theme',
+            13 => 'db-api.rest.doctrine.customer',
+            14 => 'db-api.rest.doctrine.team',
         ],
     ],
     'zf-rest' => [
@@ -310,6 +351,98 @@ return [
             'collection_class' => \DbAPI\V1\Rest\PageElement\PageElementCollection::class,
             'service_name' => 'PageElement',
         ],
+        'DbAPI\\V1\\Rest\\Theme\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Theme\ThemeResource::class,
+            'route_name' => 'db-api.rest.doctrine.theme',
+            'route_identifier_name' => 'theme_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'theme',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Theme::class,
+            'collection_class' => \DbAPI\V1\Rest\Theme\ThemeCollection::class,
+            'service_name' => 'Theme',
+        ],
+        'DbAPI\\V1\\Rest\\SubTheme\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SubTheme\SubThemeResource::class,
+            'route_name' => 'db-api.rest.doctrine.sub-theme',
+            'route_identifier_name' => 'sub_theme_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'sub_theme',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SubTheme::class,
+            'collection_class' => \DbAPI\V1\Rest\SubTheme\SubThemeCollection::class,
+            'service_name' => 'SubTheme',
+        ],
+        'DbAPI\\V1\\Rest\\Customer\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Customer\CustomerResource::class,
+            'route_name' => 'db-api.rest.doctrine.customer',
+            'route_identifier_name' => 'customer_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'customer',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Customer::class,
+            'collection_class' => \DbAPI\V1\Rest\Customer\CustomerCollection::class,
+            'service_name' => 'Customer',
+        ],
+        'DbAPI\\V1\\Rest\\Team\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Team\TeamResource::class,
+            'route_name' => 'db-api.rest.doctrine.team',
+            'route_identifier_name' => 'team_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'team',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Team::class,
+            'collection_class' => \DbAPI\V1\Rest\Team\TeamCollection::class,
+            'service_name' => 'Team',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -322,6 +455,10 @@ return [
             'DbAPI\\V1\\Rest\\Role\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\User\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\PageElement\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\Theme\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SubTheme\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\Customer\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\Team\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -369,6 +506,26 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\Theme\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SubTheme\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Customer\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Team\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -404,6 +561,22 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Theme\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SubTheme\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Customer\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Team\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -512,6 +685,53 @@ return [
                 'route_name' => 'db-api.rest.doctrine.page-element',
                 'is_collection' => true,
             ],
+            \Db\Entity\Theme::class => [
+                'route_identifier_name' => 'theme_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.theme',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Theme\\ThemeHydrator',
+                'max_depth' => 2,
+            ],
+            \DbAPI\V1\Rest\Theme\ThemeCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.theme',
+                'is_collection' => true,
+            ],
+            \Db\Entity\SubTheme::class => [
+                'route_identifier_name' => 'sub_theme_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.sub-theme',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SubTheme\\SubThemeHydrator',
+                'max_depth' => 2,
+            ],
+            \DbAPI\V1\Rest\SubTheme\SubThemeCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.sub-theme',
+                'is_collection' => true,
+            ],
+            \Db\Entity\Customer::class => [
+                'route_identifier_name' => 'customer_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.customer',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Customer\\CustomerHydrator',
+                'max_depth' => 2,
+            ],
+            \DbAPI\V1\Rest\Customer\CustomerCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.customer',
+                'is_collection' => true,
+            ],
+            \Db\Entity\Team::class => [
+                'route_identifier_name' => 'team_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.team',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Team\\TeamHydrator',
+            ],
+            \DbAPI\V1\Rest\Team\TeamCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.team',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -552,6 +772,22 @@ return [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
             ],
+            \DbAPI\V1\Rest\Theme\ThemeResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Theme\\ThemeHydrator',
+            ],
+            \DbAPI\V1\Rest\SubTheme\SubThemeResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SubTheme\\SubThemeHydrator',
+            ],
+            \DbAPI\V1\Rest\Customer\CustomerResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Customer\\CustomerHydrator',
+            ],
+            \DbAPI\V1\Rest\Team\TeamResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Team\\TeamHydrator',
+            ],
         ],
     ],
     'doctrine-hydrator' => [
@@ -561,6 +797,7 @@ return [
             'by_value' => true,
             'strategies' => [
                 'answers' => 'dbapi.v1.extract.answers',
+                'subtheme' => \ZF\Doctrine\Hydrator\Strategy\EntityLink::class,
             ],
             'use_generated_hydrator' => true,
         ],
@@ -632,6 +869,40 @@ return [
             ],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\Theme\\ThemeHydrator' => [
+            'entity_class' => \Db\Entity\Theme::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [
+                'subthemes' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+            ],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\SubTheme\\SubThemeHydrator' => [
+            'entity_class' => \Db\Entity\SubTheme::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [
+                'questions' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+            ],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\Customer\\CustomerHydrator' => [
+            'entity_class' => \Db\Entity\Customer::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [
+                'teams' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+            ],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\Team\\TeamHydrator' => [
+            'entity_class' => \Db\Entity\Team::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -661,6 +932,18 @@ return [
         'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\PageElement\\Validator',
         ],
+        'DbAPI\\V1\\Rest\\Theme\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Theme\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SubTheme\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SubTheme\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\Customer\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Customer\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\Team\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Team\\Validator',
+        ],
     ],
     'input_filter_specs' => [
         'DbAPI\\V1\\Rest\\Question\\Validator' => [
@@ -680,7 +963,7 @@ return [
                         'name' => \Zend\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
-                            'max' => 50,
+                            'max' => '512',
                         ],
                     ],
                 ],
@@ -1062,7 +1345,7 @@ return [
             ],
             3 => [
                 'name' => 'password',
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     0 => [
                         'name' => \Zend\Filter\StringTrim::class,
@@ -1133,6 +1416,98 @@ return [
                     ],
                 ],
                 'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\Theme\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\SubTheme\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\Customer\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\Team\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
             ],
         ],
     ],

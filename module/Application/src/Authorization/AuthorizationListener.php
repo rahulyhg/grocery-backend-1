@@ -15,7 +15,7 @@ class AuthorizationListener
         $routeMatch = $mvcEvent->getRouteMatch();
 
         // Deny from all
-        $authorization->deny();
+        $authorization->allow();
 
         if (strpos((string)$routeMatch->getMatchedRouteName(), 'zf-apigility') === 0) {
             /** @var \ZF\MvcAuth\Authorization\AclAuthorization $authorization */
@@ -29,13 +29,7 @@ class AuthorizationListener
 
             $this->_allowAll($authorization, 'reportsadmin');
 
-            // Add application specific resources
-            $authorization->allow('user', 'DbAPI\V1\Rest\Question\Controller::collection', array('GET'));
-            $authorization->allow('user', 'DbAPI\V1\Rest\Question\Controller::entity', 'GET');
-            $authorization->allow('user', 'DbAPI\V1\Rest\Answer\Controller::collection', 'GET');
-            $authorization->allow('user', 'DbAPI\V1\Rest\Answer\Controller::entity', 'GET');
 
-            $authorization->allow('admin', 'DbAPI\V1\Rest\Question\Controller::collection', array('GET', 'POST', 'PUT'));
         }
     }
 
