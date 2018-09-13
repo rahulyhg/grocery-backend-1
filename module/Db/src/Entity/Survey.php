@@ -29,6 +29,11 @@ class Survey {
      * @ORM\Column(name="subtitle", type="string", length=50, nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(name="type", type="string", length=50, nullable=true)
+     */
+    protected $type;
     
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Token[]
@@ -62,6 +67,10 @@ class Survey {
         return $this->description;
     }
 
+    function getType() {
+        return $this->type;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -72,6 +81,10 @@ class Survey {
 
     function setDescription($description) {
         $this->description = $description;
+    }
+
+    function setType($type) {
+        $this->type = $type;
     }
     
     /**

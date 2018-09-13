@@ -122,5 +122,14 @@ class SubTheme {
         }
     }
     
+
+
+    // function getPage() {
+    //     return $this->page;
+    // }
+    // function setPage($page) {
+    //     $this->page = $page;
+    // }
+
 }
 
