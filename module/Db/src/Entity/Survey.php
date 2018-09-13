@@ -3,9 +3,7 @@
 namespace Db\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Zend\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
-use Db\Entity\Theme;
 
 /**
  * This class represents a survey item.
@@ -42,6 +40,15 @@ class Survey {
      * @ORM\OneToMany(targetEntity="Token", mappedBy="survey")
      */
     private $tokens;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="TargetAudience")
+     * @ORM\JoinTable(name="surveys_targetaudiences",
+     *      joinColumns={@ORM\JoinColumn(name="survey_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="targetaudience_id", referencedColumnName="id")}
+     *      )
+     */
+    private $targetaudiences;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Theme[]
@@ -53,6 +60,7 @@ class Survey {
 
     public function __construct() {
         $this->tokens = new ArrayCollection();
+        $this->targetaudiences = new ArrayCollection();
         $this->survey_theme_associations  = new ArrayCollection();
     }
 
@@ -101,7 +109,44 @@ class Survey {
     function setTokens($tokens) {
         $this->tokens = $tokens;
     }
-
+    
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|TargetAudience[]
+     */
+    public function getTargetaudiences()
+    {
+        return $this->targetaudiences;
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|TargetAudience[] $targetaudiences
+     */
+    public function setTargetaudiences($targetaudiences): void
+    {
+        $this->targetaudiences = $targetaudiences;
+    }
+    
+    /**
+     * @param Answer $answer
+     */
+    public function addTargetaudience(TargetAudience $targetaudience): void {
+        if ($this->targetaudiences->contains($targetaudience)) {
+            return;
+        }
+        $this->targetaudiences->add($targetaudience);
+    }
+    
+    /**
+     * @param TargetAudience $targetaudience
+     */
+    public function removeTargetaudience(TargetAudience $targetaudience): void {
+        if (! $this->targetaudiences->contains($targetaudience)) {
+            return;
+        }
+        $this->targetaudiences->removeElement($targetaudience);
+    }
+    
+    
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
      */
@@ -130,4 +175,6 @@ class Survey {
         $this->survey_theme_associations->removeElement($surveyThemeAssociation);
     }
 
+    
+    
 }
