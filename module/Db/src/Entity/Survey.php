@@ -5,6 +5,7 @@ namespace Db\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
+use Db\Entity\Theme;
 
 /**
  * This class represents a survey item.
@@ -23,7 +24,7 @@ class Survey {
     /**
      * @ORM\Column(name="title", type="string", length=50, nullable=false)
      */
-    protected $name = 'noname';
+    protected $name = '';
 
     /**
      * @ORM\Column(name="subtitle", type="string", length=50, nullable=true)
@@ -43,16 +44,16 @@ class Survey {
     private $tokens;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|Page[]
-     * Many Surveys have Many Pages.
-     * @ORM\ManyToMany(targetEntity="Page", inversedBy="surveys")
-     * @ORM\JoinTable(name="pages_surveys")
+     * @var \Doctrine\Common\Collections\ArrayCollection|Theme[]
+     * Many Surveys have Many Themes.
+     * @ORM\OneToMany(targetEntity="SurveyThemeAssociation", mappedBy="survey", orphanRemoval=true)
      */
-    private $pages;
+    protected $survey_theme_associations;
+    
 
     public function __construct() {
         $this->tokens = new ArrayCollection();
-        $this->pages  = new ArrayCollection();
+        $this->survey_theme_associations  = new ArrayCollection();
     }
 
     function getId() {
@@ -102,41 +103,31 @@ class Survey {
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection|Page[]
+     * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
      */
-    public function getPages()
+    public function getSurveyThemeAssociations()
     {
-        return $this->pages;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection|Page[] $pages
-     */
-    public function setPages($pages): void
-    {
-        $this->pages = $pages;
+        return $this->survey_theme_associations;
     }
     
     /**
-     * @param Page $page
+     * @param SurveyThemeAssociation $surveyThemeAssociation
      */
-    public function addPage(Page $page) {
-        if ($this->pages->contains($page)) {
+    public function addSurveyThemeAssociation(SurveyThemeAssociation $surveyThemeAssociation): void {
+        if ($this->survey_theme_associations->contains($surveyThemeAssociation)) {
             return;
         }
-        $this->pages->add($page);
-        $page->addSurvey($this);
+        $this->survey_theme_associations->add($surveyThemeAssociation);
     }
     
     /**
-     * @param Page $page
+     * @param SurveyThemeAssociation $surveyThemeAssociation
      */
-    public function removePage(Page $page) {
-        if (! $this->pages->contains($page)) {
+    public function removeSurveyThemeAssociation(SurveyThemeAssociation $surveyThemeAssociation): void {
+        if (! $this->survey_theme_associations->contains($surveyThemeAssociation)) {
             return;
         }
-        $this->pages->removeElement($page);
-        $page->removeSurvey($this);
+        $this->survey_theme_associations->removeElement($surveyThemeAssociation);
     }
 
 }

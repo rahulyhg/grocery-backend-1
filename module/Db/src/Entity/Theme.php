@@ -36,8 +36,18 @@ class Theme {
      */
     private $subthemes;
     
+    
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|Theme[]
+     * Many Surveys have Many Themes.
+     * @ORM\OneToMany(targetEntity="SurveyThemeAssociation", mappedBy="theme", orphanRemoval=true)
+     */
+    protected $survey_theme_associations;
+    
+    
     public function __construct() {
         $this->subthemes  = new ArrayCollection();
+        $this->survey_theme_associations  = new ArrayCollection();
     }
     
     function getId() {
@@ -106,4 +116,33 @@ class Theme {
             $this->removeSubtheme($subtheme);
         }
     }
+    
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
+     */
+    public function getSurveyThemeAssociations()
+    {
+        return $this->survey_theme_associations;
+    }
+    
+    /**
+     * @param SurveyThemeAssociation $surveyThemeAssociation
+     */
+    public function addSurveyThemeAssociation(SurveyThemeAssociation $surveyThemeAssociation): void {
+        if ($this->survey_theme_associations->contains($surveyThemeAssociation)) {
+            return;
+        }
+        $this->survey_theme_associations->add($surveyThemeAssociation);
+    }
+    
+    /**
+     * @param SurveyThemeAssociation $surveyThemeAssociation
+     */
+    public function removeSurveyThemeAssociation(SurveyThemeAssociation $surveyThemeAssociation): void {
+        if (! $this->survey_theme_associations->contains($surveyThemeAssociation)) {
+            return;
+        }
+        $this->survey_theme_associations->removeElement($surveyThemeAssociation);
+    }
+    
 }
