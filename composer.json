@@ -42,7 +42,8 @@
         "api-skeletons/zf-doctrine-hydrator": "*",
         "zendframework/zend-mvc-console": "^1.2",
         "doctrine/migrations": "^1.8",
-        "zfr/zfr-cors": "1.*"
+        "zfr/zfr-cors": "1.*",
+        "ramsey/uuid": "^3.8"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "^1.2.1",

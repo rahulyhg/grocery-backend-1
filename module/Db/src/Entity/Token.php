@@ -5,6 +5,7 @@ namespace Db\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use Doctrine\Common\Collections\ArrayCollection;
+use Ramsey\Uuid\Uuid;
 
 /**
  * This class represents a token.
@@ -26,7 +27,7 @@ class Token {
 
     /**
      * @var string
-     * @ORM\Column(name="token", type="string", length=32, nullable=false, unique=true)
+     * @ORM\Column(name="token", type="guid", nullable=false, unique=true)
      */
     protected $token;
     
@@ -52,7 +53,7 @@ class Token {
     
     
     public function __construct() {
-        $this->setToken($this->generateToken());
+        $this->token = (string) Uuid::uuid4();
     }
 
     /**
@@ -123,11 +124,6 @@ class Token {
      */
     public function setSurvey($survey){
         $this->survey = $survey;
-    }
-    
-    private function generateToken() {
-        $bytes = random_bytes(16);
-        return bin2hex($bytes);
     }
 
 }
