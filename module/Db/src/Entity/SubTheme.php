@@ -28,7 +28,7 @@ class SubTheme {
     // VOLGNUMMER
 
     /**
-     * @var \Doctine\Common\Collections\Collection|Question[]
+     * @var \Doctrine\Common\Collections\Collection|Question[]
      * One SubTheme has Many Questions
      * @ORM\OneToMany(targetEntity="Question", mappedBy="subtheme")
      */
