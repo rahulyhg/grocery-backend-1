@@ -201,6 +201,19 @@ class Page {
             $this->removePageElement($pageElement);
         }
     }
-    
+
+
+    // function getPage() {
+    //     return $this->page;
+    // }
+    // function setPage($page) {
+    //     $this->page = $page;
+    // }
+    // function getSubTheme() {
+    //     return $this->subtheme;
+    // }
+    // function setSubTheme($subtheme) {
+    //     $this->subtheme = $subtheme;
+    // }
 
 }

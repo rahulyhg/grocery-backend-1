@@ -840,7 +840,7 @@ return [
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => [
-                'pageElements' => 'dbapi.v1.extract.pageElements',
+                'pageElements' => 'dbapi.v1.extract.pageElements'
             ],
             'use_generated_hydrator' => true,
         ],
