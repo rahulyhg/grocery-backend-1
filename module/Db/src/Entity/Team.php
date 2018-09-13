@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Team {
 	/**
 	 * @ORM\Id
-	 * @ORM\Column(name="id", type="integer", length=11)
+	 * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
 	protected $id;
