@@ -119,6 +119,24 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.survey-theme-association' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/survey-theme-association[/:survey_theme_association_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.target-audience' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/target-audience[/:target_audience_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\TargetAudience\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -137,6 +155,8 @@ return [
             12 => 'db-api.rest.doctrine.sub-theme',
             13 => 'db-api.rest.doctrine.customer',
             14 => 'db-api.rest.doctrine.team',
+            15 => 'db-api.rest.doctrine.survey-theme-association',
+            16 => 'db-api.rest.doctrine.target-audience',
         ],
     ],
     'zf-rest' => [
@@ -443,6 +463,52 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Team\TeamCollection::class,
             'service_name' => 'Team',
         ],
+        'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SurveyThemeAssociation\SurveyThemeAssociationResource::class,
+            'route_name' => 'db-api.rest.doctrine.survey-theme-association',
+            'route_identifier_name' => 'survey_theme_association_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'survey_theme_association',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SurveyThemeAssociation::class,
+            'collection_class' => \DbAPI\V1\Rest\SurveyThemeAssociation\SurveyThemeAssociationCollection::class,
+            'service_name' => 'SurveyThemeAssociation',
+        ],
+        'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\TargetAudience\TargetAudienceResource::class,
+            'route_name' => 'db-api.rest.doctrine.target-audience',
+            'route_identifier_name' => 'target_audience_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'target_audience',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\TargetAudience::class,
+            'collection_class' => \DbAPI\V1\Rest\TargetAudience\TargetAudienceCollection::class,
+            'service_name' => 'TargetAudience',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -459,6 +525,8 @@ return [
             'DbAPI\\V1\\Rest\\SubTheme\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Customer\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Team\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -526,6 +594,16 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -577,6 +655,14 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Team\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -732,6 +818,28 @@ return [
                 'route_name' => 'db-api.rest.doctrine.team',
                 'is_collection' => true,
             ],
+            \Db\Entity\SurveyThemeAssociation::class => [
+                'route_identifier_name' => 'survey_theme_association_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-theme-association',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\SurveyThemeAssociationHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyThemeAssociation\SurveyThemeAssociationCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-theme-association',
+                'is_collection' => true,
+            ],
+            \Db\Entity\TargetAudience::class => [
+                'route_identifier_name' => 'target_audience_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.target-audience',
+                'hydrator' => 'DbAPI\\V1\\Rest\\TargetAudience\\TargetAudienceHydrator',
+            ],
+            \DbAPI\V1\Rest\TargetAudience\TargetAudienceCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.target-audience',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -788,6 +896,14 @@ return [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Team\\TeamHydrator',
             ],
+            \DbAPI\V1\Rest\SurveyThemeAssociation\SurveyThemeAssociationResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\SurveyThemeAssociationHydrator',
+            ],
+            \DbAPI\V1\Rest\TargetAudience\TargetAudienceResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\TargetAudience\\TargetAudienceHydrator',
+            ],
         ],
     ],
     'doctrine-hydrator' => [
@@ -813,7 +929,7 @@ return [
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => [
-                'pages' => 'dbapi.v1.extract.pages',
+                'survey_theme_associations' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
             ],
             'use_generated_hydrator' => true,
         ],
@@ -840,7 +956,7 @@ return [
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => [
-                'pageElements' => 'dbapi.v1.extract.pageElements'
+                'pageElements' => 'dbapi.v1.extract.pageElements',
             ],
             'use_generated_hydrator' => true,
         ],
@@ -903,6 +1019,20 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\SurveyThemeAssociationHydrator' => [
+            'entity_class' => \Db\Entity\SurveyThemeAssociation::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\TargetAudience\\TargetAudienceHydrator' => [
+            'entity_class' => \Db\Entity\TargetAudience::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -943,6 +1073,12 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Team\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Team\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\TargetAudience\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -1510,6 +1646,44 @@ return [
                 ],
             ],
         ],
+        'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Validator' => [
+            0 => [
+                'name' => 'sortOrder',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\TargetAudience\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 50,
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
@@ -1665,6 +1839,7 @@ return [
             'dbapi.v1.extract.roles' => \DbAPI\V1\Rest\User\UserStrategy::class,
             'dbapi.v1.extract.pageElements' => \DbAPI\V1\Rest\Page\PageStrategy::class,
             'dbapi.v1.extract.pages' => \DbAPI\V1\Rest\Survey\SurveyStrategy::class,
+            'dbapi.v1.extract.themes' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
         ],
     ],
     'controllers' => [
