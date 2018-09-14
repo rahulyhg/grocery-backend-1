@@ -154,6 +154,10 @@ class Survey {
     {
         return $this->survey_theme_associations;
     }
+    public function setSurveyThemeAssociations($survey_theme_associations)
+    {
+        $this->survey_theme_associations = $survey_theme_associations;
+    }
     
     /**
      * @param SurveyThemeAssociation $surveyThemeAssociation
