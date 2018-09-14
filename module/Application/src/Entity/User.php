@@ -14,12 +14,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Zend\Form\Annotation;
 use ZF\OAuth2\Doctrine\Entity\UserInterface;
 use Zend\Stdlib\ArraySerializableInterface;
+use ZF\OAuth2\Doctrine\Permissions\Acl\Role\ProviderInterface;
+use Application\Entity\Role;
+use Db\Entity\Customer;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User implements UserInterface, ArraySerializableInterface
+class User implements UserInterface, ArraySerializableInterface, ProviderInterface
 {
     const STATUS_DISABLED = false;
     const STATUS_ENABLED  = true;
@@ -68,6 +71,13 @@ class User implements UserInterface, ArraySerializableInterface
      * @ORM\Column(type="integer")
      */
     protected $securityCounter = self::SEC_COUNTER;
+
+    /**
+     * Many Users have One Customer
+     * @ORM\ManyToOne(targetEntity="Db\Entity\Customer", inversedBy="users")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    protected $customer;
 
     /**
      * @ORM\Column(name="last_login_datetime", type="datetime", nullable=true)
@@ -232,38 +242,70 @@ class User implements UserInterface, ArraySerializableInterface
     }
 
     /**
-     * Get role.
+     * Get roles.
      *
      * @return array
      */
     public function getRoles()
     {
-        return $this->roles->getValues();
+        return $this->roles;
+    }
+    
+    /**
+     * Set roles.
+     *
+     * @return void
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+    
+    /**
+     * Get role.
+     *
+     * @return array
+     */
+    public function getRole()
+    {
+        return $this->getRoles();
     }
 
     /**
      * Add a role to the user.
      *
      * @param Role $role
-     *
      * @return void
      */
-    public function addRole($role)
+    public function addRole(Role $role)
     {
-        $this->roles[] = $role;
+        if ($this->roles->contains($role)) {
+            return;
+        }
+        $this->roles->add($role);
     }
 
     public function addRoles(Collection $roles)
     {
         foreach($roles as $role){
-            $this->roles->add($role);
+            $this->addRole($role);
         }
 
     }
-
+    
+    /**
+     * @param Role $role
+     */
+    public function removeRole($role) {
+        if (! $this->roles->contains($role)) {
+            return;
+        }
+        $this->roles->removeElement($role);
+    }
+    
     public function removeRoles(Collection $roles) {
         foreach($roles as $role){
-            $this->roles->removeElement($role);
+            $this->removeRole($role);
         }
     }
 
@@ -351,18 +393,8 @@ class User implements UserInterface, ArraySerializableInterface
                 case 'password':
                     $this->setPassword($value);
                     break;
-                case 'profile':
-                    $this->setProfile($value);
-                    break;
                 case 'email':
                     $this->setEmail($value);
-                    break;
-                case 'country':
-                    $this->setAddress($value);
-                    break;
-                case 'phone_number':
-                case 'phoneNumber':
-                    $this->setPhone($value);
                     break;
                 default:
                     break;
@@ -376,12 +408,17 @@ class User implements UserInterface, ArraySerializableInterface
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'password' => $this->getPassword(),
-            // 'profile' => $this->getProfile(),
             'email' => $this->getEmail(),
-            // 'country' => $this->getCountry(),
-            // 'phone_number' => $this->getPhoneNumber(), // underscore formatting for openid
-            // 'phoneNumber' => $this->getPhoneNumber(),
         ];
+    }
+
+
+    function getCustomer() {
+        return $this->customer;
+    }
+
+    function setCustomer($customer) {
+        $this->customer = $customer;
     }
     
 }

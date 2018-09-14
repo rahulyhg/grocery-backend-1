@@ -11,7 +11,7 @@ return [
     'zf-mvc-auth' => [
         'authentication' => [
             'map' => [
-                'Status\\V1' => 'oauth2_doctrine',
+                'DbAPI\\V1' => 'oauth2_doctrine',
             ],
         ],
     ],

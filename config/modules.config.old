@@ -5,6 +5,8 @@
  * The previous config file has been stored in ./config/modules.config.old
  */
 return [
+    'DoctrineModule',
+    'DoctrineORMModule',
     'Zend\\Mvc\\Console',
     'Zend\\Db',
     'Zend\\Filter',
@@ -30,9 +32,10 @@ return [
     'ZF\\OAuth2\\Doctrine',
     'ZF\\OAuth2\\Doctrine\\Identity',
     'ZF\\OAuth2\\Doctrine\\Permissions\\Acl',
-    'DoctrineModule',
-    'DoctrineORMModule',
+    'ZF\\Doctrine\\QueryBuilder',
+    'ZfrCors',
     'Application',
     'Db',
-    'Status',
+    'DbAPI',
+    'test',
 ];
