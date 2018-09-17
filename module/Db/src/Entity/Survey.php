@@ -146,6 +146,23 @@ class Survey {
         $this->targetaudiences->removeElement($targetaudience);
     }
     
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|TargetAudience[] $targetaudiences
+     */
+    public function addTargetaudiences($targetaudiences) {
+        foreach ($targetaudiences as $targetaudience) {
+            $this->addTargetaudience($targetaudience);
+        }
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|TargetAudience[] $targetaudiences
+     */
+    public function removeTargetaudiences($targetaudiences) {
+        foreach ($targetaudiences as $targetaudience) {
+            $this->removeTargetaudience($targetaudience);
+        }
+    }
     
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
