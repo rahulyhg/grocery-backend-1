@@ -930,6 +930,7 @@ return [
             'by_value' => true,
             'strategies' => [
                 'survey_theme_associations' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+                'targetaudiences' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
             ],
             'use_generated_hydrator' => true,
         ],
@@ -1692,7 +1693,7 @@ return [
                     'GET' => true,
                     'POST' => true,
                     'PUT' => true,
-                    'PATCH' => false,
+                    'PATCH' => true,
                     'DELETE' => false,
                 ],
                 'entity' => [
@@ -1816,6 +1817,102 @@ return [
                 ],
             ],
             'DbAPI\\V1\\Rest\\User\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Team\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Customer\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\SubTheme\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Theme\\Controller' => [
                 'collection' => [
                     'GET' => true,
                     'POST' => true,
