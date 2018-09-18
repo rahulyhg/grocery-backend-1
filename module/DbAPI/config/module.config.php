@@ -930,7 +930,7 @@ return [
             'by_value' => true,
             'strategies' => [
                 'survey_theme_associations' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
-                'targetaudiences' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+                'targetaudiences' => 'dbapi.v1.extract.survey.targetaudiences',
             ],
             'use_generated_hydrator' => true,
         ],
@@ -1935,7 +1935,11 @@ return [
             'dbapi.v1.extract.answers' => \DbAPI\V1\Rest\Question\QuestionStrategy::class,
             'dbapi.v1.extract.roles' => \DbAPI\V1\Rest\User\UserStrategy::class,
             'dbapi.v1.extract.pageElements' => \DbAPI\V1\Rest\Page\PageStrategy::class,
-            'dbapi.v1.extract.pages' => \DbAPI\V1\Rest\Survey\SurveyStrategy::class,
+            /**
+             * @deprecated
+             */
+            'dbapi.v1.extract.survey.pages' => \DbAPI\V1\Rest\Survey\PagesStrategy::class,
+            'dbapi.v1.extract.survey.targetaudiences' => \DbAPI\V1\Rest\Survey\TargetaudiencesStrategy::class,
             'dbapi.v1.extract.themes' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
         ],
     ],
