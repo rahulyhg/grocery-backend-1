@@ -35,6 +35,21 @@ class Survey {
     protected $type;
     
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $targetaudienceQuestion;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $teamQuestion;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $welcomeText;
+    
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Token[]
      * One Survey has Many tokens.
      * @ORM\OneToMany(targetEntity="Token", mappedBy="survey")
