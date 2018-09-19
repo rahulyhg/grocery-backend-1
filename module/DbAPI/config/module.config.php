@@ -1261,6 +1261,7 @@ return [
                         ],
                     ],
                 ],
+                'field_type' => 'string',
             ],
             1 => [
                 'name' => 'description',
@@ -1282,6 +1283,70 @@ return [
                         ],
                     ],
                 ],
+                'field_type' => 'string',
+            ],
+            2 => [
+                'required' => false,
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [],
+                    ],
+                ],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'targetaudienceQuestion',
+                'field_type' => 'string',
+            ],
+            3 => [
+                'required' => false,
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [],
+                    ],
+                ],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'teamQuestion',
+                'allow_empty' => true,
+                'field_type' => 'string',
+            ],
+            4 => [
+                'required' => false,
+                'validators' => [],
+                'filters' => [],
+                'name' => 'welcomeText',
+                'allow_empty' => true,
+                'field_type' => 'string',
+            ],
+            5 => [
+                'required' => false,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\Boolean::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'showProgress',
+                'field_type' => 'boolean',
             ],
         ],
         'DbAPI\\V1\\Rest\\Element\\Validator' => [
