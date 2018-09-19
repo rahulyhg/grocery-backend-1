@@ -112,6 +112,54 @@ class Survey {
     }
     
     /**
+     * @return string|null
+     */
+    public function getTargetaudienceQuestion(): ?string
+    {
+        return $this->targetaudienceQuestion;
+    }
+    
+    /**
+     * @param string|null $targetaudienceQuestion
+     */
+    public function setTargetaudienceQuestion(?string $targetaudienceQuestion): void
+    {
+        $this->targetaudienceQuestion = $targetaudienceQuestion;
+    }
+    
+    /**
+     * @return string|null
+     */
+    public function getTeamQuestion() : ?string
+    {
+        return $this->teamQuestion;
+    }
+    
+    /**
+     * @param string|null $teamQuestion
+     */
+    public function setTeamQuestion(?string $teamQuestion): void
+    {
+        $this->teamQuestion = $teamQuestion;
+    }
+    
+    /**
+     * @return string|null
+     */
+    public function getWelcomeText() : ?string
+    {
+        return $this->welcomeText;
+    }
+    
+    /**
+     * @param string|null $welcomeText
+     */
+    public function setWelcomeText(?string $welcomeText): void
+    {
+        $this->welcomeText = $welcomeText;
+    }
+    
+    /**
      * @return \Doctrine\Common\Collections\ArrayCollection|Token[]
      */
     function getTokens() {
