@@ -197,6 +197,44 @@ class Survey {
     }
     
     /**
+     * @param Token $token
+     */
+    public function addToken(Token $token): void {
+        if ($this->tokens->contains($token)) {
+            return;
+        }
+        $this->tokens->add($token);
+    }
+    
+    /**
+     * @param Token $token
+     */
+    public function removeTargetaudience(Token $token): void {
+        if (! $this->tokens->contains($token)) {
+            return;
+        }
+        $this->tokens->removeElement($token);
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|Token[] $tokens
+     */
+    public function addTokens($tokens) {
+        foreach ($tokens as $token) {
+            $this->addToken($token);
+        }
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|Token[] $tokens
+     */
+    public function removeTokens($tokens) {
+        foreach ($tokens as $token) {
+            $this->removeToken($token);
+        }
+    }
+    
+    /**
      * @return \Doctrine\Common\Collections\ArrayCollection|TargetAudience[]
      */
     public function getTargetaudiences()
@@ -213,7 +251,7 @@ class Survey {
     }
     
     /**
-     * @param Answer $answer
+     * @param TargetAudience $targetaudience
      */
     public function addTargetaudience(TargetAudience $targetaudience): void {
         if ($this->targetaudiences->contains($targetaudience)) {
