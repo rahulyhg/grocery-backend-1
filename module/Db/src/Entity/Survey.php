@@ -52,7 +52,7 @@ class Survey {
     /**
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    protected $showProgress = 0;
+    protected $showProgress = false;
     
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Token[]

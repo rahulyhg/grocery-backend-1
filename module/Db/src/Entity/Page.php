@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Db\Entity\PageElement;
 
 /**
+ * @deprecated
  * This class represents a page item.
  * @ORM\Entity()
  * @ORM\Table(name="pages")
@@ -35,13 +36,6 @@ class Page {
      * @ORM\Column(name="locked", type="integer", length=4, nullable=false)
      */
     protected $locked;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|Survey[]
-     * Many Pages have Many Surveys.
-     * @ORM\ManyToMany(targetEntity="Survey", mappedBy="pages")
-     */
-    private $surveys;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|PageElement[]
@@ -96,56 +90,6 @@ class Page {
     public function setLocked($locked): void
     {
         $this->locked = $locked;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSurveys()
-    {
-        return $this->surveys;
-    }
-
-    /**
-     * @param mixed $surveys
-     */
-    public function setSurveys($surveys): void
-    {
-        $this->surveys = $surveys;
-    }
-    
-    /**
-     * @param Survey $survey
-     */
-    public function addSurvey(Survey $survey) {
-        if ($this->pages->contains($survey)) {
-            return;
-        }
-        $this->surveys->add($survey);
-        $survey->addPage($this);
-    }
-    
-    /**
-     * @param Page $page
-     */
-    public function removeSurvey(Survey $survey) {
-        if (! $this->surveys->contains($survey)) {
-            return;
-        }
-        $this->surveys->removeElement($survey);
-        $survey->removePage($this);
-    }
-    
-    
-    public function addSurveys($surveys) {
-        foreach ($surveys as $survey) {
-            $this->addSurvey($survey);
-        }
-    }
-    public function removeSurveys($surveys) {
-        foreach ($surveys as $survey) {
-            $this->removeSurvey($survey);
-        }
     }
 
     /**
