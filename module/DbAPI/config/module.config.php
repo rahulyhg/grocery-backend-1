@@ -1336,6 +1336,21 @@ return [
                 'allow_empty' => true,
                 'field_type' => 'string',
             ],
+            5 => [
+                'required' => false,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\Boolean::class,
+                        'options' => [
+                            'casting' => true,
+                            'type' => 'null',
+                        ],
+                    ],
+                ],
+                'name' => 'showProgress',
+                'field_type' => 'boolean',
+            ],
         ],
         'DbAPI\\V1\\Rest\\Element\\Validator' => [
             0 => [
@@ -1988,9 +2003,6 @@ return [
             'dbapi.v1.extract.answers' => \DbAPI\V1\Rest\Question\QuestionStrategy::class,
             'dbapi.v1.extract.roles' => \DbAPI\V1\Rest\User\UserStrategy::class,
             'dbapi.v1.extract.pageElements' => \DbAPI\V1\Rest\Page\PageStrategy::class,
-            /**
-             * @deprecated
-             */
             'dbapi.v1.extract.survey.pages' => \DbAPI\V1\Rest\Survey\PagesStrategy::class,
             'dbapi.v1.extract.survey.targetaudiences' => \DbAPI\V1\Rest\Survey\TargetaudiencesStrategy::class,
             'dbapi.v1.extract.themes' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
