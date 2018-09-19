@@ -35,6 +35,26 @@ class Survey {
     protected $type;
     
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $targetaudienceQuestion;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $teamQuestion;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $welcomeText;
+    
+    /**
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    protected $showProgress = 0;
+    
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Token[]
      * One Survey has Many tokens.
      * @ORM\OneToMany(targetEntity="Token", mappedBy="survey")
@@ -95,6 +115,72 @@ class Survey {
     function setType($type) {
         $this->type = $type;
     }
+    
+    /**
+     * @return string|null
+     */
+    public function getTargetaudienceQuestion(): ?string
+    {
+        return $this->targetaudienceQuestion;
+    }
+    
+    /**
+     * @param string|null $targetaudienceQuestion
+     */
+    public function setTargetaudienceQuestion(?string $targetaudienceQuestion): void
+    {
+        $this->targetaudienceQuestion = $targetaudienceQuestion;
+    }
+    
+    /**
+     * @return string|null
+     */
+    public function getTeamQuestion() : ?string
+    {
+        return $this->teamQuestion;
+    }
+    
+    /**
+     * @param string|null $teamQuestion
+     */
+    public function setTeamQuestion(?string $teamQuestion): void
+    {
+        $this->teamQuestion = $teamQuestion;
+    }
+    
+    /**
+     * @return string|null
+     */
+    public function getWelcomeText() : ?string
+    {
+        return $this->welcomeText;
+    }
+    
+    /**
+     * @param string|null $welcomeText
+     */
+    public function setWelcomeText(?string $welcomeText): void
+    {
+        $this->welcomeText = $welcomeText;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function getShowProgress() : bool
+    {
+        return $this->showProgress;
+    }
+    
+    /**
+     * @param boolean $showProgress
+     */
+    public function setShowProgress(bool $showProgress): void
+    {
+        $this->showProgress = $showProgress;
+    }
+    
+    
     
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|Token[]
