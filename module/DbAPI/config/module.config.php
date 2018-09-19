@@ -137,6 +137,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.formulation' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/formulation[/:formulation_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Formulation\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -157,6 +166,7 @@ return [
             14 => 'db-api.rest.doctrine.team',
             15 => 'db-api.rest.doctrine.survey-theme-association',
             16 => 'db-api.rest.doctrine.target-audience',
+            17 => 'db-api.rest.doctrine.formulation',
         ],
     ],
     'zf-rest' => [
@@ -509,6 +519,29 @@ return [
             'collection_class' => \DbAPI\V1\Rest\TargetAudience\TargetAudienceCollection::class,
             'service_name' => 'TargetAudience',
         ],
+        'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Formulation\FormulationResource::class,
+            'route_name' => 'db-api.rest.doctrine.formulation',
+            'route_identifier_name' => 'formulation_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'formulation',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Formulation::class,
+            'collection_class' => \DbAPI\V1\Rest\Formulation\FormulationCollection::class,
+            'service_name' => 'Formulation',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -527,6 +560,7 @@ return [
             'DbAPI\\V1\\Rest\\Team\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\Formulation\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -604,6 +638,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -663,6 +702,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -840,6 +883,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.target-audience',
                 'is_collection' => true,
             ],
+            \Db\Entity\Formulation::class => [
+                'route_identifier_name' => 'formulation_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.formulation',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator',
+            ],
+            \DbAPI\V1\Rest\Formulation\FormulationCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.formulation',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -903,6 +957,10 @@ return [
             \DbAPI\V1\Rest\TargetAudience\TargetAudienceResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\TargetAudience\\TargetAudienceHydrator',
+            ],
+            \DbAPI\V1\Rest\Formulation\FormulationResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator',
             ],
         ],
     ],
@@ -1034,6 +1092,15 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator' => [
+            'entity_class' => \Db\Entity\Formulation::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [
+                'targetaudiences' => 'dbapi.v1.extract.formulation.targetaudiences',
+            ],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1080,6 +1147,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\TargetAudience\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Formulation\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -1753,6 +1823,29 @@ return [
                 ],
             ],
         ],
+        'DbAPI\\V1\\Rest\\Formulation\\Validator' => [
+            0 => [
+                'name' => 'formulation',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 1000,
+                        ],
+                    ],
+                ],
+            ],
+        ],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
@@ -1996,6 +2089,22 @@ return [
                     'DELETE' => true,
                 ],
             ],
+            'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
         ],
     ],
     'service_manager' => [
@@ -2006,6 +2115,7 @@ return [
             'dbapi.v1.extract.survey.pages' => \DbAPI\V1\Rest\Survey\PagesStrategy::class,
             'dbapi.v1.extract.survey.targetaudiences' => \DbAPI\V1\Rest\Survey\TargetaudiencesStrategy::class,
             'dbapi.v1.extract.themes' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
+            'dbapi.v1.extract.formulation.targetaudiences' => \DbAPI\V1\Rest\Formulation\TargetaudiencesStrategy::class,
         ],
     ],
     'controllers' => [
