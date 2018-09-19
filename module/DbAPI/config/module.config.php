@@ -1336,18 +1336,6 @@ return [
                 'allow_empty' => true,
                 'field_type' => 'string',
             ],
-            5 => [
-                'required' => false,
-                'validators' => [],
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\Boolean::class,
-                        'options' => [],
-                    ],
-                ],
-                'name' => 'showProgress',
-                'field_type' => 'boolean',
-            ],
         ],
         'DbAPI\\V1\\Rest\\Element\\Validator' => [
             0 => [
