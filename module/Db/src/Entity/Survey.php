@@ -50,6 +50,11 @@ class Survey {
     protected $welcomeText;
     
     /**
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    protected $showProgress = 0;
+    
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Token[]
      * One Survey has Many tokens.
      * @ORM\OneToMany(targetEntity="Token", mappedBy="survey")
@@ -158,6 +163,24 @@ class Survey {
     {
         $this->welcomeText = $welcomeText;
     }
+    
+    /**
+     * @return boolean
+     */
+    public function getShowProgress() : bool
+    {
+        return $this->showProgress;
+    }
+    
+    /**
+     * @param boolean $showProgress
+     */
+    public function setShowProgress(bool $showProgress): void
+    {
+        $this->showProgress = $showProgress;
+    }
+    
+    
     
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|Token[]
