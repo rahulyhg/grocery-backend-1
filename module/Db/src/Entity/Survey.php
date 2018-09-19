@@ -209,7 +209,7 @@ class Survey {
     /**
      * @param Token $token
      */
-    public function removeTargetaudience(Token $token): void {
+    public function removeToken(Token $token): void {
         if (! $this->tokens->contains($token)) {
             return;
         }
