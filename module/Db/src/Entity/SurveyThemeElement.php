@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * This class represents a page element.
  * @ORM\Entity()
- * @ORM\Table(name="themes_elements")
+ * @ORM\Table(name="surveys_themes_elements")
  */
 class SurveyThemeElement {
 
@@ -34,7 +34,7 @@ class SurveyThemeElement {
 
     /**
      * Many PageElements have One Element.
-     * @ORM\ManyToOne(targetEntity="Element", inversedBy="pageElements", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Element")
      * @ORM\JoinColumn(name="element_id", referencedColumnName="id")
      */
     private $element;

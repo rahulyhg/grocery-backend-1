@@ -47,15 +47,6 @@ return [
                     ],
                 ],
             ],
-            'db-api.rest.doctrine.page' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/page[/:page_id]',
-                    'defaults' => [
-                        'controller' => 'DbAPI\\V1\\Rest\\Page\\Controller',
-                    ],
-                ],
-            ],
             'db-api.rest.doctrine.role' => [
                 'type' => 'Segment',
                 'options' => [
@@ -71,15 +62,6 @@ return [
                     'route' => '/user[/:user_id]',
                     'defaults' => [
                         'controller' => 'DbAPI\\V1\\Rest\\User\\Controller',
-                    ],
-                ],
-            ],
-            'db-api.rest.doctrine.page-element' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/page-element[/:page_element_id]',
-                    'defaults' => [
-                        'controller' => 'DbAPI\\V1\\Rest\\PageElement\\Controller',
                     ],
                 ],
             ],
@@ -146,6 +128,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.survey-theme-element' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/survey-theme-element[/:survey_theme_element_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -155,10 +146,8 @@ return [
             2 => 'db-api.rest.doctrine.survey',
             4 => 'db-api.rest.doctrine.element',
             5 => 'db-api.rest.doctrine.answer',
-            6 => 'db-api.rest.doctrine.page',
             7 => 'db-api.rest.doctrine.role',
             8 => 'db-api.rest.doctrine.user',
-            9 => 'db-api.rest.doctrine.page-element',
             10 => 'db-api.rest.doctrine.sub-theme',
             11 => 'db-api.rest.doctrine.theme',
             12 => 'db-api.rest.doctrine.sub-theme',
@@ -167,6 +156,7 @@ return [
             15 => 'db-api.rest.doctrine.survey-theme-association',
             16 => 'db-api.rest.doctrine.target-audience',
             17 => 'db-api.rest.doctrine.formulation',
+            18 => 'db-api.rest.doctrine.survey-theme-element',
         ],
     ],
     'zf-rest' => [
@@ -287,29 +277,6 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Answer\AnswerCollection::class,
             'service_name' => 'Answer',
         ],
-        'DbAPI\\V1\\Rest\\Page\\Controller' => [
-            'listener' => \DbAPI\V1\Rest\Page\PageResource::class,
-            'route_name' => 'db-api.rest.doctrine.page',
-            'route_identifier_name' => 'page_id',
-            'entity_identifier_name' => 'id',
-            'collection_name' => 'page',
-            'entity_http_methods' => [
-                0 => 'GET',
-                1 => 'PATCH',
-                2 => 'PUT',
-                3 => 'DELETE',
-            ],
-            'collection_http_methods' => [
-                0 => 'GET',
-                1 => 'POST',
-            ],
-            'collection_query_whitelist' => [],
-            'page_size' => 25,
-            'page_size_param' => null,
-            'entity_class' => \Db\Entity\Page::class,
-            'collection_class' => \DbAPI\V1\Rest\Page\PageCollection::class,
-            'service_name' => 'Page',
-        ],
         'DbAPI\\V1\\Rest\\Role\\Controller' => [
             'listener' => \DbAPI\V1\Rest\Role\RoleResource::class,
             'route_name' => 'db-api.rest.doctrine.role',
@@ -355,31 +322,6 @@ return [
             'entity_class' => \Application\Entity\User::class,
             'collection_class' => \DbAPI\V1\Rest\User\UserCollection::class,
             'service_name' => 'User',
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
-            'listener' => \DbAPI\V1\Rest\PageElement\PageElementResource::class,
-            'route_name' => 'db-api.rest.doctrine.page-element',
-            'route_identifier_name' => 'page_element_id',
-            'entity_identifier_name' => 'id',
-            'collection_name' => 'page_element',
-            'entity_http_methods' => [
-                0 => 'GET',
-                1 => 'PATCH',
-                2 => 'PUT',
-                3 => 'DELETE',
-            ],
-            'collection_http_methods' => [
-                0 => 'GET',
-                1 => 'POST',
-            ],
-            'collection_query_whitelist' => [
-                0 => 'sort',
-            ],
-            'page_size' => 25,
-            'page_size_param' => null,
-            'entity_class' => \Db\Entity\PageElement::class,
-            'collection_class' => \DbAPI\V1\Rest\PageElement\PageElementCollection::class,
-            'service_name' => 'PageElement',
         ],
         'DbAPI\\V1\\Rest\\Theme\\Controller' => [
             'listener' => \DbAPI\V1\Rest\Theme\ThemeResource::class,
@@ -542,6 +484,29 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Formulation\FormulationCollection::class,
             'service_name' => 'Formulation',
         ],
+        'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SurveyThemeElement\SurveyThemeElementResource::class,
+            'route_name' => 'db-api.rest.doctrine.survey-theme-element',
+            'route_identifier_name' => 'survey_theme_element_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'survey_theme_element',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SurveyThemeElement::class,
+            'collection_class' => \DbAPI\V1\Rest\SurveyThemeElement\SurveyThemeElementCollection::class,
+            'service_name' => 'SurveyThemeElement',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -550,10 +515,8 @@ return [
             'DbAPI\\V1\\Rest\\Survey\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Element\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Answer\\Controller' => 'HalJson',
-            'DbAPI\\V1\\Rest\\Page\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Role\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\User\\Controller' => 'HalJson',
-            'DbAPI\\V1\\Rest\\PageElement\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Theme\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\SubTheme\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Customer\\Controller' => 'HalJson',
@@ -561,6 +524,7 @@ return [
             'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Formulation\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -588,22 +552,12 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
-            'DbAPI\\V1\\Rest\\Page\\Controller' => [
-                0 => 'application/vnd.db-api.v1+json',
-                1 => 'application/hal+json',
-                2 => 'application/json',
-            ],
             'DbAPI\\V1\\Rest\\Role\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\User\\Controller' => [
-                0 => 'application/vnd.db-api.v1+json',
-                1 => 'application/hal+json',
-                2 => 'application/json',
-            ],
-            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
@@ -639,6 +593,11 @@ return [
                 2 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
@@ -665,19 +624,11 @@ return [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
-            'DbAPI\\V1\\Rest\\Page\\Controller' => [
-                0 => 'application/vnd.db-api.v1+json',
-                1 => 'application/json',
-            ],
             'DbAPI\\V1\\Rest\\Role\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\User\\Controller' => [
-                0 => 'application/vnd.db-api.v1+json',
-                1 => 'application/json',
-            ],
-            'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -706,6 +657,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -769,18 +724,6 @@ return [
                 'route_name' => 'db-api.rest.doctrine.answer',
                 'is_collection' => true,
             ],
-            \Db\Entity\Page::class => [
-                'route_identifier_name' => 'page_id',
-                'entity_identifier_name' => 'id',
-                'route_name' => 'db-api.rest.doctrine.page',
-                'hydrator' => 'DbAPI\\V1\\Rest\\Page\\PageHydrator',
-                'max_depth' => 4,
-            ],
-            \DbAPI\V1\Rest\Page\PageCollection::class => [
-                'entity_identifier_name' => 'id',
-                'route_name' => 'db-api.rest.doctrine.page',
-                'is_collection' => true,
-            ],
             \Application\Entity\Role::class => [
                 'route_identifier_name' => 'role_id',
                 'entity_identifier_name' => 'id',
@@ -801,17 +744,6 @@ return [
             \DbAPI\V1\Rest\User\UserCollection::class => [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.user',
-                'is_collection' => true,
-            ],
-            \Db\Entity\PageElement::class => [
-                'route_identifier_name' => 'page_element_id',
-                'entity_identifier_name' => 'id',
-                'route_name' => 'db-api.rest.doctrine.page-element',
-                'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
-            ],
-            \DbAPI\V1\Rest\PageElement\PageElementCollection::class => [
-                'entity_identifier_name' => 'id',
-                'route_name' => 'db-api.rest.doctrine.page-element',
                 'is_collection' => true,
             ],
             \Db\Entity\Theme::class => [
@@ -894,6 +826,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.formulation',
                 'is_collection' => true,
             ],
+            \Db\Entity\SurveyThemeElement::class => [
+                'route_identifier_name' => 'survey_theme_element_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-theme-element',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyThemeElement\\SurveyThemeElementHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyThemeElement\SurveyThemeElementCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-theme-element',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -918,10 +861,6 @@ return [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Answer\\AnswerHydrator',
             ],
-            \DbAPI\V1\Rest\Page\PageResource::class => [
-                'object_manager' => 'doctrine.entitymanager.orm_default',
-                'hydrator' => 'DbAPI\\V1\\Rest\\Page\\PageHydrator',
-            ],
             \DbAPI\V1\Rest\Role\RoleResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Role\\RoleHydrator',
@@ -929,10 +868,6 @@ return [
             \DbAPI\V1\Rest\User\UserResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\User\\UserHydrator',
-            ],
-            \DbAPI\V1\Rest\PageElement\PageElementResource::class => [
-                'object_manager' => 'doctrine.entitymanager.orm_default',
-                'hydrator' => 'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator',
             ],
             \DbAPI\V1\Rest\Theme\ThemeResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
@@ -962,6 +897,10 @@ return [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator',
             ],
+            \DbAPI\V1\Rest\SurveyThemeElement\SurveyThemeElementResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyThemeElement\\SurveyThemeElementHydrator',
+            ],
         ],
     ],
     'doctrine-hydrator' => [
@@ -988,7 +927,6 @@ return [
             'by_value' => true,
             'strategies' => [
                 'survey_theme_associations' => 'dbapi.v1.extract.survey.survey_theme_associations',
-                // 'survey_theme_associations' => \ZF\Doctrine\Hydrator\Strategy\CollectionLink::class,
                 'targetaudiences' => 'dbapi.v1.extract.survey.targetaudiences',
             ],
             'use_generated_hydrator' => true,
@@ -1011,15 +949,6 @@ return [
             ],
             'use_generated_hydrator' => true,
         ],
-        'DbAPI\\V1\\Rest\\Page\\PageHydrator' => [
-            'entity_class' => \Db\Entity\Page::class,
-            'object_manager' => 'doctrine.entitymanager.orm_default',
-            'by_value' => true,
-            'strategies' => [
-                'pageElements' => 'dbapi.v1.extract.pageElements',
-            ],
-            'use_generated_hydrator' => true,
-        ],
         'DbAPI\\V1\\Rest\\Role\\RoleHydrator' => [
             'entity_class' => \Application\Entity\Role::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
@@ -1033,15 +962,6 @@ return [
             'by_value' => true,
             'strategies' => [
                 'roles' => 'dbapi.v1.extract.roles',
-            ],
-            'use_generated_hydrator' => true,
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\PageElementHydrator' => [
-            'entity_class' => \Db\Entity\PageElement::class,
-            'object_manager' => 'doctrine.entitymanager.orm_default',
-            'by_value' => true,
-            'strategies' => [
-                'page' => \ZF\Doctrine\Hydrator\Strategy\EntityLink::class,
             ],
             'use_generated_hydrator' => true,
         ],
@@ -1102,6 +1022,13 @@ return [
             ],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\SurveyThemeElement\\SurveyThemeElementHydrator' => [
+            'entity_class' => \Db\Entity\SurveyThemeElement::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1119,17 +1046,11 @@ return [
         'DbAPI\\V1\\Rest\\Answer\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Answer\\Validator',
         ],
-        'DbAPI\\V1\\Rest\\Page\\Controller' => [
-            'input_filter' => 'DbAPI\\V1\\Rest\\Page\\Validator',
-        ],
         'DbAPI\\V1\\Rest\\Role\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Role\\Validator',
         ],
         'DbAPI\\V1\\Rest\\User\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\User\\Validator',
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\Controller' => [
-            'input_filter' => 'DbAPI\\V1\\Rest\\PageElement\\Validator',
         ],
         'DbAPI\\V1\\Rest\\Theme\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Theme\\Validator',
@@ -1151,6 +1072,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Formulation\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SurveyThemeElement\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -1475,63 +1399,6 @@ return [
                 'validators' => [],
             ],
         ],
-        'DbAPI\\V1\\Rest\\Page\\Validator' => [
-            0 => [
-                'name' => 'title',
-                'required' => false,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                ],
-                'validators' => [
-                    0 => [
-                        'name' => \Zend\Validator\StringLength::class,
-                        'options' => [
-                            'min' => 1,
-                            'max' => 50,
-                        ],
-                    ],
-                ],
-            ],
-            1 => [
-                'name' => 'subtitle',
-                'required' => false,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                ],
-                'validators' => [
-                    0 => [
-                        'name' => \Zend\Validator\StringLength::class,
-                        'options' => [
-                            'min' => 1,
-                            'max' => 50,
-                        ],
-                    ],
-                ],
-            ],
-            2 => [
-                'name' => 'locked',
-                'required' => true,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\Digits::class,
-                    ],
-                ],
-                'validators' => [],
-            ],
-        ],
         'DbAPI\\V1\\Rest\\Role\\Validator' => [
             0 => [
                 'name' => 'roleId',
@@ -1663,34 +1530,6 @@ return [
                 'name' => 'lastLoginDateTime',
                 'required' => false,
                 'filters' => [],
-                'validators' => [],
-            ],
-        ],
-        'DbAPI\\V1\\Rest\\PageElement\\Validator' => [
-            0 => [
-                'name' => 'elementOrder',
-                'required' => true,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\Digits::class,
-                    ],
-                ],
-                'validators' => [],
-            ],
-            1 => [
-                'name' => 'locked',
-                'required' => true,
-                'filters' => [
-                    0 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\Digits::class,
-                    ],
-                ],
                 'validators' => [],
             ],
         ],
@@ -1845,6 +1684,34 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\SurveyThemeElement\\Validator' => [
+            0 => [
+                'name' => 'elementOrder',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            1 => [
+                'name' => 'locked',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
             ],
         ],
     ],
@@ -2112,7 +1979,7 @@ return [
         'invokables' => [
             'dbapi.v1.extract.answers' => \DbAPI\V1\Rest\Question\QuestionStrategy::class,
             'dbapi.v1.extract.roles' => \DbAPI\V1\Rest\User\UserStrategy::class,
-            'dbapi.v1.extract.pageElements' => \DbAPI\V1\Rest\Page\PageStrategy::class,
+            'dbapi.v1.extract.pageElements' => 'DbAPI\\V1\\Rest\\Page\\PageStrategy',
             'dbapi.v1.extract.survey.pages' => \DbAPI\V1\Rest\Survey\PagesStrategy::class,
             'dbapi.v1.extract.survey.targetaudiences' => \DbAPI\V1\Rest\Survey\TargetaudiencesStrategy::class,
             'dbapi.v1.extract.survey.survey_theme_associations' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
