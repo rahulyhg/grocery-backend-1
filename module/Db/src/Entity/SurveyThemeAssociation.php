@@ -55,7 +55,7 @@ class SurveyThemeAssociation {
     }
     
     /**
-     * @return mixed
+     * @return Survey
      */
     public function getSurvey() : Survey
     {
@@ -63,7 +63,7 @@ class SurveyThemeAssociation {
     }
     
     /**
-     * @param mixed $survey
+     * @param Survey $survey
      */
     public function setSurvey(Survey $survey): void
     {
