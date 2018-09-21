@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * This class represents a page element.
  * @ORM\Entity()
- * @ORM\Table(name="pages_elements")
+ * @ORM\Table(name="surveys_themes_elements")
  */
-class PageElement {
+class SurveyThemeElement {
 
     /**
      * @ORM\Id
@@ -19,17 +19,22 @@ class PageElement {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
+    
     /**
-     * Many PageElements have One Page.
-     * @ORM\ManyToOne(targetEntity="Page", inversedBy="pageElements")
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Survey")
+     * @ORM\JoinColumn(name="survey_id", referencedColumnName="id")
      */
-    private $page;
+    private $survey;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Theme")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
+     */
+    private $theme;
 
     /**
      * Many PageElements have One Element.
-     * @ORM\ManyToOne(targetEntity="Element", inversedBy="pageElements", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Element")
      * @ORM\JoinColumn(name="element_id", referencedColumnName="id")
      */
     private $element;
@@ -59,21 +64,38 @@ class PageElement {
     {
         $this->id = $id;
     }
-
+    
     /**
-     * @return mixed
+     * @return Survey
      */
-    public function getPage()
+    public function getSurvey() : Survey
     {
-        return $this->page;
+        return $this->survey;
     }
-
+    
     /**
-     * @param mixed $page
+     * @param Survey $survey
      */
-    public function setPage($page): void
+    public function setSurvey(Survey $survey): void
     {
-        $this->page = $page;
+        $this->survey = $survey;
+    }
+    
+    /**
+     * @return Theme
+     */
+    public function getTheme() : Theme
+    {
+        return $this->theme;
+    }
+    
+    /**
+     * @param Theme $theme
+     * @return void
+     */
+    public function setTheme(Theme $theme): void
+    {
+        $this->theme = $theme;
     }
 
     /**

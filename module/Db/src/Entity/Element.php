@@ -41,18 +41,8 @@ class Element {
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;
-    
-
-    /**
-     * One Element has Many Page Elements.
-     * @ORM\OneToMany(targetEntity="PageElement", mappedBy="element", fetch="EAGER")
-     */
-    private $pageElements;
-    
-    
 
     public function __construct() {
-        $this->pageElements = new ArrayCollection();
     }
 
     function getId() {
@@ -94,21 +84,4 @@ class Element {
     function getQuestion() {
         return $this->question;
     }
-    
-    /**
-     * @return mixed
-     */
-    public function getPageElements()
-    {
-        return $this->pageElements;
-    }
-
-    /**
-     * @param mixed $pageElements
-     */
-    public function setPageElements($pageElements): void
-    {
-        $this->pageElements = $pageElements;
-    }
-
 }
