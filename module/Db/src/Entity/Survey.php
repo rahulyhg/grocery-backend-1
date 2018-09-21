@@ -35,17 +35,17 @@ class Survey {
     protected $type;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $targetaudienceQuestion;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $teamQuestion;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $welcomeText;
     
@@ -73,7 +73,7 @@ class Survey {
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Theme[]
      * Many Surveys have Many Themes.
-     * @ORM\OneToMany(targetEntity="SurveyThemeAssociation", mappedBy="survey", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="SurveyThemeAssociation", mappedBy="survey", orphanRemoval=true, cascade={"persist"})
      */
     protected $survey_theme_associations;
     

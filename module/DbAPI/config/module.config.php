@@ -987,7 +987,8 @@ return [
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => [
-                'survey_theme_associations' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+                'survey_theme_associations' => 'dbapi.v1.extract.survey.survey_theme_associations',
+                // 'survey_theme_associations' => \ZF\Doctrine\Hydrator\Strategy\CollectionLink::class,
                 'targetaudiences' => 'dbapi.v1.extract.survey.targetaudiences',
             ],
             'use_generated_hydrator' => true,
@@ -2114,7 +2115,7 @@ return [
             'dbapi.v1.extract.pageElements' => \DbAPI\V1\Rest\Page\PageStrategy::class,
             'dbapi.v1.extract.survey.pages' => \DbAPI\V1\Rest\Survey\PagesStrategy::class,
             'dbapi.v1.extract.survey.targetaudiences' => \DbAPI\V1\Rest\Survey\TargetaudiencesStrategy::class,
-            'dbapi.v1.extract.themes' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
+            'dbapi.v1.extract.survey.survey_theme_associations' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
             'dbapi.v1.extract.formulation.targetaudiences' => \DbAPI\V1\Rest\Formulation\TargetaudiencesStrategy::class,
         ],
     ],

@@ -94,11 +94,10 @@ class Question {
     protected $customer;
 
     /**
-     * Many Questions have One Subtheme
-     * @ORM\ManyToOne(targetEntity="SubTheme", inversedBy="questions")
-     * @ORM\JoinColumn(name="subtheme_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Theme", inversedBy="questions")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true)
      */
-    private $subtheme;
+    private $theme;
 
     /**
      * @var \Doctrine\Common\Collections\Collection|Answer[]
@@ -178,8 +177,8 @@ class Question {
         return $this->answers;
     }
 
-    function getSubtheme() {
-        return $this->subtheme;
+    function getTheme() {
+        return $this->theme;
     }
 
     function getSmileytextFullyAgree() {
@@ -242,8 +241,8 @@ class Question {
         $this->answers = $answers;
     }
 
-    function setSubtheme($subtheme) {
-        $this->subtheme = $subtheme;
+    function setTheme(Theme $theme) {
+        $this->theme = $theme;
     }
 
     function setSmileytextFullyAgree($text) {
