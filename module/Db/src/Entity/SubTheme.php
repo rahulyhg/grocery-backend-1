@@ -26,13 +26,6 @@ class SubTheme {
     protected $name;
 
     // VOLGNUMMER
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection|Question[]
-     * One SubTheme has Many Questions
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="subtheme")
-     */
-    private $questions;
     
     /**
      * @var Theme
@@ -88,39 +81,6 @@ class SubTheme {
         $this->theme = $theme;
     }
 
-
-    public function setQuestions($questions) {
-        $this->questions = $questions;
-    }
-    public function getQuestions() {
-        return $this->questions;
-    }
-
-    public function addQuestion(Question $question) {
-        if ($this->questions->contains($question)) {
-            return;
-        }
-        $this->questions->add($question);
-        $question->setSubtheme($this);
-    }
-    public function removeQuestion(Question $question) {
-        if (!$this->questions->contains($question)) {
-            return;
-        }
-        $this->questions->removeElement($question);
-        $question->setSubtheme(null);
-    }
-
-    public function addQuestions($questions) {
-        foreach ($questions as $question) {
-            $this->addQuestion($question);
-        }
-    }
-    public function removeQuestions($questions) {
-        foreach ($questions as $question) {
-            $this->removeQuestion($question);
-        }
-    }
     
 
 

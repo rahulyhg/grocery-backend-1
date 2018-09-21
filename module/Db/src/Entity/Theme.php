@@ -36,6 +36,12 @@ class Theme {
      */
     private $subthemes;
     
+    /**
+     * @var \Doctrine\Common\Collections\Collection|Question[]
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="theme")
+     */
+    private $questions;
+    
     
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Theme[]
@@ -143,6 +149,39 @@ class Theme {
             return;
         }
         $this->survey_theme_associations->removeElement($surveyThemeAssociation);
+    }
+    
+    public function setQuestions($questions) {
+        $this->questions = $questions;
+    }
+    public function getQuestions() {
+        return $this->questions;
+    }
+    
+    public function addQuestion(Question $question) {
+        if ($this->questions->contains($question)) {
+            return;
+        }
+        $this->questions->add($question);
+        $question->setSubtheme($this);
+    }
+    public function removeQuestion(Question $question) {
+        if (!$this->questions->contains($question)) {
+            return;
+        }
+        $this->questions->removeElement($question);
+        $question->setSubtheme(null);
+    }
+    
+    public function addQuestions($questions) {
+        foreach ($questions as $question) {
+            $this->addQuestion($question);
+        }
+    }
+    public function removeQuestions($questions) {
+        foreach ($questions as $question) {
+            $this->removeQuestion($question);
+        }
     }
     
 }
