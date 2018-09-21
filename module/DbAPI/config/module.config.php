@@ -1702,13 +1702,14 @@ return [
             ],
             1 => [
                 'name' => 'locked',
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
-                    ],
-                    1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Zend\Filter\Boolean::class,
+                        'options' => [
+                            'casting' => true,
+                            'type' => 'null',
+                        ],
                     ],
                 ],
                 'validators' => [],

@@ -45,7 +45,7 @@ class SurveyThemeElement {
     protected $elementOrder = 0;
 
     /**
-     * @ORM\Column(name="locked", type="integer", length=4, nullable=false)
+     * @ORM\Column(type="boolean", options={"default" = 0})
      */
     protected $locked = 0;
 
@@ -129,11 +129,11 @@ class SurveyThemeElement {
     {
         $this->elementOrder = $elementOrder;
     }
-
+    
     /**
      * @return mixed
      */
-    public function getLocked()
+    public function getLocked(): bool
     {
         return $this->locked;
     }
