@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Db\Entity;
 
@@ -17,18 +18,21 @@ class SurveyThemeElement {
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int
      */
     protected $id;
     
     /**
      * @ORM\ManyToOne(targetEntity="Survey")
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id")
+     * @var Survey
      */
     private $survey;
     
     /**
      * @ORM\ManyToOne(targetEntity="Theme")
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
+     * @var Theme
      */
     private $theme;
 
@@ -36,21 +40,24 @@ class SurveyThemeElement {
      * Many PageElements have One Element.
      * @ORM\ManyToOne(targetEntity="Element")
      * @ORM\JoinColumn(name="element_id", referencedColumnName="id")
+     * @var Element
      */
     private $element;
 
     /**
      * @ORM\Column(name="element_order", type="integer", length=11, nullable=false)
+     * @var int
      */
     protected $elementOrder = 0;
 
     /**
      * @ORM\Column(type="boolean", options={"default" = 0})
+     * @var bool
      */
-    protected $locked = 0;
+    protected $locked = false;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -58,9 +65,10 @@ class SurveyThemeElement {
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
+     * @return void
      */
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -75,6 +83,7 @@ class SurveyThemeElement {
     
     /**
      * @param Survey $survey
+     * @return void
      */
     public function setSurvey(Survey $survey): void
     {
@@ -99,39 +108,41 @@ class SurveyThemeElement {
     }
 
     /**
-     * @return mixed
+     * @return Element
      */
-    public function getElement()
+    public function getElement(): Element
     {
         return $this->element;
     }
 
     /**
-     * @param mixed $element
+     * @param Element $element
+     * @return void
      */
-    public function setElement($element): void
+    public function setElement(Element $element): void
     {
         $this->element = $element;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getElementOrder()
+    public function getElementOrder(): int
     {
         return $this->elementOrder;
     }
 
     /**
-     * @param mixed $elementOrder
+     * @param int $elementOrder
+     * @return void
      */
-    public function setElementOrder($elementOrder): void
+    public function setElementOrder(int $elementOrder): void
     {
         $this->elementOrder = $elementOrder;
     }
     
     /**
-     * @return mixed
+     * @return bool
      */
     public function getLocked(): bool
     {
@@ -139,13 +150,12 @@ class SurveyThemeElement {
     }
 
     /**
-     * @param mixed $locked
+     * @param bool $locked
+     * @return void
      */
-    public function setLocked($locked): void
+    public function setLocked(bool $locked): void
     {
         $this->locked = $locked;
     }
-
-
 
 }
