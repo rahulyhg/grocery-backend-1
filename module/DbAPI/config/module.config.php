@@ -1173,6 +1173,23 @@ return [
                 ],
                 'validators' => [],
             ],
+            6 => [
+                'required' => false,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'extraText',
+                'description' => 'For after the text. Will be shown when pressing the questionmark.',
+                'allow_empty' => true,
+            ],
         ],
         'DbAPI\\V1\\Rest\\Token\\Validator' => [
             0 => [
@@ -1638,6 +1655,22 @@ return [
                     ],
                 ],
                 'validators' => [],
+            ],
+            1 => [
+                'required' => true,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'survey',
+                'field_type' => 'number',
             ],
         ],
         'DbAPI\\V1\\Rest\\TargetAudience\\Validator' => [
