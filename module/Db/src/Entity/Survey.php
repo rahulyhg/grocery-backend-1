@@ -62,6 +62,12 @@ class Survey {
     private $tokens;
     
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection|SurveySettingValue[]
+     * @ORM\OneToMany(targetEntity="SurveySettingValue", mappedBy="survey")
+     */
+    private $settings;
+    
+    /**
      * @ORM\ManyToMany(targetEntity="TargetAudience")
      * @ORM\JoinTable(name="surveys_targetaudiences",
      *      joinColumns={@ORM\JoinColumn(name="survey_id", referencedColumnName="id")},
@@ -180,8 +186,6 @@ class Survey {
         $this->showProgress = $showProgress;
     }
     
-    
-    
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|Token[]
      */
@@ -232,6 +236,42 @@ class Survey {
         foreach ($tokens as $token) {
             $this->removeToken($token);
         }
+    }
+    
+    /**
+     * @return SurveySettingValue[]|ArrayCollection
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+    
+    /**
+     * @param SurveySettingValue[]|ArrayCollection $settings
+     */
+    public function setSettings($settings): void
+    {
+        $this->settings = $settings;
+    }
+    
+    /**
+     * @param SurveySettingValue $setting
+     */
+    public function addSetting(SurveySettingValue $setting): void {
+        if ($this->settings->contains($setting)) {
+            return;
+        }
+        $this->settings->add($setting);
+    }
+    
+    /**
+     * @param SurveySettingValue $setting
+     */
+    public function removeSetting(SurveySettingValue $setting): void {
+        if (! $this->settings->contains($setting)) {
+            return;
+        }
+        $this->settings->removeElement($setting);
     }
     
     /**
