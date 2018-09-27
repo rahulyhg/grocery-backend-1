@@ -155,6 +155,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.survey-setting-type' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/survey-setting-type[/:survey_setting_type_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SurveySettingType\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -177,6 +186,7 @@ return [
             18 => 'db-api.rest.doctrine.survey-theme-element',
             19 => 'db-api.rest.doctrine.survey-setting',
             20 => 'db-api.rest.doctrine.survey-setting-value',
+            21 => 'db-api.rest.doctrine.survey-setting-type',
         ],
     ],
     'zf-rest' => [
@@ -573,6 +583,25 @@ return [
             'collection_class' => \DbAPI\V1\Rest\SurveySettingValue\SurveySettingValueCollection::class,
             'service_name' => 'SurveySettingValue',
         ],
+        'DbAPI\\V1\\Rest\\SurveySettingType\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SurveySettingType\SurveySettingTypeResource::class,
+            'route_name' => 'db-api.rest.doctrine.survey-setting-type',
+            'route_identifier_name' => 'survey_setting_type_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'survey_setting_type',
+            'entity_http_methods' => [
+                0 => 'GET',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SurveySettingType::class,
+            'collection_class' => \DbAPI\V1\Rest\SurveySettingType\SurveySettingTypeCollection::class,
+            'service_name' => 'SurveySettingType',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -593,6 +622,7 @@ return [
             'DbAPI\\V1\\Rest\\SurveyThemeElement\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\SurveySetting\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\SurveySettingValue\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SurveySettingType\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -680,6 +710,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\SurveySettingType\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -747,6 +782,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\SurveySettingValue\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveySettingType\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -945,6 +984,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.survey-setting-value',
                 'is_collection' => true,
             ],
+            \Db\Entity\SurveySettingType::class => [
+                'route_identifier_name' => 'survey_setting_type_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-setting-type',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveySettingType\\SurveySettingTypeHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveySettingType\SurveySettingTypeCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-setting-type',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1016,6 +1066,10 @@ return [
             \DbAPI\V1\Rest\SurveySettingValue\SurveySettingValueResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\SurveySettingValue\\SurveySettingValueHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveySettingType\SurveySettingTypeResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveySettingType\\SurveySettingTypeHydrator',
             ],
         ],
     ],
@@ -1160,6 +1214,13 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\SurveySettingType\\SurveySettingTypeHydrator' => [
+            'entity_class' => \Db\Entity\SurveySettingType::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1212,6 +1273,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\SurveySettingValue\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\SurveySettingValue\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SurveySettingType\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SurveySettingType\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -1903,6 +1967,7 @@ return [
                 'validators' => [],
             ],
         ],
+        'DbAPI\\V1\\Rest\\SurveySettingType\\Validator' => [],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
