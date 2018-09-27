@@ -29,10 +29,10 @@ class SurveySetting
     protected $name;
     
     /**
-     * @var string
-     * @ORM\Column(name="type", type="string", length=8, nullable=false)
+     * @ORM\ManyToOne(targetEntity="SurveySettingType")
+     * @ORM\JoinColumn(name="survey_settings_type_id", referencedColumnName="id", nullable=false)
      */
-    protected $type;
+    private $type;
     
     protected $validTypes = [
         self::SETTING_TYPE_BOOLEAN,
@@ -73,19 +73,19 @@ class SurveySetting
     }
     
     /**
-     * @return string
+     * @return SurveySettingType
      */
-    public function getType(): string
+    public function getType(): SurveySettingType
     {
         return $this->type;
     }
     
     /**
-     * @param string $type
+     * @param SurveySettingType $type
      */
-    public function setType(string $type): void
+    public function setType(SurveySettingType $type): void
     {
-        if (!in_array($type, $this->validTypes)) {
+        if (!in_array($type->getId(), $this->validTypes)) {
             throw new \Exception('invalid SurveySetting type');
         }
         $this->type = $type;
