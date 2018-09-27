@@ -27,6 +27,11 @@ class Question {
     protected $text;
 
     /**
+     * @ORM\Column(name="extraText", type="string", length=2048, nullable=true)
+     */
+    protected $extraText;
+
+    /**
      * @ORM\Column(name="required", type="integer", length=11, nullable=false)
      */
     protected $required;
@@ -153,6 +158,10 @@ class Question {
         return $this->text;
     }
 
+    function getExtraText() {
+        return $this->extraText;
+    }
+
     function getRequired() {
         return $this->required;
     }
@@ -215,6 +224,10 @@ class Question {
 
     function setText($text) {
         $this->text = $text;
+    }
+
+    function setExtraText($extraText) {
+        $this->extraText = $extraText;
     }
 
     function setRequired($required) {
