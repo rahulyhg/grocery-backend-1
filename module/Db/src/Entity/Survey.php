@@ -75,6 +75,15 @@ class Survey {
      *      )
      */
     private $targetaudiences;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Team")
+     * @ORM\JoinTable(name="surveys_teams",
+     *      joinColumns={@ORM\JoinColumn(name="survey_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="team_id", referencedColumnName="id")}
+     *      )
+     */
+    private $teams;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|Theme[]
@@ -326,6 +335,42 @@ class Survey {
         foreach ($targetaudiences as $targetaudience) {
             $this->removeTargetaudience($targetaudience);
         }
+    }
+    
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|Team[]
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|Team[] $teams
+     */
+    public function setTeams($teams): void
+    {
+        $this->teams = $teams;
+    }
+    
+    /**
+     * @param TargetAudience $targetaudience
+     */
+    public function addTeam(Team $team): void {
+        if ($this->teams->contains($team)) {
+            return;
+        }
+        $this->teams->add($team);
+    }
+    
+    /**
+     * @param TargetAudience $targetaudience
+     */
+    public function removeTeam(Team $team): void {
+        if (! $this->teams->contains($team)) {
+            return;
+        }
+        $this->teams->removeElement($team);
     }
     
     /**
