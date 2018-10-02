@@ -21,6 +21,12 @@ class Theme {
     protected $id;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Customer")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    private $customer;
+    
+    /**
      * @ORM\Column(name="name", type="string", length=128, nullable=false)
      */
     protected $name;
@@ -49,7 +55,6 @@ class Theme {
      */
     protected $survey_theme_associations;
     
-    
     public function __construct() {
         $this->subthemes  = new ArrayCollection();
         $this->survey_theme_associations  = new ArrayCollection();
@@ -61,6 +66,22 @@ class Theme {
     
     function setId($id) {
         $this->id = $id;
+    }
+    
+    /**
+     * @return Customer
+     */
+    public function getCustomer(): Customer
+    {
+        return $this->customer;
+    }
+    
+    /**
+     * @param Customer $customer
+     */
+    public function setCustomer(Customer $customer): void
+    {
+        $this->customer = $customer;
     }
     
     function getName() {
@@ -182,5 +203,4 @@ class Theme {
             $this->removeQuestion($question);
         }
     }
-    
 }

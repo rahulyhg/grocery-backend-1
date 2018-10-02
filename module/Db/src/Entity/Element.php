@@ -19,6 +19,12 @@ class Element {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Customer")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    private $customer;
 
     /**
      * @ORM\Column(name="type", type="string", length=255, nullable=false)
@@ -51,6 +57,22 @@ class Element {
     
     function setId($id) {
         $this->id = $id;
+    }
+    
+    /**
+     * @return Customer
+     */
+    public function getCustomer(): Customer
+    {
+        return $this->customer;
+    }
+    
+    /**
+     * @param Customer $customer
+     */
+    public function setCustomer(Customer $customer): void
+    {
+        $this->customer = $customer;
     }
     
     function getType() {
