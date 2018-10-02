@@ -108,37 +108,40 @@ class Survey {
     function getId() {
         return $this->id;
     }
+    
+    function setId($id) {
+        $this->id = $id;
+    }
 
     function getName() {
         return $this->name;
     }
+    
+    function setName($name) {
+        $this->name = $name;
+    }
 
     function getDescription() {
         return $this->description;
+    }
+    
+    function setDescription($description) {
+        $this->description = $description;
     }
 
     function getType() {
         return $this->type;
     }
     
-    function geStatus(): SurveyStatus {
-        return $this->status;
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
-
-    function setName($name) {
-        $this->name = $name;
-    }
-
-    function setDescription($description) {
-        $this->description = $description;
-    }
-
     function setType($type) {
         $this->type = $type;
+    }
+    
+    /**
+     * @return SurveyStatus
+     */
+    function getStatus(): SurveyStatus {
+        return $this->status;
     }
     
     /**
@@ -398,7 +401,11 @@ class Survey {
     {
         return $this->survey_theme_associations;
     }
-    public function setSurveyThemeAssociations($survey_theme_associations)
+    
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[] $survey_theme_associations
+     */
+    public function setSurveyThemeAssociations($survey_theme_associations): void
     {
         $this->survey_theme_associations = $survey_theme_associations;
     }
@@ -422,7 +429,4 @@ class Survey {
         }
         $this->survey_theme_associations->removeElement($surveyThemeAssociation);
     }
-
-    
-    
 }
