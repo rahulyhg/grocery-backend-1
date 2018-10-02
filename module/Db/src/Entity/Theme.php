@@ -27,11 +27,16 @@ class Theme {
     private $customer;
     
     /**
+     * @var string
      * @ORM\Column(name="name", type="string", length=128, nullable=false)
      */
     protected $name;
-
-    protected $number;
+    
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=7)
+     */
+    protected $colorCode;
 
     // PICT ID
 
@@ -84,12 +89,34 @@ class Theme {
         $this->customer = $customer;
     }
     
+    /**
+     * @return string
+     */
     function getName() {
         return $this->name;
     }
     
-    function setName($name) {
+    /**
+     * @param string $name
+     */
+    function setName(string $name) {
         $this->name = $name;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getColorCode(): ?string
+    {
+        return $this->colorCode;
+    }
+    
+    /**
+     * @param string $colorCode
+     */
+    public function setColorCode(?string $colorCode): void
+    {
+        $this->colorCode = $colorCode;
     }
     
     /**
