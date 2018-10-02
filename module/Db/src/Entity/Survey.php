@@ -35,6 +35,12 @@ class Survey {
     protected $type;
     
     /**
+     * @ORM\ManyToOne(targetEntity="SurveyStatus")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
+     */
+    private $status;
+    
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     protected $targetaudienceQuestion;
@@ -114,6 +120,10 @@ class Survey {
     function getType() {
         return $this->type;
     }
+    
+    function geStatus(): SurveyStatus {
+        return $this->status;
+    }
 
     function setId($id) {
         $this->id = $id;
@@ -129,6 +139,14 @@ class Survey {
 
     function setType($type) {
         $this->type = $type;
+    }
+    
+    /**
+     * @param SurveyStatus $status
+     */
+    public function setStatus(SurveyStatus $status): void
+    {
+        $this->status = $status;
     }
     
     /**
