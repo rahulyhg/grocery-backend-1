@@ -67,15 +67,15 @@ class SurveyStatus
      */
     public function getActionName(): string
     {
-        return $this->name;
+        return $this->actionName;
     }
     
     /**
-     * @param string $name
+     * @param string $actionName
      */
-    public function setActionName(string $name): void
+    public function setActionName(string $actionName): void
     {
-        $this->name = $name;
+        $this->actionName = $actionName;
     }
     
     
