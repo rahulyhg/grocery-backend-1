@@ -208,7 +208,7 @@ class Question {
     /**
      * @return Customer
      */
-    public function getCustomer(): Customer
+    public function getCustomer(): ?Customer
     {
         return $this->customer;
     }
@@ -276,7 +276,7 @@ class Question {
     /**
      * @param Customer $customer
      */
-    public function setCustomer(Customer $customer): void
+    public function setCustomer(?Customer $customer): void
     {
         $this->customer = $customer;
     }

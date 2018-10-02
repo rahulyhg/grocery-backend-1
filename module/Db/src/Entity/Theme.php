@@ -71,7 +71,7 @@ class Theme {
     /**
      * @return Customer
      */
-    public function getCustomer(): Customer
+    public function getCustomer(): ?Customer
     {
         return $this->customer;
     }
@@ -79,7 +79,7 @@ class Theme {
     /**
      * @param Customer $customer
      */
-    public function setCustomer(Customer $customer): void
+    public function setCustomer(?Customer $customer): void
     {
         $this->customer = $customer;
     }
