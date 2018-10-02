@@ -20,6 +20,12 @@ class Question {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="questions")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    private $customer;
 
     /**
      * @ORM\Column(name="text", type="string", length=512, nullable=false)
@@ -91,12 +97,6 @@ class Question {
      * @ORM\Column(name="smileytext_dont_know", type="text", length=256, nullable=true)
      */
     protected $smileytextDontKnow;
-
-    /**
-     * Many Questions have One Customer
-     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="questions")
-     */
-    protected $customer;
 
     /**
      * @ORM\ManyToOne(targetEntity="Theme", inversedBy="questions")
@@ -213,8 +213,12 @@ class Question {
     function getSmileytextDontKnow() {
         return $this->smileytext_dont_know;
     }
-
-    function getCustomer() {
+    
+    /**
+     * @return Customer
+     */
+    public function getCustomer(): Customer
+    {
         return $this->customer;
     }
 
@@ -281,9 +285,12 @@ class Question {
     function setSmileytextDontKnow($text) {
         $this->smileytext_dont_know = $text;
     }
-
-    function setCustomer($customer) {
+    
+    /**
+     * @param Customer $customer
+     */
+    public function setCustomer(Customer $customer): void
+    {
         $this->customer = $customer;
     }
-
 }
