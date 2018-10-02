@@ -173,6 +173,24 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.file-type' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/file-type[/:file_type_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\FileType\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.file' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/file[/:file_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\File\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -197,6 +215,8 @@ return [
             20 => 'db-api.rest.doctrine.survey-setting-value',
             21 => 'db-api.rest.doctrine.survey-setting-type',
             22 => 'db-api.rest.doctrine.survey-status',
+            23 => 'db-api.rest.doctrine.file-type',
+            24 => 'db-api.rest.doctrine.file',
         ],
     ],
     'zf-rest' => [
@@ -635,6 +655,52 @@ return [
             'collection_class' => \DbAPI\V1\Rest\SurveyStatus\SurveyStatusCollection::class,
             'service_name' => 'SurveyStatus',
         ],
+        'DbAPI\\V1\\Rest\\FileType\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\FileType\FileTypeResource::class,
+            'route_name' => 'db-api.rest.doctrine.file-type',
+            'route_identifier_name' => 'file_type_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'file_type',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\FileType::class,
+            'collection_class' => \DbAPI\V1\Rest\FileType\FileTypeCollection::class,
+            'service_name' => 'FileType',
+        ],
+        'DbAPI\\V1\\Rest\\File\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\File\FileResource::class,
+            'route_name' => 'db-api.rest.doctrine.file',
+            'route_identifier_name' => 'file_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'file',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\File::class,
+            'collection_class' => \DbAPI\V1\Rest\File\FileCollection::class,
+            'service_name' => 'File',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -657,6 +723,8 @@ return [
             'DbAPI\\V1\\Rest\\SurveySettingValue\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\SurveySettingType\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\SurveyStatus\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\FileType\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\File\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -754,6 +822,16 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\FileType\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\File\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -829,6 +907,14 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\SurveyStatus\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\FileType\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\File\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -1049,6 +1135,28 @@ return [
                 'route_name' => 'db-api.rest.doctrine.survey-status',
                 'is_collection' => true,
             ],
+            \Db\Entity\FileType::class => [
+                'route_identifier_name' => 'file_type_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.file-type',
+                'hydrator' => 'DbAPI\\V1\\Rest\\FileType\\FileTypeHydrator',
+            ],
+            \DbAPI\V1\Rest\FileType\FileTypeCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.file-type',
+                'is_collection' => true,
+            ],
+            \Db\Entity\File::class => [
+                'route_identifier_name' => 'file_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.file',
+                'hydrator' => 'DbAPI\\V1\\Rest\\File\\FileHydrator',
+            ],
+            \DbAPI\V1\Rest\File\FileCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.file',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1128,6 +1236,14 @@ return [
             \DbAPI\V1\Rest\SurveyStatus\SurveyStatusResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\SurveyStatus\\SurveyStatusHydrator',
+            ],
+            \DbAPI\V1\Rest\FileType\FileTypeResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\FileType\\FileTypeHydrator',
+            ],
+            \DbAPI\V1\Rest\File\FileResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\File\\FileHydrator',
             ],
         ],
     ],
@@ -1287,6 +1403,20 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\FileType\\FileTypeHydrator' => [
+            'entity_class' => \Db\Entity\FileType::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\File\\FileHydrator' => [
+            'entity_class' => \Db\Entity\File::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1345,6 +1475,12 @@ return [
         ],
         'DbAPI\\V1\\Rest\\SurveyStatus\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\SurveyStatus\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\FileType\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\FileType\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\File\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\File\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -2079,6 +2215,58 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\FileType\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 50,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\File\\Validator' => [
+            0 => [
+                'name' => 'fileName',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+            1 => [
+                'name' => 'contents',
+                'required' => true,
+                'filters' => [],
+                'validators' => [],
             ],
         ],
     ],
