@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Db\Entity;
 
@@ -12,49 +13,50 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="teams")
  */
 class Team {
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-	/**
-	 * @ORM\Column(name="name", type="string", length=128, nullable=false)
-	 */
-	protected $name;
+    /**
+     * @ORM\Column(name="name", type="string", length=128, nullable=false)
+     */
+    protected $name;
 
-	/**
-	 * Many Teams have One Customer
-	 * @ORM\ManyToOne(targetEntity="Customer", inversedBy="teams")
-	 * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)
-	 */
-	protected $customer;
+    /**
+     * Many Teams have One Customer
+     * @ORM\ManyToOne(targetEntity="TeamGroup", inversedBy="teams")
+     * @ORM\JoinColumn(name="teamgroup_id", referencedColumnName="id", nullable=false)
+     */
+    protected $teamgroup;
 
-	public function __construct() {
-		$this->teams = new ArrayCollection();
-	}
+    public function __construct() {
+        $this->teams = new ArrayCollection();
+    }
 
-	function getId() {
+    function getId(): int {
         return $this->id;
     }
 
-    function getName() {
+    function setId(int $id): void {
+        $this->id = $id;
+    }
+    
+    function getName(): string {
         return $this->name;
     }
 
-    function setId($id) {
-        $this->id = $id;
-    }
-
-    function setName($name) {
+    function setName(string $name): void {
         $this->name = $name;
     }
 
-    public function getCustomer() {
-    	return $this->customer;
+    public function getTeamgroup(): TeamGroup {
+        return $this->teamgroup;
     }
-    public function setCustomer($customer) {
-    	$this->customer = $customer;
+    
+    public function setTeamgroup(TeamGroup $teamgroup): void {
+        $this->teamgroup = $teamgroup;
     }
 }
