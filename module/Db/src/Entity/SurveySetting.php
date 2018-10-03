@@ -13,6 +13,7 @@ class SurveySetting
     public const SETTING_TYPE_BOOLEAN = 'boolean';
     public const SETTING_TYPE_INTEGER = 'integer';
     public const SETTING_TYPE_STRING  = 'string';
+    public const SETTING_TYPE_COLOR   = 'color';
     
     /**
      * @var int
@@ -34,10 +35,17 @@ class SurveySetting
      */
     private $type;
     
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $description;
+    
     protected $validTypes = [
         self::SETTING_TYPE_BOOLEAN,
         self::SETTING_TYPE_INTEGER,
-        self::SETTING_TYPE_STRING
+        self::SETTING_TYPE_STRING,
+        self::SETTING_TYPE_COLOR
     ];
     
     /**
@@ -78,6 +86,22 @@ class SurveySetting
     public function getType(): SurveySettingType
     {
         return $this->type;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+    
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
     
     /**

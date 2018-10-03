@@ -93,14 +93,14 @@ class SurveySettingValue {
     public function getValue()
     {
         $return = null;
-        switch ($this->setting->getType()) {
+        switch ($this->setting->getType()->getId()) {
             case SurveySetting::SETTING_TYPE_BOOLEAN: {
                 return (bool) $this->value;
             }
             case SurveySetting::SETTING_TYPE_INTEGER: {
                 return (int) $this->value;
             }
-            case SurveySetting::SETTING_TYPE_STRING: {
+            default: {
                 return $this->value;
             }
         }

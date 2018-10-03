@@ -12,155 +12,161 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="customers")
  */
 class Customer {
-	/**
-	 * @ORM\Id
-	 * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-	/**
-	 * @ORM\Column(name="name", type="string", length=128, nullable=false)
-	 */
-	protected $name;
+    /**
+     * @ORM\Column(name="name", type="string", length=128, nullable=false)
+     */
+    protected $name;
 
-	/**
-	 * One Customer has Many Teams
-	 * @ORM\OneToMany(targetEntity="Team", mappedBy="customer")
-	 */
-	protected $teams;
+    /**
+     * One Customer has Many TeamGroups
+     * @ORM\OneToMany(targetEntity="TeamGroup", mappedBy="customer")
+     */
+    protected $teamgroups;
 
-	/**
-	 * One Customer has Many Questions
-	 * @ORM\OneToMany(targetEntity="Question", mappedBy="customer")
-	 */
-	protected $questions;
+    /**
+     * One Customer has Many Questions
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="customer")
+     */
+    protected $questions;
 
-	/**
-	 * One Customer has Many Users
-	 * @ORM\OneToMany(targetEntity="Application\Entity\User", mappedBy="customer")
-	 */
-	protected $users;
+    /**
+     * One Customer has Many Users
+     * @ORM\OneToMany(targetEntity="Application\Entity\User", mappedBy="customer")
+     */
+    protected $users;
 
-	public function __construct() {
-		$this->teams = new ArrayCollection();
-	}
+    public function __construct() {
+        $this->teams = new ArrayCollection();
+    }
 
-	function getId() {
+    function getId() {
         return $this->id;
+    }
+    
+    function setId($id) {
+        $this->id = $id;
     }
 
     function getName() {
         return $this->name;
     }
 
-    function setId($id) {
-        $this->id = $id;
-    }
-
     function setName($name) {
         $this->name = $name;
     }
 
-    public function getTeams() {
-    	return $this->teams;
+    public function getTeamGroups() {
+        return $this->teamgroups;
     }
-    public function setTeams($teams) {
-    	$this->teams = $teams;
-    }
-
-    public function addTeam($team) {
-    	if ($this->teams->contains($team)) {
-    		return;
-    	}
-    	$this->teams->add($team);
-    	$team->setCustomer($this);
-    }
-    public  function removeTeam($team) {
-    	if (!$this->teams->contains($team)) {
-    		return;
-    	}
-    	$this->teams->removeElement($team);
-    	$team->setCustomer(null);
+    
+    public function setTeamGroups($teamgroups) {
+        $this->teamgroups = $teamgroups;
     }
 
-    public function addTeams($teams) {
-    	foreach ($teams as $team) {
-    		$this->addTeam($team);
-    	}
+    public function addTeamGroup($teamgroup) {
+        if ($this->teamgroups->contains($teamgroup)) {
+            return;
+        }
+        $this->teamgroups->add($teamgroup);
+        $teamgroup->setCustomer($this);
     }
-    public function removeTeams($teams) {
-    	foreach ($teams as $team) {
-    		$this->removeTeam($team);
-    	}
+    
+    public  function removeTeamGroup($teamgroup) {
+        if (!$this->teamgroups->contains($teamgroup)) {
+            return;
+        }
+        $this->teamgroups->removeElement($teamgroup);
+        $teamgroup->setCustomer(null);
+    }
+
+    public function addTeamGroups($teamgroups) {
+        foreach ($teamgroups as $teamgroup) {
+            $this->addTeam($teamgroup);
+        }
+    }
+    
+    public function removeTeamGroups($teamgroups) {
+        foreach ($teamgroups as $teamgroup) {
+            $this->removeTeam($teamgroup);
+        }
     }
 
     public function getQuestions() {
-    	return $this->questions;
+        return $this->questions;
     }
+    
     public function setQuestions($questions) {
-    	$this->questions = $questions;
+        $this->questions = $questions;
     }
 
     public function addQuestion($question) {
-    	if ($this->questions->contains($question)) {
-    		return;
-    	}
-    	$this->questions->add($question);
-    	$question->setCustomer($this);
+        if ($this->questions->contains($question)) {
+            return;
+        }
+        $this->questions->add($question);
+        $question->setCustomer($this);
     }
+    
     public function removeQuestion($question) {
-    	if (!$this->questions->contains($question)) {
-    		return;
-    	}
-    	$this->questions->removeElement($question);
-    	$question->setCustomer(null);
+        if (!$this->questions->contains($question)) {
+            return;
+        }
+        $this->questions->removeElement($question);
+        $question->setCustomer(null);
     }
 
     public function addQuestions($questions) {
-    	foreach ($questions as $question) {
-    		$this->addQuestion($question);
-    	}
+        foreach ($questions as $question) {
+            $this->addQuestion($question);
+        }
     }
+    
     public function removeQuestions($questions) {
-    	foreach ($questions as $question) {
-    		$this->removeQuestion($question);
-    	}
+        foreach ($questions as $question) {
+            $this->removeQuestion($question);
+        }
     }
-
-
-
-
+    
     public function getUsers() {
-    	return $this->users;
+        return $this->users;
     }
+    
     public function setUsers($users) {
-    	$this->users = $users;
+        $this->users = $users;
     }
 
     public function addUser($user) {
-    	if ($this->users->contains($user)) {
-    		return;
-    	}
-    	$this->users->add($user);
-    	$user->setCustomer($this);
+        if ($this->users->contains($user)) {
+            return;
+        }
+        $this->users->add($user);
+        $user->setCustomer($this);
     }
+    
     public  function removeUser($user) {
-    	if (!$this->users->contains($user)) {
-    		return;
-    	}
-    	$this->users->removeElement($user);
-    	$user->setCustomer(null);
+        if (!$this->users->contains($user)) {
+            return;
+        }
+        $this->users->removeElement($user);
+        $user->setCustomer(null);
     }
 
     public function addUsers($users) {
-    	foreach ($users as $team) {
-    		$this->addTeam($team);
-    	}
+        foreach ($users as $team) {
+            $this->addTeam($team);
+        }
     }
+    
     public function removeUsers($users) {
-    	foreach ($users as $team) {
-    		$this->removeTeam($team);
-    	}
+        foreach ($users as $team) {
+            $this->removeTeam($team);
+        }
     }
 }
