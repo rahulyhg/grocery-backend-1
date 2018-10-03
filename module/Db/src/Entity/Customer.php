@@ -62,11 +62,11 @@ class Customer {
         $this->name = $name;
     }
 
-    public function getTeamGroups() {
+    public function getTeamgroups() {
         return $this->teamgroups;
     }
     
-    public function setTeamGroups($teamgroups) {
+    public function setTeamgroups($teamgroups) {
         $this->teamgroups = $teamgroups;
     }
 
