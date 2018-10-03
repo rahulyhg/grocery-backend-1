@@ -191,6 +191,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.team-group' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/team-group[/:team_group_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\TeamGroup\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -217,6 +226,7 @@ return [
             22 => 'db-api.rest.doctrine.survey-status',
             23 => 'db-api.rest.doctrine.file-type',
             24 => 'db-api.rest.doctrine.file',
+            25 => 'db-api.rest.doctrine.team-group',
         ],
     ],
     'zf-rest' => [
@@ -701,6 +711,29 @@ return [
             'collection_class' => \DbAPI\V1\Rest\File\FileCollection::class,
             'service_name' => 'File',
         ],
+        'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\TeamGroup\TeamGroupResource::class,
+            'route_name' => 'db-api.rest.doctrine.team-group',
+            'route_identifier_name' => 'team_group_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'team_group',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\TeamGroup::class,
+            'collection_class' => \DbAPI\V1\Rest\TeamGroup\TeamGroupCollection::class,
+            'service_name' => 'TeamGroup',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -725,6 +758,7 @@ return [
             'DbAPI\\V1\\Rest\\SurveyStatus\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\FileType\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\File\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -832,6 +866,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -915,6 +954,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\File\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -1046,6 +1089,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.team',
                 'is_collection' => true,
+                'max_depth' => 2,
             ],
             \Db\Entity\SurveyThemeAssociation::class => [
                 'route_identifier_name' => 'survey_theme_association_id',
@@ -1157,6 +1201,19 @@ return [
                 'route_name' => 'db-api.rest.doctrine.file',
                 'is_collection' => true,
             ],
+            \Db\Entity\TeamGroup::class => [
+                'route_identifier_name' => 'team_group_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.team-group',
+                'hydrator' => 'DbAPI\\V1\\Rest\\TeamGroup\\TeamGroupHydrator',
+                'max_depth' => 2,
+            ],
+            \DbAPI\V1\Rest\TeamGroup\TeamGroupCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.team-group',
+                'is_collection' => true,
+                'max_depth' => 2,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1245,6 +1302,10 @@ return [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\File\\FileHydrator',
             ],
+            \DbAPI\V1\Rest\TeamGroup\TeamGroupResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\TeamGroup\\TeamGroupHydrator',
+            ],
         ],
     ],
     'doctrine-hydrator' => [
@@ -1331,6 +1392,15 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Customer\\CustomerHydrator' => [
             'entity_class' => \Db\Entity\Customer::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [
+                'teamgroups' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+            ],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\TeamGroup\\TeamGroupHydrator' => [
+            'entity_class' => \Db\Entity\TeamGroup::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
             'strategies' => [
@@ -1481,6 +1551,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\File\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\File\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\TeamGroup\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -2324,6 +2397,29 @@ return [
                 'required' => true,
                 'filters' => [],
                 'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\TeamGroup\\Validator' => [
+            0 => [
+                'name' => 'name',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
             ],
         ],
     ],
