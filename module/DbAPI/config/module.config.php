@@ -1273,7 +1273,7 @@ return [
                 'survey_theme_associations' => 'dbapi.v1.extract.survey.survey_theme_associations',
                 'targetaudiences' => 'dbapi.v1.extract.survey.targetaudiences',
                 'teams' => 'dbapi.v1.extract.survey.teams',
-                'settings' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+                'settings' => 'dbapi.v1.extract.survey.settings',
             ],
             'use_generated_hydrator' => true,
         ],
@@ -2156,6 +2156,30 @@ return [
                     ],
                 ],
             ],
+            2 => [
+                'required' => true,
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => '1',
+                            'max' => '255',
+                        ],
+                    ],
+                ],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'description',
+                'field_type' => 'string',
+            ],
         ],
         'DbAPI\\V1\\Rest\\SurveySettingValue\\Validator' => [
             0 => [
@@ -2539,6 +2563,7 @@ return [
             'dbapi.v1.extract.survey.targetaudiences' => \DbAPI\V1\Rest\Survey\TargetaudiencesStrategy::class,
             'dbapi.v1.extract.survey.teams' => \DbAPI\V1\Rest\Survey\TeamsStrategy::class,
             'dbapi.v1.extract.survey.survey_theme_associations' => \DbAPI\V1\Rest\Survey\SurveyThemeStrategy::class,
+            'dbapi.v1.extract.survey.settings' => \DbAPI\V1\Rest\Survey\SettingsStrategy::class,
             'dbapi.v1.extract.formulation.targetaudiences' => \DbAPI\V1\Rest\Formulation\TargetaudiencesStrategy::class,
         ],
     ],
