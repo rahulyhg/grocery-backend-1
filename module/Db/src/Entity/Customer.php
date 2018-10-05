@@ -88,13 +88,13 @@ class Customer {
 
     public function addTeamGroups($teamgroups) {
         foreach ($teamgroups as $teamgroup) {
-            $this->addTeam($teamgroup);
+            $this->addTeamGroup($teamgroup);
         }
     }
     
     public function removeTeamGroups($teamgroups) {
         foreach ($teamgroups as $teamgroup) {
-            $this->removeTeam($teamgroup);
+            $this->removeTeamGroup($teamgroup);
         }
     }
 
@@ -150,7 +150,7 @@ class Customer {
         $user->setCustomer($this);
     }
     
-    public  function removeUser($user) {
+    public function removeUser($user) {
         if (!$this->users->contains($user)) {
             return;
         }
@@ -159,14 +159,14 @@ class Customer {
     }
 
     public function addUsers($users) {
-        foreach ($users as $team) {
-            $this->addTeam($team);
+        foreach ($users as $user) {
+            $this->addUser($user);
         }
     }
     
     public function removeUsers($users) {
-        foreach ($users as $team) {
-            $this->removeTeam($team);
+        foreach ($users as $user) {
+            $this->removeUser($user);
         }
     }
 }
