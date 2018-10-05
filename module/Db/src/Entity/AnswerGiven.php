@@ -100,17 +100,17 @@ class AnswerGiven {
     }
     
     /**
-     * @return Answer
+     * @return Answer|null
      */
-    public function getAnswer(): Answer
+    public function getAnswer(): ?Answer
     {
         return $this->answer;
     }
     
     /**
-     * @param Answer $answer
+     * @param Answer|null $answer
      */
-    public function setAnswer(Answer $answer): void
+    public function setAnswer(?Answer $answer): void
     {
         $this->answer = $answer;
     }
