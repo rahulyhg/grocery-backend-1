@@ -9,6 +9,7 @@ namespace Application;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
+    'token-user' => 'token_user',
     'router' => [
         'routes' => [
             'home' => [

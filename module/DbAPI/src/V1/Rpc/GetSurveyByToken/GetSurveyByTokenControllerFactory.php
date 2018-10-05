@@ -8,12 +8,14 @@ class GetSurveyByTokenControllerFactory
     public function __invoke($container)
     {
         $config = $container->get('config');
-//        $doctrineHydratorConfig = $config['doctrine-hydrator'];
         
-        
+        $applicationConfig = $config['token-user'] ?: null;
+    
+    
         return new GetSurveyByTokenController(
-            $container->get(EntityManager::class), 
-            $container->get('HydratorManager')
+            $container->get(EntityManager::class),
+            $container->get('oauth2.doctrineadapter.default'),
+            $applicationConfig
         );
     }
 }
