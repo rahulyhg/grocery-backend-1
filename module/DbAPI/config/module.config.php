@@ -218,6 +218,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.importance' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/importance[/:importance_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Importance\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -247,6 +256,7 @@ return [
             25 => 'db-api.rest.doctrine.team-group',
             26 => 'db-api.rest.doctrine.response',
             27 => 'db-api.rest.doctrine.answer-given',
+            28 => 'db-api.rest.doctrine.importance',
         ],
     ],
     'zf-rest' => [
@@ -800,6 +810,29 @@ return [
             'collection_class' => \DbAPI\V1\Rest\AnswerGiven\AnswerGivenCollection::class,
             'service_name' => 'AnswerGiven',
         ],
+        'DbAPI\\V1\\Rest\\Importance\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Importance\ImportanceResource::class,
+            'route_name' => 'db-api.rest.doctrine.importance',
+            'route_identifier_name' => 'importance_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'importance',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Importance::class,
+            'collection_class' => \DbAPI\V1\Rest\Importance\ImportanceCollection::class,
+            'service_name' => 'Importance',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -827,6 +860,7 @@ return [
             'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Response\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\Importance\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -949,6 +983,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\Importance\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1044,6 +1083,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Importance\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -1322,6 +1365,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.answer-given',
                 'is_collection' => true,
             ],
+            \Db\Entity\Importance::class => [
+                'route_identifier_name' => 'importance_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.importance',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Importance\\ImportanceHydrator',
+            ],
+            \DbAPI\V1\Rest\Importance\ImportanceCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.importance',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1421,6 +1475,10 @@ return [
             \DbAPI\V1\Rest\AnswerGiven\AnswerGivenResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\AnswerGiven\\AnswerGivenHydrator',
+            ],
+            \DbAPI\V1\Rest\Importance\ImportanceResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Importance\\ImportanceHydrator',
             ],
         ],
     ],
@@ -1617,6 +1675,13 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\Importance\\ImportanceHydrator' => [
+            'entity_class' => \Db\Entity\Importance::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1690,6 +1755,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\AnswerGiven\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\Importance\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Importance\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -2600,6 +2668,7 @@ return [
                 'validators' => [],
             ],
         ],
+        'DbAPI\\V1\\Rest\\Importance\\Validator' => [],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
@@ -2876,6 +2945,22 @@ return [
                 ],
             ],
             'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Importance\\Controller' => [
                 'collection' => [
                     'GET' => true,
                     'POST' => true,
