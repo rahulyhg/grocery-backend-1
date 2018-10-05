@@ -209,6 +209,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.answer-given' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/answer-given[/:answer_given_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\AnswerGiven\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -237,6 +246,7 @@ return [
             24 => 'db-api.rest.doctrine.file',
             25 => 'db-api.rest.doctrine.team-group',
             26 => 'db-api.rest.doctrine.response',
+            27 => 'db-api.rest.doctrine.answer-given',
         ],
     ],
     'zf-rest' => [
@@ -767,6 +777,29 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Response\ResponseCollection::class,
             'service_name' => 'Response',
         ],
+        'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\AnswerGiven\AnswerGivenResource::class,
+            'route_name' => 'db-api.rest.doctrine.answer-given',
+            'route_identifier_name' => 'answer_given_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'answer_given',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\AnswerGiven::class,
+            'collection_class' => \DbAPI\V1\Rest\AnswerGiven\AnswerGivenCollection::class,
+            'service_name' => 'AnswerGiven',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -793,6 +826,7 @@ return [
             'DbAPI\\V1\\Rest\\File\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Response\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -910,6 +944,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1001,6 +1040,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Response\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -1268,6 +1311,17 @@ return [
                 'route_name' => 'db-api.rest.doctrine.response',
                 'is_collection' => true,
             ],
+            \Db\Entity\AnswerGiven::class => [
+                'route_identifier_name' => 'answer_given_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.answer-given',
+                'hydrator' => 'DbAPI\\V1\\Rest\\AnswerGiven\\AnswerGivenHydrator',
+            ],
+            \DbAPI\V1\Rest\AnswerGiven\AnswerGivenCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.answer-given',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1363,6 +1417,10 @@ return [
             \DbAPI\V1\Rest\Response\ResponseResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Response\\ResponseHydrator',
+            ],
+            \DbAPI\V1\Rest\AnswerGiven\AnswerGivenResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\AnswerGiven\\AnswerGivenHydrator',
             ],
         ],
     ],
@@ -1552,6 +1610,13 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\AnswerGiven\\AnswerGivenHydrator' => [
+            'entity_class' => \Db\Entity\AnswerGiven::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1622,6 +1687,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Response\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Response\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\AnswerGiven\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -2504,6 +2572,34 @@ return [
                 'validators' => [],
             ],
         ],
+        'DbAPI\\V1\\Rest\\AnswerGiven\\Validator' => [
+            0 => [
+                'name' => 'value',
+                'required' => false,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            1 => [
+                'name' => 'comment',
+                'required' => false,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+        ],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
@@ -2764,6 +2860,22 @@ return [
                 ],
             ],
             'DbAPI\\V1\\Rest\\Response\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
                 'collection' => [
                     'GET' => true,
                     'POST' => true,
