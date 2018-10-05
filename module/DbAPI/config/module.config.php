@@ -200,6 +200,15 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.response' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/response[/:response_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Response\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -227,6 +236,7 @@ return [
             23 => 'db-api.rest.doctrine.file-type',
             24 => 'db-api.rest.doctrine.file',
             25 => 'db-api.rest.doctrine.team-group',
+            26 => 'db-api.rest.doctrine.response',
         ],
     ],
     'zf-rest' => [
@@ -734,6 +744,29 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Token\TokenCollection::class,
             'service_name' => 'Token',
         ],
+        'DbAPI\\V1\\Rest\\Response\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Response\ResponseResource::class,
+            'route_name' => 'db-api.rest.doctrine.response',
+            'route_identifier_name' => 'response_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'response',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Response::class,
+            'collection_class' => \DbAPI\V1\Rest\Response\ResponseCollection::class,
+            'service_name' => 'Response',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -759,6 +792,7 @@ return [
             'DbAPI\\V1\\Rest\\FileType\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\File\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\Response\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -871,6 +905,11 @@ return [
                 1 => 'application/hal+json',
                 2 => 'application/json',
             ],
+            'DbAPI\\V1\\Rest\\Response\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -958,6 +997,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Response\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -1214,6 +1257,17 @@ return [
                 'is_collection' => true,
                 'max_depth' => 2,
             ],
+            \Db\Entity\Response::class => [
+                'route_identifier_name' => 'response_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.response',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Response\\ResponseHydrator',
+            ],
+            \DbAPI\V1\Rest\Response\ResponseCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.response',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1305,6 +1359,10 @@ return [
             \DbAPI\V1\Rest\TeamGroup\TeamGroupResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\TeamGroup\\TeamGroupHydrator',
+            ],
+            \DbAPI\V1\Rest\Response\ResponseResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Response\\ResponseHydrator',
             ],
         ],
     ],
@@ -1487,6 +1545,13 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\Response\\ResponseHydrator' => [
+            'entity_class' => \Db\Entity\Response::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1554,6 +1619,9 @@ return [
         ],
         'DbAPI\\V1\\Rest\\TeamGroup\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\TeamGroup\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\Response\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Response\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -2422,6 +2490,20 @@ return [
                 ],
             ],
         ],
+        'DbAPI\\V1\\Rest\\Response\\Validator' => [
+            0 => [
+                'name' => 'responseDate',
+                'required' => true,
+                'filters' => [],
+                'validators' => [],
+            ],
+            1 => [
+                'name' => 'complete',
+                'required' => true,
+                'filters' => [],
+                'validators' => [],
+            ],
+        ],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
@@ -2666,6 +2748,22 @@ return [
                 ],
             ],
             'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
+                'collection' => [
+                    'GET' => true,
+                    'POST' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
+                ],
+                'entity' => [
+                    'GET' => true,
+                    'POST' => false,
+                    'PUT' => true,
+                    'PATCH' => true,
+                    'DELETE' => true,
+                ],
+            ],
+            'DbAPI\\V1\\Rest\\Response\\Controller' => [
                 'collection' => [
                     'GET' => true,
                     'POST' => true,
