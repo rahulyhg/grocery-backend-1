@@ -224,6 +224,9 @@ return [
                     'route' => '/importance[/:importance_id]',
                     'defaults' => [
                         'controller' => 'DbAPI\\V1\\Rest\\Importance\\Controller',
+                    ],
+                ],
+            ],
             'db-api.rpc.get-survey-by-token' => [
                 'type' => 'Segment',
                 'options' => [
@@ -996,6 +999,7 @@ return [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
+            ],
             'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
