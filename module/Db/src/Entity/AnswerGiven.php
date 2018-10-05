@@ -116,7 +116,7 @@ class AnswerGiven {
     }
     
     /**
-     * @return int
+     * @return int|null
      */
     public function getValue(): ?int
     {
@@ -124,7 +124,7 @@ class AnswerGiven {
     }
     
     /**
-     * @param int $value
+     * @param int|null $value
      */
     public function setValue(?int $value): void
     {
@@ -132,7 +132,7 @@ class AnswerGiven {
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getComment(): ?string
     {
@@ -140,7 +140,7 @@ class AnswerGiven {
     }
     
     /**
-     * @param string $comment
+     * @param string|null $comment
      */
     public function setComment(?string $comment): void
     {
