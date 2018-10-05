@@ -9,6 +9,9 @@ namespace Application;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
+    'get-survey-by-token' => [
+        'token-user' => 'token_user',
+    ],
     'router' => [
         'routes' => [
             'home' => [

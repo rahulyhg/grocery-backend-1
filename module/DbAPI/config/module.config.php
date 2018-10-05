@@ -267,7 +267,7 @@ return [
             26 => 'db-api.rest.doctrine.response',
             27 => 'db-api.rest.doctrine.answer-given',
             28 => 'db-api.rest.doctrine.importance',
-            26 => 'db-api.rpc.get-survey-by-token',
+            29 => 'db-api.rpc.get-survey-by-token',
         ],
     ],
     'zf-rest' => [
@@ -2674,6 +2674,7 @@ return [
                     ],
                 ],
                 'validators' => [],
+                'allow_empty' => true,
             ],
             1 => [
                 'name' => 'comment',
@@ -2687,6 +2688,7 @@ return [
                     ],
                 ],
                 'validators' => [],
+                'allow_empty' => true,
             ],
         ],
         'DbAPI\\V1\\Rest\\Importance\\Validator' => [],
