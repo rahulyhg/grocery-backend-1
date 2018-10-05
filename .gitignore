@@ -6,3 +6,4 @@ data/cache/*
 data/DoctrineORMModule
 !data/cache/.gitkeep
 phpunit.xml
+logs/
