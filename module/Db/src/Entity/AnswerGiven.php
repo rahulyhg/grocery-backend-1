@@ -116,33 +116,33 @@ class AnswerGiven {
     }
     
     /**
-     * @return int
+     * @return int|null
      */
-    public function getValue(): int
+    public function getValue(): ?int
     {
         return $this->value;
     }
     
     /**
-     * @param int $value
+     * @param int|null $value
      */
-    public function setValue(int $value): void
+    public function setValue(?int $value): void
     {
         $this->value = $value;
     }
     
     /**
-     * @return string
+     * @return string|null
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
     
     /**
-     * @param string $comment
+     * @param string|null $comment
      */
-    public function setComment(string $comment): void
+    public function setComment(?string $comment): void
     {
         $this->comment = $comment;
     }
