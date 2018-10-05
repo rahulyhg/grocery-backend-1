@@ -2695,14 +2695,14 @@ return [
         'authorization' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => true,
                     'PATCH' => true,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2711,14 +2711,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Answer\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2759,14 +2759,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Element\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2775,14 +2775,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Token\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2791,14 +2791,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Survey\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2903,14 +2903,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\SubTheme\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2919,14 +2919,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Theme\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2935,14 +2935,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Formulation\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
@@ -2951,32 +2951,32 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Response\\Controller' => [
                 'collection' => [
-                    'GET' => true,
-                    'POST' => true,
+                    'GET' => false,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
-                    'PUT' => true,
+                    'PUT' => false,
                     'PATCH' => true,
                     'DELETE' => true,
                 ],
             ],
             'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => [
                 'collection' => [
-                    'GET' => true,
-                    'POST' => true,
+                    'GET' => false,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
-                    'PUT' => true,
+                    'PUT' => false,
                     'PATCH' => true,
                     'DELETE' => true,
                 ],
