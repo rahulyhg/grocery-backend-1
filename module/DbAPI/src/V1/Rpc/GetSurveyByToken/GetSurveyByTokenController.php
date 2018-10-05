@@ -21,7 +21,7 @@ class GetSurveyByTokenController extends AbstractActionController
     
     private $doctrineOAuth2Adapter;
     
-    private $tokenuserConfig;
+    private $config;
     
     /**
      * Constructor
@@ -30,15 +30,15 @@ class GetSurveyByTokenController extends AbstractActionController
     public function __construct(
         EntityManager $entityManager,
         DoctrineAdapter $doctrineOAuth2Adapter,
-        ?string $tokenuserConfig
+        ?array $config
     ) {
         $this->entityManager = $entityManager;
         $this->doctrineOAuth2Adapter = $doctrineOAuth2Adapter;
         
-        if (! $tokenuserConfig) {
+        if ($config === null || ($config !== null && $config['token-user'] === null)) {
             throw new Exception('no token-user configured');
         }
-        $this->tokenuserConfig = $tokenuserConfig;
+        $this->config = $config;
     }
     
     public function getSurveyByTokenAction()
@@ -66,14 +66,14 @@ class GetSurveyByTokenController extends AbstractActionController
             } else {
                 $return['ok'] = true;
                 $client_id = "testclient";
-                $token_username = $this->tokenuserConfig;
+                $token_username = $this->config['token-user'];
                 $expires_in = 3600;
                 $scope = "DbAPI";
         
                 $expires = time() + $expires_in;
                 $token_user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $token_username, 'state' => 1]);
                 if ($token_user === null) {
-                    throw new Exception('configured token-user with username "' . $this->tokenuserConfig . '" not found');
+                    throw new Exception('configured token-user with username "' . $token_username . '" not found');
                 }
                 
                 $user_id = $token_user->getId();

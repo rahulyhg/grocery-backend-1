@@ -9,13 +9,12 @@ class GetSurveyByTokenControllerFactory
     {
         $config = $container->get('config');
         
-        $applicationConfig = $config['token-user'] ?: null;
-    
+        $serviceConfig = $config['get-survey-by-token'] ?: null;
     
         return new GetSurveyByTokenController(
             $container->get(EntityManager::class),
             $container->get('oauth2.doctrineadapter.default'),
-            $applicationConfig
+            $serviceConfig
         );
     }
 }
