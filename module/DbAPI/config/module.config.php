@@ -224,6 +224,13 @@ return [
                     'route' => '/importance[/:importance_id]',
                     'defaults' => [
                         'controller' => 'DbAPI\\V1\\Rest\\Importance\\Controller',
+            'db-api.rpc.get-survey-by-token' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/get-survey-by-token/:token',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller',
+                        'action' => 'getSurveyByToken',
                     ],
                 ],
             ],
@@ -257,6 +264,7 @@ return [
             26 => 'db-api.rest.doctrine.response',
             27 => 'db-api.rest.doctrine.answer-given',
             28 => 'db-api.rest.doctrine.importance',
+            26 => 'db-api.rpc.get-survey-by-token',
         ],
     ],
     'zf-rest' => [
@@ -861,6 +869,7 @@ return [
             'DbAPI\\V1\\Rest\\Response\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Importance\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => 'Json',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -987,6 +996,10 @@ return [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
+            'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+                2 => 'application/*+json',
             ],
         ],
         'content_type_whitelist' => [
@@ -1087,6 +1100,10 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rest\\Importance\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -2992,7 +3009,22 @@ return [
         ],
     ],
     'controllers' => [
-        'factories' => [],
+        'factories' => [
+            'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => \DbAPI\V1\Rpc\GetSurveyByToken\GetSurveyByTokenControllerFactory::class,
+        ],
     ],
-    'zf-rpc' => [],
+    'zf-rpc' => [
+        'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => [
+            'service_name' => 'getSurveyByToken',
+            'http_methods' => [
+                0 => 'GET',
+            ],
+            'route_name' => 'db-api.rpc.get-survey-by-token',
+        ],
+    ],
+    'view_manager' => [
+        'template_map' => [
+            'test_view' => __DIR__ . '/../view/test.phtml',
+        ],
+    ],
 ];
