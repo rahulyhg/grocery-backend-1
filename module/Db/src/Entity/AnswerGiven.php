@@ -118,7 +118,7 @@ class AnswerGiven {
     /**
      * @return int
      */
-    public function getValue(): int
+    public function getValue(): ?int
     {
         return $this->value;
     }
@@ -126,7 +126,7 @@ class AnswerGiven {
     /**
      * @param int $value
      */
-    public function setValue(int $value): void
+    public function setValue(?int $value): void
     {
         $this->value = $value;
     }
@@ -134,7 +134,7 @@ class AnswerGiven {
     /**
      * @return string
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
@@ -142,7 +142,7 @@ class AnswerGiven {
     /**
      * @param string $comment
      */
-    public function setComment(string $comment): void
+    public function setComment(?string $comment): void
     {
         $this->comment = $comment;
     }
