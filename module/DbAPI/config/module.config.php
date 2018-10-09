@@ -2511,6 +2511,23 @@ return [
                 'name' => 'description',
                 'field_type' => 'string',
             ],
+            3 => [
+                'required' => false,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'defaultValue',
+                'description' => 'The default value for this setting. Can be null',
+                'field_type' => 'string',
+            ],
         ],
         'DbAPI\\V1\\Rest\\SurveySettingValue\\Validator' => [
             0 => [
