@@ -36,7 +36,7 @@ class SurveySetting
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(type="string", nullable=true)
      */
     private $defaultValue;
@@ -95,17 +95,17 @@ class SurveySetting
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDefaultValue(): string
+    public function getDefaultValue(): ?string
     {
         return $this->defaultValue;
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      */
-    public function setDefaultValue(string $value): void
+    public function setDefaultValue(?string $value): void
     {
         $this->defaultValue = $value;
     }
