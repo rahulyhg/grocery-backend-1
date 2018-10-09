@@ -34,6 +34,12 @@ class SurveySetting
      * @ORM\JoinColumn(name="survey_settings_type_id", referencedColumnName="id", nullable=false)
      */
     private $type;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $defaultValue;
     
     /**
      * @var string
@@ -86,6 +92,22 @@ class SurveySetting
     public function getType(): SurveySettingType
     {
         return $this->type;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefaultValue(): ?string
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @param string|null $value
+     */
+    public function setDefaultValue(?string $value): void
+    {
+        $this->defaultValue = $value;
     }
     
     /**
