@@ -82,7 +82,7 @@ class SurveySettingValue {
      * @param SurveySetting $setting
      * @return void
      */
-    public function setTheme(SurveySetting $setting): void
+    public function setSetting(SurveySetting $setting): void
     {
         $this->setting = $setting;
     }
@@ -104,6 +104,14 @@ class SurveySettingValue {
                 return $this->value;
             }
         }
+    }
+
+    /**
+     * @param String $value
+     */
+    public function setValue($value)
+    {
+      $this->value = $value;
     }
     
     /**
