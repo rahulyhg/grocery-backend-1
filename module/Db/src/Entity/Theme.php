@@ -38,7 +38,12 @@ class Theme {
      */
     protected $colorCode;
 
-    // PICT ID
+    /**
+     * One Theme has One File
+     * @ORM\OneToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="file_id", referencedColumnName="id")
+     */
+    protected $file;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|SubTheme[]
@@ -117,6 +122,20 @@ class Theme {
     public function setColorCode(?string $colorCode): void
     {
         $this->colorCode = $colorCode;
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setFile(?File $file): ?File {
+      $this->file = $file;
+    }
+
+    /**
+     * @return File
+     */
+    public function getFile() {
+      return $this->file;
     }
     
     /**
