@@ -127,14 +127,14 @@ class Theme {
     /**
      * @param File $file
      */
-    public function setFile(?File $file): ?File {
+    public function setFile(?File $file) {
       $this->file = $file;
     }
 
     /**
      * @return File
      */
-    public function getFile() {
+    public function getFile(): ?File {
       return $this->file;
     }
     
