@@ -2542,6 +2542,7 @@ return [
                     ],
                 ],
                 'validators' => [],
+                'allow_empty' => true,
             ],
         ],
         'DbAPI\\V1\\Rest\\SurveySettingType\\Validator' => [],

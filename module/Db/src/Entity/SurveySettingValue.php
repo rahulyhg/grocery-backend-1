@@ -107,7 +107,7 @@ class SurveySettingValue {
     }
 
     /**
-     * @param String $value
+     * @param mixed $value
      */
     public function setValue($value)
     {
