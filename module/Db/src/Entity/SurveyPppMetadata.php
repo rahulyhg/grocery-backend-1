@@ -27,49 +27,49 @@ class SurveyPppMetadata {
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps1_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps1_locked = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps2_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps2_locked = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade1_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade1_locked = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade2_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade2_locked = 0;
 
