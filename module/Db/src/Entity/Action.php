@@ -53,19 +53,19 @@ class Action {
 
     /**
      * @var string
-     * @ORM\Column(name="cause", type="string", length=128, nullable=false)
+     * @ORM\Column(name="cause", type="string", length=512, nullable=false)
      */
     protected $cause;
 
     /**
      * @var string
-     * @ORM\Column(name="description_action", type="string", length=128, nullable=false)
+     * @ORM\Column(name="description_action", type="string", length=512, nullable=false)
      */
     protected $description_action;
 
     /**
      * @var string
-     * @ORM\Column(name="description_solution", type="string", length=128, nullable=false)
+     * @ORM\Column(name="description_solution", type="string", length=512, nullable=false)
      */
     protected $description_solution;
 
