@@ -14,7 +14,7 @@ class SurveyPppMetadata {
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", length=11, options={"unsigned":true})
-     * @ORM\GeneratedValue(stategy="AUTO")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
