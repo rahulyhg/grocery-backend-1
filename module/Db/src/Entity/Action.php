@@ -65,7 +65,7 @@ class Action {
 
     /**
      * @var string
-     * @ORM\Column(name="description_solution", type="string", length=512, nullable=false)
+     * @ORM\Column(name="description_solution", type="string", length=512, nullable=true)
      */
     protected $description_solution;
 
