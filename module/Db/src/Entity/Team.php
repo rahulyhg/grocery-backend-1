@@ -26,7 +26,7 @@ class Team {
     protected $name;
 
     /**
-     * Many Teams have One Customer
+     * Many Teams have One TeamGroup
      * @ORM\ManyToOne(targetEntity="TeamGroup", inversedBy="teams")
      * @ORM\JoinColumn(name="teamgroup_id", referencedColumnName="id", nullable=false)
      */
