@@ -27,51 +27,51 @@ class SurveyPppMetadata {
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $nps1_visible;
+    protected $nps1_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $nps1_locked;
+    protected $nps1_locked = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $nps2_visible;
+    protected $nps2_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $nps2_locked;
+    protected $nps2_locked = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $grade1_visible;
+    protected $grade1_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $grade1_locked;
+    protected $grade1_locked = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $grade2_visible;
+    protected $grade2_visible = 0;
 
     /**
      * @var bool
-     * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0})
      */
-    protected $grade2_locked;
+    protected $grade2_locked = 0;
 
 
     /**
