@@ -115,5 +115,39 @@ class SurveyThemeAssociation {
     {
         $this->sortOrder = $sortOrder;
     }
+
+    /**
+     * @return int
+     */
+    public function getLocked(): int
+    {
+        return $this->locked;
+    }
+
+    /**
+     * @param int $locked
+     */
+    public function setLocked(int $locked): void
+    {
+        $this->locked = $locked;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVisible(): int
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param int $visible
+     */
+    public function setVisible(int $visible): void
+    {
+        $this->visible = $visible;
+    }
+
+
     
 }
