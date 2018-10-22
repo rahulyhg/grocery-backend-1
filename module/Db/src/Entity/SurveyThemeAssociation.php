@@ -37,6 +37,18 @@ class SurveyThemeAssociation {
      * @ORM\Column(name="sortorder", type="integer", nullable=false)
      */
     private $sortOrder = 0;
+
+    /**
+     * @var int
+     * @ORM\Column(name="locked", type="integer", length="11", nullable=false)
+     */
+    private $locked = 0;
+
+    /**
+     * @var int
+     * @ORM\Column(name="visible", type="integer", length="11", nullable=false)
+     */
+    private $visible = 1;
     
     /**
      * @return int
