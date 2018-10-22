@@ -39,6 +39,12 @@ class Formulation
      * @ORM\JoinTable(name="targetaudiences_formulations")
      */
     private $targetaudiences;
+
+    /**
+     * @var string
+     * @ORM\Column(name="extraText", type="string", length=2048, nullable=true)
+     */
+    private $extraText;
     
     public function __construct() {
         $this->targetaudiences = new ArrayCollection();
@@ -125,6 +131,14 @@ class Formulation
             return;
         }
         $this->targetaudiences->removeElement($targetaudience);
+    }
+
+    function getExtraText(): string {
+        return $this->extraText;
+    }
+
+    function setExtraText(string $extraText) {
+        $this->extraText = $extraText;
     }
 
 }
