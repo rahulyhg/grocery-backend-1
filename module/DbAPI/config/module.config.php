@@ -237,6 +237,51 @@ return [
                     ],
                 ],
             ],
+            'db-api.rest.doctrine.survey-ppp-classification-question-answer' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/survey-ppp-classification-question-answer[/:survey_ppp_classification_question_answer_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.action' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/action[/:action_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\Action\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.action-status' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/action-status[/:action_status_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\ActionStatus\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.survey-ppp-classification-question' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/survey-ppp-classification-question[/:survey_ppp_classification_question_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Controller',
+                    ],
+                ],
+            ],
+            'db-api.rest.doctrine.survey-ppp-metadata' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/survey-ppp-metadata[/:survey_ppp_metadata_id]',
+                    'defaults' => [
+                        'controller' => 'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Controller',
+                    ],
+                ],
+            ],
         ],
     ],
     'zf-versioning' => [
@@ -268,6 +313,12 @@ return [
             27 => 'db-api.rest.doctrine.answer-given',
             28 => 'db-api.rest.doctrine.importance',
             29 => 'db-api.rpc.get-survey-by-token',
+            30 => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
+            31 => 'db-api.rest.doctrine.action',
+            32 => 'db-api.rest.doctrine.action-status',
+            33 => 'db-api.rest.doctrine.survey-ppp-classification-question',
+            34 => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
+            35 => 'db-api.rest.doctrine.survey-ppp-metadata',
         ],
     ],
     'zf-rest' => [
@@ -844,6 +895,121 @@ return [
             'collection_class' => \DbAPI\V1\Rest\Importance\ImportanceCollection::class,
             'service_name' => 'Importance',
         ],
+        'DbAPI\\V1\\Rest\\Action\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\Action\ActionResource::class,
+            'route_name' => 'db-api.rest.doctrine.action',
+            'route_identifier_name' => 'action_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'action',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\Action::class,
+            'collection_class' => \DbAPI\V1\Rest\Action\ActionCollection::class,
+            'service_name' => 'Action',
+        ],
+        'DbAPI\\V1\\Rest\\ActionStatus\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\ActionStatus\ActionStatusResource::class,
+            'route_name' => 'db-api.rest.doctrine.action-status',
+            'route_identifier_name' => 'action_status_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'action_status',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\ActionStatus::class,
+            'collection_class' => \DbAPI\V1\Rest\ActionStatus\ActionStatusCollection::class,
+            'service_name' => 'ActionStatus',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SurveyPppClassificationQuestion\SurveyPppClassificationQuestionResource::class,
+            'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question',
+            'route_identifier_name' => 'survey_ppp_classification_question_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'survey_ppp_classification_question',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SurveyPppClassificationQuestion::class,
+            'collection_class' => \DbAPI\V1\Rest\SurveyPppClassificationQuestion\SurveyPppClassificationQuestionCollection::class,
+            'service_name' => 'SurveyPppClassificationQuestion',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SurveyPppClassificationQuestionAnswer\SurveyPppClassificationQuestionAnswerResource::class,
+            'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
+            'route_identifier_name' => 'survey_ppp_classification_question_answer_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'survey_ppp_classification_question_answer',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SurveyPppClassificationQuestionAnswer::class,
+            'collection_class' => \DbAPI\V1\Rest\SurveyPppClassificationQuestionAnswer\SurveyPppClassificationQuestionAnswerCollection::class,
+            'service_name' => 'SurveyPppClassificationQuestionAnswer',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Controller' => [
+            'listener' => \DbAPI\V1\Rest\SurveyPppMetadata\SurveyPppMetadataResource::class,
+            'route_name' => 'db-api.rest.doctrine.survey-ppp-metadata',
+            'route_identifier_name' => 'survey_ppp_metadata_id',
+            'entity_identifier_name' => 'id',
+            'collection_name' => 'survey_ppp_metadata',
+            'entity_http_methods' => [
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ],
+            'collection_http_methods' => [
+                0 => 'GET',
+                1 => 'POST',
+            ],
+            'collection_query_whitelist' => [],
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => \Db\Entity\SurveyPppMetadata::class,
+            'collection_class' => \DbAPI\V1\Rest\SurveyPppMetadata\SurveyPppMetadataCollection::class,
+            'service_name' => 'SurveyPppMetadata',
+        ],
     ],
     'zf-content-negotiation' => [
         'controllers' => [
@@ -873,6 +1039,11 @@ return [
             'DbAPI\\V1\\Rest\\AnswerGiven\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rest\\Importance\\Controller' => 'HalJson',
             'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => 'Json',
+            'DbAPI\\V1\\Rest\\Action\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\ActionStatus\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Controller' => 'HalJson',
+            'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Controller' => 'HalJson',
         ],
         'accept_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1005,6 +1176,31 @@ return [
                 1 => 'application/json',
                 2 => 'application/*+json',
             ],
+            'DbAPI\\V1\\Rest\\Action\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\ActionStatus\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            ],
         ],
         'content_type_whitelist' => [
             'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1108,6 +1304,26 @@ return [
                 1 => 'application/json',
             ],
             'DbAPI\\V1\\Rpc\\GetSurveyByToken\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\Action\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\ActionStatus\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Controller' => [
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            ],
+            'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Controller' => [
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             ],
@@ -1397,6 +1613,61 @@ return [
                 'route_name' => 'db-api.rest.doctrine.importance',
                 'is_collection' => true,
             ],
+            \Db\Entity\Action::class => [
+                'route_identifier_name' => 'action_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.action',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Action\\ActionHydrator',
+            ],
+            \DbAPI\V1\Rest\Action\ActionCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.action',
+                'is_collection' => true,
+            ],
+            \Db\Entity\ActionStatus::class => [
+                'route_identifier_name' => 'action_status_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.action-status',
+                'hydrator' => 'DbAPI\\V1\\Rest\\ActionStatus\\ActionStatusHydrator',
+            ],
+            \DbAPI\V1\Rest\ActionStatus\ActionStatusCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.action-status',
+                'is_collection' => true,
+            ],
+            \Db\Entity\SurveyPppClassificationQuestion::class => [
+                'route_identifier_name' => 'survey_ppp_classification_question_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\SurveyPppClassificationQuestionHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyPppClassificationQuestion\SurveyPppClassificationQuestionCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question',
+                'is_collection' => true,
+            ],
+            \Db\Entity\SurveyPppClassificationQuestionAnswer::class => [
+                'route_identifier_name' => 'survey_ppp_classification_question_answer_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\SurveyPppClassificationQuestionAnswerHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyPppClassificationQuestionAnswer\SurveyPppClassificationQuestionAnswerCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
+                'is_collection' => true,
+            ],
+            \Db\Entity\SurveyPppMetadata::class => [
+                'route_identifier_name' => 'survey_ppp_metadata_id',
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-ppp-metadata',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppMetadata\\SurveyPppMetadataHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyPppMetadata\SurveyPppMetadataCollection::class => [
+                'entity_identifier_name' => 'id',
+                'route_name' => 'db-api.rest.doctrine.survey-ppp-metadata',
+                'is_collection' => true,
+            ],
         ],
     ],
     'zf-apigility' => [
@@ -1500,6 +1771,26 @@ return [
             \DbAPI\V1\Rest\Importance\ImportanceResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Importance\\ImportanceHydrator',
+            ],
+            \DbAPI\V1\Rest\Action\ActionResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\Action\\ActionHydrator',
+            ],
+            \DbAPI\V1\Rest\ActionStatus\ActionStatusResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\ActionStatus\\ActionStatusHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyPppClassificationQuestion\SurveyPppClassificationQuestionResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\SurveyPppClassificationQuestionHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyPppClassificationQuestionAnswer\SurveyPppClassificationQuestionAnswerResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\SurveyPppClassificationQuestionAnswerHydrator',
+            ],
+            \DbAPI\V1\Rest\SurveyPppMetadata\SurveyPppMetadataResource::class => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppMetadata\\SurveyPppMetadataHydrator',
             ],
         ],
     ],
@@ -1703,6 +1994,41 @@ return [
             'strategies' => [],
             'use_generated_hydrator' => true,
         ],
+        'DbAPI\\V1\\Rest\\Action\\ActionHydrator' => [
+            'entity_class' => \Db\Entity\Action::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\ActionStatus\\ActionStatusHydrator' => [
+            'entity_class' => \Db\Entity\ActionStatus::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\SurveyPppClassificationQuestionHydrator' => [
+            'entity_class' => \Db\Entity\SurveyPppClassificationQuestion::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\SurveyPppClassificationQuestionAnswerHydrator' => [
+            'entity_class' => \Db\Entity\SurveyPppClassificationQuestionAnswer::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppMetadata\\SurveyPppMetadataHydrator' => [
+            'entity_class' => \Db\Entity\SurveyPppMetadata::class,
+            'object_manager' => 'doctrine.entitymanager.orm_default',
+            'by_value' => true,
+            'strategies' => [],
+            'use_generated_hydrator' => true,
+        ],
     ],
     'zf-content-validation' => [
         'DbAPI\\V1\\Rest\\Question\\Controller' => [
@@ -1779,6 +2105,21 @@ return [
         ],
         'DbAPI\\V1\\Rest\\Importance\\Controller' => [
             'input_filter' => 'DbAPI\\V1\\Rest\\Importance\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\Action\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\Action\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\ActionStatus\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\ActionStatus\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Validator',
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Controller' => [
+            'input_filter' => 'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Validator',
         ],
     ],
     'input_filter_specs' => [
@@ -2710,6 +3051,326 @@ return [
             ],
         ],
         'DbAPI\\V1\\Rest\\Importance\\Validator' => [],
+        'DbAPI\\V1\\Rest\\Action\\Validator' => [
+            0 => [
+                'name' => 'theme',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+            1 => [
+                'name' => 'cause',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 512,
+                        ],
+                    ],
+                ],
+            ],
+            2 => [
+                'name' => 'description_action',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 512,
+                        ],
+                    ],
+                ],
+            ],
+            3 => [
+                'name' => 'description_solution',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 512,
+                        ],
+                    ],
+                ],
+            ],
+            4 => [
+                'name' => 'owner',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 128,
+                        ],
+                    ],
+                ],
+            ],
+            5 => [
+                'name' => 'creation_date',
+                'required' => true,
+                'filters' => [],
+                'validators' => [],
+            ],
+            6 => [
+                'name' => 'closing_date',
+                'required' => false,
+                'filters' => [],
+                'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\ActionStatus\\Validator' => [
+            0 => [
+                'name' => 'description',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 255,
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestion\\Validator' => [
+            0 => [
+                'name' => 'text',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 512,
+                        ],
+                    ],
+                ],
+            ],
+            1 => [
+                'name' => 'order',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\Validator' => [
+            0 => [
+                'name' => 'text',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                ],
+                'validators' => [
+                    0 => [
+                        'name' => \Zend\Validator\StringLength::class,
+                        'options' => [
+                            'min' => 1,
+                            'max' => 512,
+                        ],
+                    ],
+                ],
+            ],
+            1 => [
+                'name' => 'order',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+        ],
+        'DbAPI\\V1\\Rest\\SurveyPppMetadata\\Validator' => [
+            0 => [
+                'name' => 'nps1_visible',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            1 => [
+                'name' => 'nps1_locked',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            2 => [
+                'name' => 'nps2_visible',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            3 => [
+                'name' => 'nps2_locked',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            4 => [
+                'name' => 'grade1_visible',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            5 => [
+                'name' => 'grade1_locked',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            6 => [
+                'name' => 'grade2_visible',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+            7 => [
+                'name' => 'grade2_locked',
+                'required' => true,
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\Digits::class,
+                    ],
+                ],
+                'validators' => [],
+            ],
+        ],
     ],
     'zf-mvc-auth' => [
         'authorization' => [
@@ -2859,14 +3520,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\SurveyThemeAssociation\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
