@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="surveys_ppp_classification_questions")
+ * @ORM\Table(name="surveys_ppp_classification_question_answers")
  */
 class SurveyPppClassificationQuestionAnswer
 {
