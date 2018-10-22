@@ -155,11 +155,11 @@ class Action {
         $this->description_action = $description_action;
     }
 
-    function getDescriptionSolution(): string {
+    function getDescriptionSolution(): ?string {
         return $this->description_solution;
     }
     
-    function setDescriptionSolution(string $description_solution): void {
+    function setDescriptionSolution(?string $description_solution): void {
         $this->description_solution = $description_solution;
     }
 
