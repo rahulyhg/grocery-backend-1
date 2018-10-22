@@ -21,22 +21,6 @@ class Response {
     protected $id;
     
     /**
-     * @deprecated Customer and TeamGroup should be removed (are defined by Team)
-     * @var Customer
-     * @ORM\ManyToOne(targetEntity="Customer")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)
-     */
-    protected $customer;
-    
-    /**
-     * @deprecated Customer and TeamGroup should be removed (are defined by Team)
-     * @var TeamGroup
-     * @ORM\ManyToOne(targetEntity="TeamGroup")
-     * @ORM\JoinColumn(name="teamgroup_id", referencedColumnName="id", nullable=false)
-     */
-    protected $teamgroup;
-    
-    /**
      * @var Team
      * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
@@ -82,29 +66,7 @@ class Response {
     function setId(int $id): void {
         $this->id = $id;
     }
-    
-    /**
-     * @return Customer
-     */
-    public function getCustomer(): Customer {
-        return $this->customer;
-    }
-    
-    /**
-     * @param Customer $customer
-     */
-    public function setCustomer(Customer $customer): void {
-        $this->customer = $customer;
-    }
-    
-    public function getTeamgroup(): TeamGroup {
-        return $this->teamgroup;
-    }
-    
-    public function setTeamgroup(TeamGroup $teamgroup): void {
-        $this->teamgroup = $teamgroup;
-    }
-    
+
     /**
      * @return Team
      */

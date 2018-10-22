@@ -7,3 +7,5 @@ data/DoctrineORMModule
 !data/cache/.gitkeep
 phpunit.xml
 logs/
+
+backend_pass_acc.txt
