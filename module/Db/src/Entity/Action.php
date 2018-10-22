@@ -22,25 +22,28 @@ class Action {
     protected $id;
 
     /**
+     * @var ActionStatus
      * Many Actions have One ActionStatus
      * @ORM\ManyToOne(targetEntity="Db\Entity\ActionStatus", inversedBy="action_status")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
-    protected $status_id;
+    protected $status;
 
     /**
+     * @var Team
      * Many Actions have One Team
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="actions")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
      */
-    protected $team_id;
+    protected $team;
 
     /**
+     * @var Survey
      * Many Actions have One Survey
      * @ORM\ManyToOne(targetEntity="Survey", inversedBy="actions")
      * @ORM\JoinColumn(name="survey_id", referencedColumnName="id", nullable=false)
      */
-    protected $survey_id;
+    protected $survey;
 
     /**
      * @var string
@@ -85,7 +88,7 @@ class Action {
     protected $closing_date;
 
 
-    
+
     /**
      * @return int
      */
@@ -102,35 +105,37 @@ class Action {
 
     // Sorry, no /****/ things here. Dode lijn.
 
-    function getStatusId(): int {
-        return $this->status_id;
+    function getStatus(): int {
+        return $this->status;
     }
 
-    function setStatusId($status_id): void {
-        $this->status_id = $status_id;
+    function setStatus($status_id): void {
+        $this->status = $status_id;
     }
 
-    function getTeamId(): int {
-        return $this->team_id;
+    function getTeam(): Team {
+        return $this->team;
     }
 
-    function setTeamId($team_id): void {
-        $this->team_id = $team_id;
+    function setTeam(Team $team): void {
+        $this->team= $team;
     }
 
-    function getSurveyId(): int {
-        return $this->survey_id;
+    function getSurvey(): Survey {
+        return $this->survey;
     }
 
-    function setSurveyId($survey_id): void {
-        $this->survey_id = $survey_id;
+    function setSurvey(Survey $survey): void {
+        $this->survey = $survey;
     }
 
+    // "string" is not a typo. This "theme" is plain-text, by request
     function getTheme(): string {
         return $this->theme;
     }
-    
-    function setTheme($theme): void {
+
+    // "string" is not a typo. This "theme" is plain-text, by request
+    function setTheme(string $theme): void {
         $this->theme = $theme;
     }
 
@@ -146,7 +151,7 @@ class Action {
         return $this->description_action;
     }
 
-    function setDescriptionAction($description_action): void {
+    function setDescriptionAction(string $description_action): void {
         $this->description_action = $description_action;
     }
 
@@ -154,7 +159,7 @@ class Action {
         return $this->description_solution;
     }
     
-    function setDescriptionSolution($description_solution): void {
+    function setDescriptionSolution(string $description_solution): void {
         $this->description_solution = $description_solution;
     }
 
@@ -162,7 +167,7 @@ class Action {
         return $this->owner;
     }
 
-    function setOwner($owner): void {
+    function setOwner(string $owner): void {
         $this->owner = $owner;
     }
 
@@ -170,7 +175,7 @@ class Action {
         return $this->creation_date;
     }
 
-    function setCreationDate($creation_date): void {
+    function setCreationDate(\DateTime $creation_date): void {
         $this->creation_date = $creation_date;
     }
 
@@ -178,7 +183,7 @@ class Action {
         return $this->closing_date;
     }
 
-    function setClosingDate($closing_date): void {
+    function setClosingDate(\DateTime $closing_date): void {
         $this->closing_date = $closing_date;
     }
 

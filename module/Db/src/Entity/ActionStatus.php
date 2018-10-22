@@ -21,6 +21,10 @@ class ActionStatus {
      */
     protected $id;
 
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     */
     protected $description;
 
 

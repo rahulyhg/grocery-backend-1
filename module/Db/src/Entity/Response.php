@@ -40,6 +40,18 @@ class Response {
      * @ORM\JoinColumn(name="targetaudience_id", referencedColumnName="id", nullable=false)
      */
     protected $targetaudience;
+
+    /**
+     * @var string
+     * @ORM\Column(name="improve_text", type="string", length=128, nullable=true)
+     */
+    protected $improve_text;
+
+    /**
+     * @var string
+     * @ORM\Column(name="explanation_text", type="string", length=128, nullable=true)
+     */
+    protected $explanation_text;
     
     /**
      * @var \DateTime
@@ -52,6 +64,13 @@ class Response {
      * @ORM\Column(type="boolean", nullable=false, options={"default" = 0})
      */
     protected $complete;
+
+    /**
+     * Many Responses have One Action
+     * @ORM\ManyToOne(targetEntity="Action", inversedBy="actions")
+     * @ORM\JoinColumn(name="action_id", referencedColumnName="id")
+     */
+    protected $action;
     
     /**
      * @return int
@@ -95,6 +114,36 @@ class Response {
     public function setSurvey(Survey $survey): void
     {
         $this->survey = $survey;
+    }
+
+    public function getImproveText(): string {
+        return $this->improve_text;
+    }
+
+    public function setImproveText($improve_text): void {
+        $this->improve_text = $improve_text;
+    }
+
+    public function getExplanationText(): string {
+        return $this->explanation_text;
+    }
+
+    public function setExplanationText($explanation_text): void {
+        $this->explanation_text = $explanation_text;
+    }
+
+    /**
+     * @return Action
+     */
+    public function getAction(): Action {
+        return $this->action;
+    }
+
+    /**
+     * @param Action $action
+     */
+    public function setAction(Action $action): void {
+        $this->action = $action;
     }
     
     /**
