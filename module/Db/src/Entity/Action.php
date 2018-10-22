@@ -24,7 +24,7 @@ class Action {
     /**
      * @var ActionStatus
      * Many Actions have One ActionStatus
-     * @ORM\ManyToOne(targetEntity="Db\Entity\ActionStatus", inversedBy="action_status")
+     * @ORM\ManyToOne(targetEntity="Db\Entity\ActionStatus", inversedBy="actions")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
     protected $status;

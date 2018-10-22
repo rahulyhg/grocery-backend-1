@@ -52,6 +52,14 @@ class AnswerGiven {
      * @ORM\Column(type="string", nullable=true)
      */
     protected $comment;
+
+    /**
+     * @var Action
+     * Many AnswerGiven have One Action
+     * @ORM\ManyToOne(targetEntity="Db\Entity\Action", inversedBy="answers_given")
+     * @ORM\JoinColumn(name="action_id", referencedColumnName="id", nullable=true)
+     */
+    protected $action;
     
     /**
      * @return int
