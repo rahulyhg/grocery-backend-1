@@ -179,11 +179,11 @@ class Action {
         $this->creation_date = $creation_date;
     }
 
-    function getClosingDate(): \DateTime {
+    function getClosingDate(): ?\DateTime {
         return $this->closing_date;
     }
 
-    function setClosingDate(\DateTime $closing_date): void {
+    function setClosingDate(?\DateTime $closing_date): void {
         $this->closing_date = $closing_date;
     }
 
