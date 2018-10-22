@@ -105,11 +105,11 @@ class Action {
 
     // Sorry, no /****/ things here. Dode lijn.
 
-    function getStatus(): int {
+    function getStatus(): ActionStatus {
         return $this->status;
     }
 
-    function setStatus($status_id): void {
+    function setStatus(ActionStatus $status_id): void {
         $this->status = $status_id;
     }
 
