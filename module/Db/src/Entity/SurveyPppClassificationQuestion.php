@@ -156,14 +156,14 @@ class SurveyPppClassificationQuestion
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection|SurveyPppClassificationQuestionAnswer[]
      */
-    public function setSurveyPppClassificationQuestionAnswers($answers): void
+    public function setAnswer($answers): void
     {
         $this->answers = $answers;
     }
     /**
      * @param SurveyPppClassificationQuestionAnswer $answer
      */
-    public function addSurveyPppClassificationQuestionAnswer(SurveyPppClassificationQuestionAnswer $answer) {
+    public function addAnswer(SurveyPppClassificationQuestionAnswer $answer) {
         if ($this->answers->contains($answer)) {
             return;
         }
@@ -173,7 +173,7 @@ class SurveyPppClassificationQuestion
     /**
      * @param SurveyPppClassificationQuestionAnswer $answer
      */
-    public function removeSurveyPppClassificationQuestionAnswer(SurveyPppClassificationQuestionAnswer$answer) {
+    public function removeAnswer(SurveyPppClassificationQuestionAnswer$answer) {
         if (! $this->answers->contains($answer)) {
             return;
         }
@@ -183,7 +183,7 @@ class SurveyPppClassificationQuestion
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|SurveyPppClassificationQuestionAnswer[]
      */
-    public function getSurveyPppClassificationQuestionAnswers()
+    public function getAnswers()
     {
         return $this->answer;
     }
