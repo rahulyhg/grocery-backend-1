@@ -79,6 +79,38 @@ class SurveyPppClassificationQuestion
     }
 
     /**
+     * @return string
+     */
+    public function getText(): string
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText(string $text): void
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return Survey
+     */
+    public function getSurvey(): Survey
+    {
+        return $this->survey;
+    }
+
+    /**
+     * @param Survey $survey
+     */
+    public function setSurvey(Survey $survey): void
+    {
+        $this->survey = $survey;
+    }
+
+    /**
      * @param \Doctrine\Common\Collections\ArrayCollection|TargetAudience[]
      */
     public function setTargetaudiences($targetaudiences): void
