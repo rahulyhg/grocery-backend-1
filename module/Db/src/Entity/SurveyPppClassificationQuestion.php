@@ -44,7 +44,7 @@ class SurveyPppClassificationQuestion
 
     /**
      * Many SurveyPppClassificationQuestions have Many Questions
-     * @ORM\OneToMany(targetEntity="SurveyPppClassificationQuestionAnswer", mappedBy="SurveyPppClassificationQuestion")
+     * @ORM\OneToMany(targetEntity="SurveyPppClassificationQuestionAnswer", inversedBy="SurveyPppClassificationQuestionAnswer")
      */
     private $answers;
 
@@ -58,6 +58,7 @@ class SurveyPppClassificationQuestion
 
     public function __construct() {
         $this->targetaudiences = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     /**
