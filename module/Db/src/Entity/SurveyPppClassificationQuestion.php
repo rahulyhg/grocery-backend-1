@@ -43,7 +43,7 @@ class SurveyPppClassificationQuestion
     private $targetaudiences;
 
     /**
-     * Many SurveyPppClassificationQuestions have Many Questions
+     * One SurveyPppClassificationQuestion have Many Answers
      * @ORM\OneToMany(targetEntity="SurveyPppClassificationQuestionAnswer", mappedBy="question")
      */
     private $answers;
@@ -156,7 +156,7 @@ class SurveyPppClassificationQuestion
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection|SurveyPppClassificationQuestionAnswer[]
      */
-    public function setAnswer($answers): void
+    public function setAnswers($answers): void
     {
         $this->answers = $answers;
     }
