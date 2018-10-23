@@ -1913,7 +1913,9 @@ return [
             'entity_class' => \Db\Entity\TargetAudience::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'classification_questions' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+            ]
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator' => [
