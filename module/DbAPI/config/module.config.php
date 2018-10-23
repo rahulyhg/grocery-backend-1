@@ -2015,6 +2015,7 @@ return [
             'by_value' => true,
             'strategies' => [
                 'answers' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+                'targetaudiences' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class
             ],
             'use_generated_hydrator' => true,
         ],
