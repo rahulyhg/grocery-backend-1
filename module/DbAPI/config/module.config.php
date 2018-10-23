@@ -1917,6 +1917,7 @@ return [
                 'classification_questions' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
             ],
             'use_generated_hydrator' => true,
+            'max_depth' => 2
         ],
         'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator' => [
             'entity_class' => \Db\Entity\Formulation::class,
