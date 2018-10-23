@@ -39,8 +39,8 @@ class Theme {
     protected $colorCode;
 
     /**
-     * One Theme has One File
-     * @ORM\OneToOne(targetEntity="File")
+     * Many Themes have One File
+     * @ORM\ManyToOne(targetEntity="File", inversedBy="themes")
      * @ORM\JoinColumn(name="file_id", referencedColumnName="id")
      */
     protected $file;

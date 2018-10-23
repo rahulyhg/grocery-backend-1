@@ -49,9 +49,23 @@ class AnswerGiven {
     
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=2048, nullable=true)
      */
     protected $comment;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=2048, nullable=true)
+     */
+    protected $improve_text;
+
+    /**
+     * @var Action
+     * Many AnswerGiven have One Action
+     * @ORM\ManyToOne(targetEntity="Db\Entity\Action", inversedBy="answers_given")
+     * @ORM\JoinColumn(name="action_id", referencedColumnName="id", nullable=true)
+     */
+    protected $action;
     
     /**
      * @return int

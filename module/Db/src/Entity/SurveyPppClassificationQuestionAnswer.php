@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="formulations")
+ * @ORM\Table(name="surveys_ppp_classification_question_answers")
  */
-class Formulation
+class SurveyPppClassificationQuestionAnswer
 {
     /**
      * @ORM\Id
@@ -21,35 +21,30 @@ class Formulation
     protected $id;
 
     /**
-     * @ORM\Column(name="formulation", type="string", length=1000, nullable=false)
-     */
-    protected $formulation;
-
-    /**
-     * Many formulations have 1 question
-     * @ORM\ManyToOne(targetEntity="Question")
+     * @var SurveyPppClassificationQuestion
+     * Many SurveyPppClassificationQuestionAnswers have One SurveyPppClassificationQuestion
+     * @ORM\ManyToOne(targetEntity="SurveyPppClassificationQuestion", inversedBy="answers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $question;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection|TargetAudience[]
-     * Many formulations have many target audiences
-     * @ORM\ManyToMany(targetEntity="TargetAudience")
-     * @ORM\JoinTable(name="targetaudiences_formulations")
-     */
-    private $targetaudiences;
+    protected $question;
 
     /**
      * @var string
-     * @ORM\Column(name="extraText", type="string", length=2048, nullable=true)
+     * @ORM\Column(name="text", type="string", length=512, nullable=false)
      */
-    private $extraText;
-    
+    protected $text;
+
+    /**
+     * @var integer
+     * Sort order of this SurveyPppClassificationQuestion
+     * @ORM\Column(name="sortOrder", type="integer", length=11)
+     */
+    private $sortOrder;
+
     public function __construct() {
         $this->targetaudiences = new ArrayCollection();
     }
-    
+
     /**
      * @return int
      */
@@ -64,38 +59,6 @@ class Formulation
     public function setId(int $id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFormulation(): string
-    {
-        return $this->formulation;
-    }
-
-    /**
-     * @param string $formulation
-     */
-    public function setFormulation(string $formulation): void
-    {
-        $this->formulation = $formulation;
-    }
-
-    /**
-     * @return Question
-     */
-    public function getQuestion(): Question
-    {
-        return $this->question;
-    }
-
-    /**
-     * @param Question $question
-     */
-    public function setQuestion(Question $question): void
-    {
-        $this->question = $question;
     }
 
     /**
@@ -122,7 +85,7 @@ class Formulation
         }
         $this->targetaudiences->add($targetaudience);
     }
-    
+
     /**
      * @param TargetAudience $targetaudience
      */
@@ -133,12 +96,47 @@ class Formulation
         $this->targetaudiences->removeElement($targetaudience);
     }
 
-    function getExtraText(): ?string {
-        return $this->extraText;
+    public function setSortOrder(int $sortOrder): void {
+        $this->sortOrder = $sortOrder;
     }
 
-    function setExtraText(?string $extraText) {
-        $this->extraText = $extraText;
+    public function getSortOrder(): int {
+        return $this->sortOrder;
     }
+
+    /**
+     * @return SurveyPppClassificationQuestion
+     */
+    public function getQuestion(): SurveyPppClassificationQuestion
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param SurveyPppClassificationQuestion $question
+     */
+    public function setQuestion(SurveyPppClassificationQuestion $question): void
+    {
+        $this->question = $question;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText(): string
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText(string $text): void
+    {
+        $this->text = $text;
+    }
+
+
+
 
 }

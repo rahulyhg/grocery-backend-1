@@ -37,6 +37,18 @@ class SurveyThemeAssociation {
      * @ORM\Column(name="sortorder", type="integer", nullable=false)
      */
     private $sortOrder = 0;
+
+    /**
+     * @var int
+     * @ORM\Column(name="locked", type="integer", length=11, nullable=false)
+     */
+    private $locked = 0;
+
+    /**
+     * @var int
+     * @ORM\Column(name="visible", type="integer", length=11, nullable=false)
+     */
+    private $visible = 1;
     
     /**
      * @return int
@@ -103,5 +115,39 @@ class SurveyThemeAssociation {
     {
         $this->sortOrder = $sortOrder;
     }
+
+    /**
+     * @return int
+     */
+    public function getLocked(): int
+    {
+        return $this->locked;
+    }
+
+    /**
+     * @param int $locked
+     */
+    public function setLocked(int $locked): void
+    {
+        $this->locked = $locked;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVisible(): int
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param int $visible
+     */
+    public function setVisible(int $visible): void
+    {
+        $this->visible = $visible;
+    }
+
+
     
 }

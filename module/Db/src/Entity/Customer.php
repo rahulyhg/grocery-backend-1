@@ -42,6 +42,14 @@ class Customer {
      */
     protected $users;
 
+    /**
+     * @var File
+     * Many Customers have One Logo
+     * @ORM\ManyToOne(targetEntity="File")
+     * @ORM\JoinColumn(name="logo_id", nullable=true)
+     */
+    protected $logo;
+
     public function __construct() {
         $this->teams = new ArrayCollection();
     }
@@ -168,5 +176,21 @@ class Customer {
         foreach ($users as $user) {
             $this->removeUser($user);
         }
+    }
+
+    /**
+     * @return File the logo
+     */
+    public function getLogo(): ?File
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param mixed $logo
+     */
+    public function setLogo(?File $logo): void
+    {
+        $this->logo = $logo;
     }
 }

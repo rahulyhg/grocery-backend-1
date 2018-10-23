@@ -33,6 +33,8 @@ class Question {
     protected $text;
 
     /**
+     * @deprecated extraText is now at Formulation. Should be able to change the text
+     *             depending on which targetAudience the user selected
      * @ORM\Column(name="extraText", type="string", length=2048, nullable=true)
      */
     protected $extraText;
