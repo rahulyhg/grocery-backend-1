@@ -116,19 +116,19 @@ class Response {
         $this->survey = $survey;
     }
 
-    public function getImproveText(): string {
+    public function getImproveText(): ?string {
         return $this->improve_text;
     }
 
-    public function setImproveText($improve_text): void {
+    public function setImproveText(?$improve_text): void {
         $this->improve_text = $improve_text;
     }
 
-    public function getExplanationText(): string {
+    public function getExplanationText(): ?string {
         return $this->explanation_text;
     }
 
-    public function setExplanationText($explanation_text): void {
+    public function setExplanationText(?$explanation_text): void {
         $this->explanation_text = $explanation_text;
     }
 

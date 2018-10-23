@@ -45,9 +45,9 @@ class SurveyPppClassificationQuestion
     /**
      * @var integer
      * Sort order of this SurveyPppClassificationQuestion
-     * @ORM\Column(name="order", type="integer", length=11)
+     * @ORM\Column(name="sortOrder", type="integer", length=11)
      */
-    private $order;
+    private $sortOrder;
 
 
     public function __construct() {
@@ -137,12 +137,12 @@ class SurveyPppClassificationQuestion
         $this->targetaudiences->removeElement($targetaudience);
     }
 
-    public function setOrder(int $order): void {
-        $this->order = $order;
+    public function setSortOrder(int $sortOrder): void {
+        $this->sortOrder = $sortOrder;
     }
 
-    public function getOrder(): int {
-        return $this->order;
+    public function getSortOrder(): int {
+        return $this->sortOrder;
     }
 
 

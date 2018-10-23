@@ -133,11 +133,11 @@ class Formulation
         $this->targetaudiences->removeElement($targetaudience);
     }
 
-    function getExtraText(): string {
+    function getExtraText(): ?string {
         return $this->extraText;
     }
 
-    function setExtraText(string $extraText) {
+    function setExtraText(?string $extraText) {
         $this->extraText = $extraText;
     }
 
