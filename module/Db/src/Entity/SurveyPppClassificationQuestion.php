@@ -61,7 +61,6 @@ class SurveyPppClassificationQuestion
      */
     private $enabled = 0;
 
-
     public function __construct() {
         $this->targetaudiences = new ArrayCollection();
         $this->answers = new ArrayCollection();
@@ -193,6 +192,23 @@ class SurveyPppClassificationQuestion
     {
         return $this->answers;
     }
+
+    /**
+     * @return bool
+     */
+    public function getEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+
 
 
 }
