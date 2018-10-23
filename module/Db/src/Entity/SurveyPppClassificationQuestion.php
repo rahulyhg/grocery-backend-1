@@ -43,6 +43,12 @@ class SurveyPppClassificationQuestion
     private $targetaudiences;
 
     /**
+     * Many SurveyPppClassificationQuestions have Many Questions
+     * @ORM\OneToMany(targetEntity="SurveyPppClassificationQuestionAnswer", mappedBy="SurveyPppClassificationQuestion")
+     */
+    private $answers;
+
+    /**
      * @var integer
      * Sort order of this SurveyPppClassificationQuestion
      * @ORM\Column(name="sortOrder", type="integer", length=11)
@@ -143,6 +149,42 @@ class SurveyPppClassificationQuestion
 
     public function getSortOrder(): int {
         return $this->sortOrder;
+    }
+
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection|SurveyPppClassificationQuestionAnswer[]
+     */
+    public function setSurveyPppClassificationQuestionAnswers($answers): void
+    {
+        $this->answers = $answers;
+    }
+    /**
+     * @param SurveyPppClassificationQuestionAnswer $answer
+     */
+    public function addSurveyPppClassificationQuestionAnswer(SurveyPppClassificationQuestionAnswer $answer) {
+        if ($this->answers->contains($answer)) {
+            return;
+        }
+        $this->answers->add($answer);
+    }
+
+    /**
+     * @param SurveyPppClassificationQuestionAnswer $answer
+     */
+    public function removeSurveyPppClassificationQuestionAnswer(SurveyPppClassificationQuestionAnswer$answer) {
+        if (! $this->answers->contains($answer)) {
+            return;
+        }
+        $this->answers->removeElement($answer);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|SurveyPppClassificationQuestionAnswer[]
+     */
+    public function getSurveyPppClassificationQuestionAnswers()
+    {
+        return $this->answer;
     }
 
 
