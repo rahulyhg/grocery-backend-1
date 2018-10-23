@@ -3540,14 +3540,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\TargetAudience\\Controller' => [
                 'collection' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => true,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
