@@ -55,6 +55,12 @@ class SurveyPppClassificationQuestion
      */
     private $sortOrder;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
+     */
+    private $enabled = 0;
+
 
     public function __construct() {
         $this->targetaudiences = new ArrayCollection();
