@@ -37,7 +37,7 @@ class SurveyPppClassificationQuestion
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection|TargetAudience[]
      * Many SurveyPppClassificationQuestions have many TargetAudiences
-     * @ORM\ManyToMany(targetEntity="TargetAudience")
+     * @ORM\ManyToMany(targetEntity="TargetAudience", inversedBy="classification_questions")
      * @ORM\JoinTable(name="targetaudiences_surveypppclassificationquestions")
      */
     private $targetaudiences;
@@ -60,6 +60,13 @@ class SurveyPppClassificationQuestion
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     private $enabled = 0;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
+     */
+    private $required = 0;
+
 
     public function __construct() {
         $this->targetaudiences = new ArrayCollection();
@@ -142,7 +149,7 @@ class SurveyPppClassificationQuestion
     /**
      * @param TargetAudience $targetaudience
      */
-    public function removeTargetAudience(Targetaudience $targetaudience) {
+    public function removeTargetaudience(Targetaudience $targetaudience) {
         if (! $this->targetaudiences->contains($targetaudience)) {
             return;
         }
@@ -209,6 +216,21 @@ class SurveyPppClassificationQuestion
         $this->enabled = $enabled;
     }
 
+    /**
+     * @return int
+     */
+    public function getRequired(): int
+    {
+        return $this->required;
+    }
+
+    /**
+     * @param int $required
+     */
+    public function setRequired(int $required): void
+    {
+        $this->required = $required;
+    }
 
 
 }
