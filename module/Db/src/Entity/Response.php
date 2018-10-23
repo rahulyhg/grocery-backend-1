@@ -120,7 +120,7 @@ class Response {
         return $this->improve_text;
     }
 
-    public function setImproveText(?$improve_text): void {
+    public function setImproveText($improve_text): void {
         $this->improve_text = $improve_text;
     }
 
@@ -128,7 +128,7 @@ class Response {
         return $this->explanation_text;
     }
 
-    public function setExplanationText(?$explanation_text): void {
+    public function setExplanationText($explanation_text): void {
         $this->explanation_text = $explanation_text;
     }
 
