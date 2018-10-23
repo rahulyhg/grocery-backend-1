@@ -24,7 +24,7 @@ class SurveyPppClassificationQuestionAnswer
      * @var SurveyPppClassificationQuestion
      * Many SurveyPppClassificationQuestionAnswers have One SurveyPppClassificationQuestion
      * @ORM\ManyToOne(targetEntity="SurveyPppClassificationQuestion", inversedBy="answers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="question_id", nullable=false, referencedColumnName="id")
      */
     protected $question;
 
