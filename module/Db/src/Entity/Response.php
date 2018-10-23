@@ -135,7 +135,7 @@ class Response {
     /**
      * @return Action
      */
-    public function getAction(): Action {
+    public function getAction(): ?Action {
         return $this->action;
     }
 
