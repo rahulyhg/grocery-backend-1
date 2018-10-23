@@ -104,5 +104,39 @@ class SurveyPppClassificationQuestionAnswer
         return $this->order;
     }
 
+    /**
+     * @return SurveyPppClassificationQuestion
+     */
+    public function getQuestion(): SurveyPppClassificationQuestion
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param SurveyPppClassificationQuestion $question
+     */
+    public function setQuestion(SurveyPppClassificationQuestion $question): void
+    {
+        $this->question = $question;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText(): string
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText(string $text): void
+    {
+        $this->text = $text;
+    }
+
+
+
 
 }
