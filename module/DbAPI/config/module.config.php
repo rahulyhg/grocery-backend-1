@@ -1645,6 +1645,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question',
                 'is_collection' => true,
+                'max_depth' => 2,
             ],
             \Db\Entity\SurveyPppClassificationQuestionAnswer::class => [
                 'route_identifier_name' => 'survey_ppp_classification_question_answer_id',
