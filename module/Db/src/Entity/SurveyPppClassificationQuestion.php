@@ -56,7 +56,7 @@ class SurveyPppClassificationQuestion
     private $sortOrder;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     private $enabled = 0;
@@ -194,17 +194,17 @@ class SurveyPppClassificationQuestion
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function getEnabled(): bool
+    public function getEnabled(): integer
     {
         return $this->enabled;
     }
 
     /**
-     * @param bool $enabled
+     * @param integer $enabled
      */
-    public function setEnabled(bool $enabled): void
+    public function setEnabled(integer $enabled): void
     {
         $this->enabled = $enabled;
     }

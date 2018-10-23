@@ -26,49 +26,49 @@ class SurveyPppMetadata {
     protected $survey;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps1_visible = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps1_locked = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps2_visible = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $nps2_locked = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade1_visible = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade1_locked = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade2_visible = 0;
 
     /**
-     * @var bool
+     * @var integer
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     protected $grade2_locked = 0;
@@ -107,129 +107,129 @@ class SurveyPppMetadata {
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isNps1Visible(): bool
+    public function getNps1Visible(): integer
     {
         return $this->nps1_visible;
     }
 
     /**
-     * @param bool $nps1_visible
+     * @param integer $nps1_visible
      */
-    public function setNps1Visible(bool $nps1_visible): void
+    public function setNps1Visible(integer $nps1_visible): void
     {
         $this->nps1_visible = $nps1_visible;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isNps1Locked(): bool
+    public function getNps1Locked(): integer
     {
         return $this->nps1_locked;
     }
 
     /**
-     * @param bool $nps1_locked
+     * @param integer $nps1_locked
      */
-    public function setNps1Locked(bool $nps1_locked): void
+    public function setNps1Locked(integer $nps1_locked): void
     {
         $this->nps1_locked = $nps1_locked;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isNps2Visible(): bool
+    public function getNps2Visible(): integer
     {
         return $this->nps2_visible;
     }
 
     /**
-     * @param bool $nps2_visible
+     * @param integer $nps2_visible
      */
-    public function setNps2Visible(bool $nps2_visible): void
+    public function setNps2Visible(integer $nps2_visible): void
     {
         $this->nps2_visible = $nps2_visible;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isNps2Locked(): bool
+    public function getNps2Locked(): integer
     {
         return $this->nps2_locked;
     }
 
     /**
-     * @param bool $nps2_locked
+     * @param integer $nps2_locked
      */
-    public function setNps2Locked(bool $nps2_locked): void
+    public function setNps2Locked(integer $nps2_locked): void
     {
         $this->nps2_locked = $nps2_locked;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isGrade1Visible(): bool
+    public function getGrade1Visible(): integer
     {
         return $this->grade1_visible;
     }
 
     /**
-     * @param bool $grade1_visible
+     * @param integer $grade1_visible
      */
-    public function setGrade1Visible(bool $grade1_visible): void
+    public function setGrade1Visible(integer $grade1_visible): void
     {
         $this->grade1_visible = $grade1_visible;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isGrade1Locked(): bool
+    public function getGrade1Locked(): integer
     {
         return $this->grade1_locked;
     }
 
     /**
-     * @param bool $grade1_locked
+     * @param integer $grade1_locked
      */
-    public function setGrade1Locked(bool $grade1_locked): void
+    public function setGrade1Locked(integer $grade1_locked): void
     {
         $this->grade1_locked = $grade1_locked;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isGrade2Visible(): bool
+    public function getGrade2Visible(): integer
     {
         return $this->grade2_visible;
     }
 
     /**
-     * @param bool $grade2_visible
+     * @param integer $grade2_visible
      */
-    public function setGrade2Visible(bool $grade2_visible): void
+    public function setGrade2Visible(integer $grade2_visible): void
     {
         $this->grade2_visible = $grade2_visible;
     }
 
     /**
-     * @return bool
+     * @return integer
      */
-    public function isGrade2Locked(): bool
+    public function getGrade2Locked(): integer
     {
         return $this->grade2_locked;
     }
 
     /**
-     * @param bool $grade2_locked
+     * @param integer $grade2_locked
      */
-    public function setGrade2Locked(bool $grade2_locked): void
+    public function setGrade2Locked(integer $grade2_locked): void
     {
         $this->grade2_locked = $grade2_locked;
     }
