@@ -185,7 +185,7 @@ class SurveyPppClassificationQuestion
      */
     public function getAnswers()
     {
-        return $this->answer;
+        return $this->answers;
     }
 
 
