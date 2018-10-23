@@ -44,7 +44,7 @@ class SurveyPppClassificationQuestion
 
     /**
      * Many SurveyPppClassificationQuestions have Many Questions
-     * @ORM\OneToMany(targetEntity="SurveyPppClassificationQuestionAnswer", inversedBy="SurveyPppClassificationQuestionAnswer")
+     * @ORM\OneToMany(targetEntity="SurveyPppClassificationQuestionAnswer", mappedBy="question")
      */
     private $answers;
 
