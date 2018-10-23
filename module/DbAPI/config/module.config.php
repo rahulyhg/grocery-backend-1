@@ -2012,7 +2012,9 @@ return [
             'entity_class' => \Db\Entity\SurveyPppClassificationQuestion::class,
             'object_manager' => 'doctrine.entitymanager.orm_default',
             'by_value' => true,
-            'strategies' => [],
+            'strategies' => [
+                'answers' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\SurveyPppClassificationQuestionAnswerHydrator' => [
