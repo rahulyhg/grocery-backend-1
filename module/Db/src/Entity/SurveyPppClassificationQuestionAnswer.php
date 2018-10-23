@@ -20,13 +20,13 @@ class SurveyPppClassificationQuestionAnswer
      */
     protected $id;
 
-    /**
-     * @var SurveyPppClassificationQuestion
-     * Many SurveyPppClassificationQuestionAnswers have One SurveyPppClassificationQuestion
-     * @ORM\ManyToOne(targetEntity="SurveyPppClassificationQuestion")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected $question;
+//    /**
+//     * @var SurveyPppClassificationQuestion
+//     * Many SurveyPppClassificationQuestionAnswers have One SurveyPppClassificationQuestion
+//     * @ORM\ManyToOne(targetEntity="SurveyPppClassificationQuestion")
+//     * @ORM\JoinColumn(nullable=false)
+//     */
+//    protected $question;
 
     /**
      * @var string
