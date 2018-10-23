@@ -43,13 +43,13 @@ class Response {
 
     /**
      * @var string
-     * @ORM\Column(name="improve_text", type="string", length=128, nullable=true)
+     * @ORM\Column(name="improve_text", type="string", length=2048, nullable=true)
      */
     protected $improve_text;
 
     /**
      * @var string
-     * @ORM\Column(name="explanation_text", type="string", length=128, nullable=true)
+     * @ORM\Column(name="explanation_text", type="string", length=2048, nullable=true)
      */
     protected $explanation_text;
     
