@@ -49,14 +49,14 @@ class SurveyPppClassificationQuestion
     private $answers;
 
     /**
-     * @var integer
+     * @var int
      * Sort order of this SurveyPppClassificationQuestion
      * @ORM\Column(name="sortOrder", type="integer", length=11)
      */
     private $sortOrder;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(type="integer", length=1, nullable=false, options={"default" = 0, "unsigned": true})
      */
     private $enabled = 0;
@@ -194,17 +194,17 @@ class SurveyPppClassificationQuestion
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getEnabled(): integer
+    public function getEnabled(): int
     {
         return $this->enabled;
     }
 
     /**
-     * @param integer $enabled
+     * @param int $enabled
      */
-    public function setEnabled(integer $enabled): void
+    public function setEnabled(int $enabled): void
     {
         $this->enabled = $enabled;
     }
