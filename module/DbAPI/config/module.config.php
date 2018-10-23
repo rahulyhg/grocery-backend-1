@@ -1915,7 +1915,7 @@ return [
             'by_value' => true,
             'strategies' => [
                 'classification_questions' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
-            ]
+            ],
             'use_generated_hydrator' => true,
         ],
         'DbAPI\\V1\\Rest\\Formulation\\FormulationHydrator' => [
