@@ -1608,7 +1608,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.importance',
                 'hydrator' => 'DbAPI\\V1\\Rest\\Importance\\ImportanceHydrator',
-                'max_depth' => 2,
+                'max_depth' => 1,
             ],
             \DbAPI\V1\Rest\Importance\ImportanceCollection::class => [
                 'entity_identifier_name' => 'id',
