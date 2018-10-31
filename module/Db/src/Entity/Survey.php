@@ -401,6 +401,13 @@ class Survey {
     {
         return $this->survey_theme_associations;
     }
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
+     */
+    public function getSurvey_theme_associations()
+    {
+        return $this->survey_theme_associations;
+    }
     
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[] $survey_theme_associations
