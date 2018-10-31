@@ -413,7 +413,7 @@ class Survey {
     /**
      * @param SurveyThemeAssociation $surveyThemeAssociation
      */
-    public function addSurvey_theme_association(SurveyThemeAssociation $surveyThemeAssociation): void {
+    public function addSurvey_theme_associations(SurveyThemeAssociation $surveyThemeAssociation): void {
         if ($this->survey_theme_associations->contains($surveyThemeAssociation)) {
             return;
         }
