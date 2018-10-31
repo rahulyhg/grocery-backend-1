@@ -397,7 +397,7 @@ class Survey {
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
      */
-    public function getSurveyThemeAssociations()
+    public function getSurvey_theme_associations()
     {
         return $this->survey_theme_associations;
     }
@@ -405,7 +405,7 @@ class Survey {
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[] $survey_theme_associations
      */
-    public function setSurveyThemeAssociations($survey_theme_associations): void
+    public function setSurvey_theme_associations($survey_theme_associations): void
     {
         $this->survey_theme_associations = $survey_theme_associations;
     }
@@ -413,7 +413,7 @@ class Survey {
     /**
      * @param SurveyThemeAssociation $surveyThemeAssociation
      */
-    public function addSurveyThemeAssociation(SurveyThemeAssociation $surveyThemeAssociation): void {
+    public function addSurvey_theme_association(SurveyThemeAssociation $surveyThemeAssociation): void {
         if ($this->survey_theme_associations->contains($surveyThemeAssociation)) {
             return;
         }
@@ -423,7 +423,7 @@ class Survey {
     /**
      * @param SurveyThemeAssociation $surveyThemeAssociation
      */
-    public function removeSurveyThemeAssociation(SurveyThemeAssociation $surveyThemeAssociation): void {
+    public function removeSurvey_theme_associations(SurveyThemeAssociation $surveyThemeAssociation): void {
         if (! $this->survey_theme_associations->contains($surveyThemeAssociation)) {
             return;
         }
