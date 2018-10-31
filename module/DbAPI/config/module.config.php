@@ -1659,6 +1659,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
                 'is_collection' => true,
+                'max_depth' => 2,
             ],
             \Db\Entity\SurveyPppMetadata::class => [
                 'route_identifier_name' => 'survey_ppp_metadata_id',
