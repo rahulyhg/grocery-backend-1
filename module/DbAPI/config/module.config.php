@@ -1665,12 +1665,13 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
                 'hydrator' => 'DbAPI\\V1\\Rest\\SurveyPppClassificationQuestionAnswer\\SurveyPppClassificationQuestionAnswerHydrator',
+		'max_depth' => 1,
             ],
             \DbAPI\V1\Rest\SurveyPppClassificationQuestionAnswer\SurveyPppClassificationQuestionAnswerCollection::class => [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.survey-ppp-classification-question-answer',
                 'is_collection' => true,
-		'max_depth' => 2
+		'max_depth' => 2,
             ],
         ],
     ],
