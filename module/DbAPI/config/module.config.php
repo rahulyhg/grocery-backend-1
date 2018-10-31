@@ -1473,7 +1473,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'db-api.rest.doctrine.target-audience',
                 'hydrator' => 'DbAPI\\V1\\Rest\\TargetAudience\\TargetAudienceHydrator',
-                'max_depth' => 2
+                'max_depth' => 2,
             ],
             \DbAPI\V1\Rest\TargetAudience\TargetAudienceCollection::class => [
                 'entity_identifier_name' => 'id',
@@ -2019,7 +2019,7 @@ return [
             'by_value' => true,
             'strategies' => [
                 'answers' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
-                'targetaudiences' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class
+                'targetaudiences' => \ZF\Doctrine\Hydrator\Strategy\CollectionExtract::class,
             ],
             'use_generated_hydrator' => true,
         ],
@@ -3672,14 +3672,14 @@ return [
             ],
             'DbAPI\\V1\\Rest\\Importance\\Controller' => [
                 'collection' => [
-                    'GET' => true,
-                    'POST' => true,
+                    'GET' => false,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
                     'PUT' => true,
                     'PATCH' => true,
