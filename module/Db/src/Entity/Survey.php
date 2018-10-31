@@ -397,7 +397,7 @@ class Survey {
     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|SurveyThemeAssociation[]
      */
-    public function getSurvey_theme_associations()
+    public function getSurveyThemeAssociations()
     {
         return $this->survey_theme_associations;
     }
