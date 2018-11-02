@@ -35,7 +35,7 @@ class Survey {
     protected $type;
     
     /**
-     * @ORM\ManyToOne(targetEntity="SurveyStatus")
+     * @ORM\ManyToOne(targetEntity="SurveyStatus", cascade={"persist"})
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
     private $status;
